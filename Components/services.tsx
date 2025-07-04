@@ -1,5 +1,5 @@
 import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
-import React, { useRef } from "react";
+import React, { JSX, useRef } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { FaLaptopCode, FaMobileAlt, FaCloud, FaBullhorn, FaLightbulb } from "react-icons/fa"; // Import icons
 
