@@ -1,73 +1,63 @@
-'use client';
+import {
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+  FaFacebook,
+  FaEnvelope,
+} from "react-icons/fa";
 
-import { useState } from 'react';
-import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-
-export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form Submitted', formData);
-  };
-
+export default function ContactSection() {
   return (
-    <div className="min-h-screen bg-[#f2f2f2] text-black flex flex-col items-center py-12 px-6 md:px-16">
-      <motion.h1 
-        className="text-4xl mt-20 font-extrabold mb-8 text-orange-500"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
+    <section className="container bg-white py-12 mx-auto mt-24 rounded-4xl mb-20 px-6 sm:px-16">
+      <h2 className="text-3xl font-bold mb-12 text-gray-900 text-left ">
         Get in Touch
-      </motion.h1>
-      <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div className="space-y-6">
-          {[{ icon: FaEnvelope, text: 'contact@tribetek.com' }, { icon: FaPhoneAlt, text: '+94 77 123 4567' }, { icon: FaMapMarkerAlt, text: 'Colombo, Sri Lanka' }].map((item, index) => (
-            <motion.div 
-              key={index} 
-              className="flex items-center gap-4 p-4 bg-gray-200 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <item.icon className="text-orange-500 text-2xl" />
-              <span className="text-lg">{item.text}</span>
-            </motion.div>
-          ))}
+      </h2>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-12 mb-12 text-center">
+        {/* Social Media - 1 column each */}
+        <a
+          href="https://instagram.com/tribetek"
+          target="_blank"
+          className="p-6 bg-[#f2f2f2] rounded-3xl shadow-md hover:shadow-lg transition">
+          <FaInstagram size={36} className="text-[#ED4716]  mx-auto mb-3" />
+          <h3 className="text-lg font-semibold">Instagram</h3>
+          <p className="text-gray-600 text-sm">@tribetek</p>
+        </a>
+
+        <a
+          href="https://linkedin.com/company/tribetek"
+          target="_blank"
+          className="p-6 bg-[#f2f2f2] rounded-3xl shadow-md hover:shadow-lg transition">
+          <FaLinkedin size={36} className="text-[#ED4716] mx-auto mb-3" />
+          <h3 className="text-lg font-semibold">LinkedIn</h3>
+          <p className="text-gray-600 text-sm">TribeTek</p>
+        </a>
+
+        <a
+          href="https://twitter.com/tribetek"
+          target="_blank"
+          className="p-6 bg-[#f2f2f2] rounded-3xl shadow-md hover:shadow-lg transition">
+          <FaTwitter size={36} className="text-[#ED4716] mx-auto mb-3" />
+          <h3 className="text-lg font-semibold">Twitter</h3>
+          <p className="text-gray-600 text-sm">@tribetek</p>
+        </a>
+
+        <a
+          href="https://facebook.com/tribetek"
+          target="_blank"
+          className="p-6 bg-[#f2f2f2] rounded-3xl shadow-md hover:shadow-lg transition">
+          <FaFacebook size={36} className="text-[#ED4716] mx-auto mb-3" />
+          <h3 className="text-lg font-semibold">Facebook</h3>
+          <p className="text-gray-600 text-sm">TribeTek Official</p>
+        </a>
+
+        {/* Email block - spans all 4 columns */}
+        <div className="col-span-2 sm:col-span-4 p-6 bg-[#f2f2f2] rounded-3xl shadow-md text-center">
+          <FaEnvelope size={36} className="text-[#ED4716] mx-auto mb-3" />
+          <h3 className="text-lg font-semibold">Email Us</h3>
+          <p className="text-gray-600 text-sm">hello@tribetek.tech</p>
         </div>
-        <motion.form 
-          onSubmit={handleSubmit} 
-          className="space-y-4 bg-gray-800 p-6 rounded-2xl shadow-xl w-full"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <input type="text" name="name" placeholder="Your Name" required onChange={handleChange} className="w-full p-3 bg-[#f2f2f2] text-black rounded-md focus:ring-2 focus:ring-orange-500" />
-          <input type="email" name="email" placeholder="Your Email" required onChange={handleChange} className="w-full p-3 bg-[#f2f2f2] text-black rounded-md focus:ring-2 focus:ring-orange-500" />
-          <textarea name="message" placeholder="Your Message" required rows={4} onChange={handleChange} className="w-full p-3 bg-[#f2f2f2] text-black rounded-md focus:ring-2 focus:ring-orange-500" />
-          <motion.button 
-            type="submit" 
-            className="w-full bg-orange-500 hover:bg-orange-600 text-[#F2F2F2] p-3 rounded-md shadow-md"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Send Message
-          </motion.button>
-        </motion.form>
-      </motion.div>
-    </div>
+      </div>
+    </section>
   );
 }

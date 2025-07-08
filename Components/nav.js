@@ -24,7 +24,8 @@ const NavBar = () => {
           <div className="flex space-x-4">
             {[
               { name: "Home", path: "/" },
-              { name: "Projects", path: "/projects" },
+              { name: "About us", path: "/about" },
+              { name: "Blogs", path: "/blog" },
               { name: "Contact", path: "/contact" },
             ].map((item) => (
               <motion.a
