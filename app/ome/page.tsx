@@ -1,7 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { HoverImageLinks } from "../../Components/services";
-import AnimatedText from "@/Components/animatedText";
+import { HoverImageLinks } from "../../components/services";
+import AnimatedText from "@/components/animatedText";
 // import AboutUs from "@/Components/aboutus";
 import { FaRocket, FaShieldAlt, FaCode, FaCloud } from "react-icons/fa";
 
