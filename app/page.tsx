@@ -1,128 +1,271 @@
-"use client"; // Marks the component as a Client Component
+"use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { HoverImageLinks } from "../Components/services";
-import AnimatedText from "@/Components/animatedText";
-// import AboutUs from "@/Components/aboutus";
-import { FaRocket, FaShieldAlt, FaCode, FaCloud } from "react-icons/fa";
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
+import { RollerCoasterGeometry } from "three/examples/jsm/misc/RollerCoaster";
 
-export default function Index() {
-  const { scrollYProgress } = useScroll();
-  const xTransform = useTransform(scrollYProgress, [0, 0.3], ["0%", "-50%"]);
-  const yTransform = useTransform(scrollYProgress, [0, 0.3], ["0%", "20%"]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.3], [1, 0.5]);
+export default function CleanMilestoneRollerCoaster() {
+  const mountRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!mountRef.current) return;
+
+    // Initialize renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    mountRef.current.appendChild(renderer.domElement);
+
+    // Create scene with dark background
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x111122);
+
+    // Add lighting
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(1, 1, 1);
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x404040));
+    const pointLight = new THREE.PointLight(0xf97316, 2, 10);
+    scene.add(pointLight);
+
+    // Create train (camera container)
+    const train = new THREE.Object3D();
+    scene.add(train);
+
+    // Create camera
+    const camera = new THREE.PerspectiveCamera(
+      60,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    train.add(camera);
+
+    // Create rollercoaster curve
+    const PI2 = Math.PI * 2;
+    const curve = {
+      getPointAt: function (t: number) {
+        t = t * PI2;
+        const x = Math.sin(t * 3) * Math.cos(t * 4) * 20;
+        const y = Math.sin(t * 10) * 2 + Math.cos(t * 17) * 2 + 5;
+        const z = Math.sin(t) * Math.sin(t * 4) * 50;
+        return new THREE.Vector3(x, y, z).multiplyScalar(2);
+      },
+      getTangentAt: function (t: number) {
+        const delta = 0.0001;
+        const t1 = Math.max(0, t - delta);
+        const t2 = Math.min(1, t + delta);
+        return this.getPointAt(t2).sub(this.getPointAt(t1)).normalize();
+      },
+    };
+
+    // Create track with orange color
+    const geometry = new RollerCoasterGeometry(curve, 1000);
+    const material = new THREE.MeshPhongMaterial({
+      color: 0xf97316,
+      emissive: 0xf97316,
+      emissiveIntensity: 0.2,
+      specular: 0xffb74d,
+      shininess: 50,
+    });
+    const track = new THREE.Mesh(geometry, material);
+    scene.add(track);
+
+    // Digital transformation concepts
+    const transformationStages = [
+      "Legacy Systems",
+      "Cloud Migration",
+      "Data Analytics",
+      "AI Integration",
+      "Automation",
+      "Digital Transformation",
+    ];
+
+    // Define milestones
+    const milestones = transformationStages.map((stage, i) => ({
+      progress: (i + 1) / (transformationStages.length + 1),
+      duration: 0.02,
+      label: stage,
+    }));
+
+    // Create clean milestone markers (without dark center)
+    const createMilestoneMarker = (
+      position: THREE.Vector3,
+      radius: number,
+      label: string
+    ) => {
+      // Only create the glowing ring (no dark platform)
+      const ringGeometry = new THREE.TorusGeometry(radius, 0.15, 16, 32);
+      const ringMaterial = new THREE.MeshPhongMaterial({
+        color: 0xf97316,
+        emissive: 0xf97316,
+        emissiveIntensity: 0.8,
+        transparent: true,
+        opacity: 0.9,
+      });
+      const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+      ring.position.copy(position);
+      ring.position.y += 0.3; // Slightly above track
+      ring.rotation.x = Math.PI / 2;
+      scene.add(ring);
+
+      // Add floating tech symbols instead of displays
+      const techSymbol = new THREE.Mesh(
+        new THREE.SphereGeometry(0.4, 16, 16),
+        new THREE.MeshPhongMaterial({
+          color: 0x00aaff,
+          emissive: 0x003366,
+          emissiveIntensity: 0.5,
+        })
+      );
+      techSymbol.position.copy(position);
+      techSymbol.position.y += 1.2;
+      scene.add(techSymbol);
+
+      // Add text label
+      const textCanvas = document.createElement("canvas");
+      textCanvas.width = 512;
+      textCanvas.height = 256;
+      const context = textCanvas.getContext("2d");
+      if (context) {
+        context.fillStyle = "#f97316";
+        context.font = "Bold 36px Arial";
+        context.textAlign = "center";
+        context.fillText(label, textCanvas.width / 2, 100);
+
+        const texture = new THREE.CanvasTexture(textCanvas);
+        const spriteMaterial = new THREE.SpriteMaterial({
+          map: texture,
+          transparent: true,
+        });
+        const sprite = new THREE.Sprite(spriteMaterial);
+        sprite.position.copy(position);
+        sprite.position.y += 1.8;
+        sprite.scale.set(4, 2, 1);
+        scene.add(sprite);
+      }
+    };
+
+    // Create all milestone markers
+    milestones.forEach((milestone, index) => {
+      const pos = curve.getPointAt(milestone.progress);
+      createMilestoneMarker(pos, 2.5, milestone.label);
+    });
+
+    // Animation variables
+    const position = new THREE.Vector3();
+    const tangent = new THREE.Vector3();
+    const lookAt = new THREE.Vector3();
+    let progress = 0;
+    let targetProgress = 0;
+    let isAtMilestone = false;
+    let currentMilestone = -1;
+    let milestoneStart = 0;
+
+    // Handle scroll events
+    const handleScroll = () => {
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPosition = window.scrollY;
+      const rawProgress = scrollPosition / scrollHeight;
+
+      // Check if we're currently in a milestone pause
+      if (isAtMilestone) {
+        const milestone = milestones[currentMilestone];
+        const milestoneEnd = milestoneStart + milestone.duration;
+
+        if (rawProgress >= milestoneEnd) {
+          // Exit milestone
+          isAtMilestone = false;
+          targetProgress = rawProgress;
+        } else {
+          // Stay at milestone progress
+          targetProgress = milestone.progress;
+        }
+      } else {
+        // Check if we've reached a new milestone
+        for (let i = 0; i < milestones.length; i++) {
+          const milestone = milestones[i];
+          if (
+            rawProgress >= milestone.progress &&
+            currentMilestone < i &&
+            Math.abs(rawProgress - milestone.progress) < 0.02
+          ) {
+            currentMilestone = i;
+            isAtMilestone = true;
+            milestoneStart = rawProgress;
+            targetProgress = milestone.progress;
+
+            // Visual feedback when reaching milestone
+            pointLight.color.setHex(0x00ff00);
+            setTimeout(() => {
+              pointLight.color.setHex(0xf97316);
+            }, 500);
+            break;
+          }
+        }
+
+        // If not at milestone, follow scroll normally
+        if (!isAtMilestone) {
+          targetProgress = rawProgress;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Animation loop
+    const animate = () => {
+      requestAnimationFrame(animate);
+
+      // Smooth progress transition
+      progress += (targetProgress - progress) * 0.1;
+
+      // Update rollercoaster position
+      position.copy(curve.getPointAt(progress));
+      position.y += 0.3;
+      train.position.copy(position);
+
+      // Update orientation
+      tangent.copy(curve.getTangentAt(progress));
+      train.lookAt(lookAt.copy(position).sub(tangent));
+
+      // Update point light position to follow train
+      pointLight.position.copy(position);
+      pointLight.position.y += 1;
+
+      renderer.render(scene, camera);
+    };
+
+    // Handle window resize
+    const onWindowResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener("resize", onWindowResize);
+
+    // Start animation
+    animate();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", onWindowResize);
+      mountRef.current?.removeChild(renderer.domElement);
+    };
+  }, []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white relative overflow-hidden">
-      {/* Hero Section */}
-      <motion.section
-        style={{ x: xTransform, opacity: opacityTransform, y: yTransform }}
-        className="flex flex-col items-center justify-center min-h-screen text-center">
-        <motion.h1
-          className="text-6xl sm:text-8xl font-extrabold text-orange-500 drop-shadow-glow"
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}>
-          TribeTek
-        </motion.h1>
-        <motion.p
-          className="text-xl sm:text-3xl mt-6 text-orange-400 drop-shadow-glow"
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1.5, ease: "easeOut" }}>
-          Transform, Thrive, Triumph
-        </motion.p>
-      </motion.section>
+    <div>
+      {/* 3D Canvas */}
+      <div
+        ref={mountRef}
+        className="fixed top-0 left-0 w-full h-full pointer-events-none"
+      />
 
-      {/* Animated Text Section */}
-      <section className="py-12">
-        <AnimatedText />
-      </section>
-
-      {/* Features Section */}
-      <motion.section
-        className="py-20"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}>
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-orange-500 mb-12">
-            Our Key Features
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                title: "High Performance",
-                description: "Optimized solutions for speed and efficiency.",
-                icon: (
-                  <FaRocket className="text-orange-500 text-5xl drop-shadow-neon" />
-                ),
-              },
-              {
-                title: "Secure & Reliable",
-                description: "Top-tier security for all operations.",
-                icon: (
-                  <FaShieldAlt className="text-orange-500 text-5xl drop-shadow-neon" />
-                ),
-              },
-              {
-                title: "Custom Development",
-                description: "Tailored solutions for every need.",
-                icon: (
-                  <FaCode className="text-orange-500 text-5xl drop-shadow-neon" />
-                ),
-              },
-              {
-                title: "Cloud Integration",
-                description: "Seamless connectivity to cloud platforms.",
-                icon: (
-                  <FaCloud className="text-orange-500 text-5xl drop-shadow-neon" />
-                ),
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                className="bg-gray-800/30 backdrop-blur-md p-6 rounded-lg border border-orange-500/40 shadow-md text-center transform transition duration-300 hover:scale-105 hover:border-orange-500 hover:shadow-orange-500/40"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}>
-                <div className="mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-300">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Interactive Call to Action */}
-      <motion.section
-        className="py-20 text-center"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}>
-        <h2 className="text-4xl font-bold text-orange-500 mb-6">
-          Ready to Innovate?
-        </h2>
-        <p className="text-lg text-gray-300 mb-8">
-          Join TribeTek and take your ideas to the next level.
-        </p>
-        <motion.button
-          className="px-6 py-3 text-lg font-bold text-black bg-orange-500 rounded-lg shadow-lg hover:bg-orange-600 transition"
-          whileHover={{ scale: 1.1 }}>
-          Get Started
-        </motion.button>
-      </motion.section>
-
-      {/* Placeholder Section */}
-      <section className="min-h-screen flex items-center justify-center">
-        <HoverImageLinks />
-      </section>
-    </main>
+      {/* Scrollable content spacer */}
+      <div style={{ height: "500vh" }} />
+    </div>
   );
 }
