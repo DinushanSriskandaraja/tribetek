@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllPostSlugs, getPostData } from "@/lib/post";
+import { getAllPostSlugs, getPostData } from "../../lib/post";
 
 export default async function BlogsListPage() {
   const slugs = getAllPostSlugs(); // [{ slug: string }, ...]

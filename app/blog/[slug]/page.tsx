@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getAllPostSlugs, getPostData } from "@/lib/post";
+import { getAllPostSlugs, getPostData } from "../../../lib/post";
 import Head from "next/head";
 
 export async function generateStaticParams() {
