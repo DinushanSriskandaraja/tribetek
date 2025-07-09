@@ -1,10 +1,10 @@
 "use client";
-import HeroSection from "../components/HeroSection";
-import ServicesSection from "../components/ServicesSection";
-import BlogSection from "../components/BlogSection";
-import TestimonialSection from "../components/TestimonialSection";
-import BrandsSection from "../components/BrandSection";
-import OurProducts from "../components/OurProducts";
+import HeroSection from "../Components/HeroSection";
+import ServicesSection from "../Components/ServicesSection";
+import BlogSection from "../Components/BlogSection";
+import TestimonialSection from "../Components/TestimonialSection";
+import BrandsSection from "../Components/BrandSection";
+import OurProducts from "../Components/OurProducts";
 
 export default function HomePage() {
   return (
