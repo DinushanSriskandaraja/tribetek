@@ -3,8 +3,8 @@ import HeroSection from "../Components/HeroSection";
 import ServicesSection from "../Components/ServicesSection";
 import BlogSection from "../Components/BlogSection";
 import TestimonialSection from "../Components/TestimonialSection";
-import BrandsSection from "../Components/BrandSection";
-import OurProducts from "../Components/OurProducts";
+// import BrandsSection from "../Components/BrandSection";
+// import OurProducts from "../Components/OurProducts";
 
 export default function HomePage() {
   return (
