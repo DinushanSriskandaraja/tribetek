@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function BrandSection() {
   const brands = [
@@ -26,23 +26,19 @@ export default function BrandSection() {
         <div className="h-56">
           {/* Row 1 – Single centered brand */}
           <div className=" flex justify-center">
-            <div className="bg-[#f2f2f2] p-6 rounded-2xl h-64  shadow-md w-full  flex items-center justify-center">
-              <Image
-                src={brands[0].logo}
-                alt={brands[0].name}
-                className="h-12"
-              />
+            <div className="bg-[#f2f2f2] p-6 rounded-3xl h-64  shadow-md w-full  flex items-center justify-center">
+              <img src={brands[0].logo} alt={brands[0].name} className="h-12" />
             </div>
           </div>
 
           {/* Row 2 – Two brands side-by-side */}
-          {brands.slice(1).map((brand, index) => (
+          {/* {brands.slice(1).map((brand, index) => (
             <div
               key={index}
               className="bg-[#f2f2f2] p-6 rounded-2xl shadow-md flex items-center justify-center">
-              <Image src={brand.logo} alt={brand.name} className="h-12" />
+              <img src={brand.logo} alt={brand.name} className="h-12" />
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </section>

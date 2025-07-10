@@ -1,4 +1,7 @@
 import Image from "next/image";
+import C1 from "../assets/C1.jpg";
+import C2 from "../assets/C2.jpg";
+import C3 from "../assets/C3.jpg";
 
 const testimonials = [
   {
@@ -6,28 +9,28 @@ const testimonials = [
     role: "CEO, Nexon Tech",
     quote:
       "TribeTek helped us digitize our entire process. What used to take days now takes minutes. Their team truly understands business and tech.",
-    avatar: "/avatar1.jpg",
+    avatar: C1,
   },
   {
     name: "Dilini Perera",
     role: "Marketing Head, Luxe Studios",
     quote:
       "Their branding and automation ideas were game-changing for us. Super easy to work with and delivers above expectations.",
-    avatar: "/avatar2.jpg",
+    avatar: C2,
   },
   {
     name: "Shanaka Mendis",
     role: "Founder, AgroLink",
     quote:
       "Our entire farming supply chain is now online thanks to TribeTek. They’re not just developers—they’re true partners.",
-    avatar: "/avatar3.jpg",
+    avatar: C3,
   },
   {
     name: "Hasan Rauf",
     role: "CTO, BizCore Global",
     quote:
       "We saw a 60% improvement in operational efficiency. They helped us scale with the right tools and clean interfaces.",
-    avatar: "/avatar4.jpg",
+    avatar: C3,
   },
 ];
 

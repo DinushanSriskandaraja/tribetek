@@ -1,41 +1,48 @@
 import { FaLinkedin, FaTwitter, FaGithub } from "react-icons/fa";
 import Image from "next/image";
+import AboutUsImage from "../../assets/AboutUs.webp";
+import Dinushan from "../../assets/Dinushan.jpg";
+import Kenisan from "../../assets/Kenisan.jpg";
+import Thigshi from "../../assets/Thigshi.jpg";
 
 const team = [
   {
     name: "Dinushan Sriskandaraja",
     role: "Founder & Tech Lead",
-    image: "/team/dinushan.jpg",
+    image: Dinushan,
     socials: {
-      linkedin: "https://linkedin.com/in/dinushan",
-      github: "https://github.com/dinushan",
-      twitter: "https://github.com/dinushan",
+      linkedin: "https://www.linkedin.com/in/dinushansriskandaraja/",
+      github: "https://github.com/DinushanSriskandaraja",
+      twitter: "https://x.com/sri_dinu",
     },
   },
   {
-    name: "Shan Kavinthan",
-    role: "UI/UX Designer",
-    image: "/team/shan.jpg",
+    name: "Kenisan Sanmugathasan",
+    role: "Co-Founder & Business Lead",
+    image: Kenisan,
     socials: {
-      linkedin: "https://linkedin.com/in/shank",
+      linkedin: "https://www.linkedin.com/in/kenisan-sanmugathasan-585646320/",
+      github: "https://github.com/Ken7373",
     },
   },
   {
-    name: "Kavisha Perera",
-    role: "Project Manager",
-    image: "/team/kavisha.jpg",
+    name: "Thigshi Vigneswaramoorthy",
+    role: "Intern - Full Stack Developer",
+    image: Thigshi,
     socials: {
-      linkedin: "https://linkedin.com/in/kavisha",
+      linkedin:
+        "https://www.linkedin.com/in/thigshicca-vigneshwaramoorthy-a5aa7823a/",
+      github: "https://github.com/THIGSHICCA",
     },
   },
-  {
-    name: "Imesh Jayasinghe",
-    role: "Full Stack Developer",
-    image: "/team/imesh.jpg",
-    socials: {
-      github: "https://github.com/imesh",
-    },
-  },
+  // {
+  //   name: "Imesh Jayasinghe",
+  //   role: "Full Stack Developer",
+  //   image: "/team/imesh.jpg",
+  //   socials: {
+  //     github: "https://github.com/imesh",
+  //   },
+  // },
 ];
 
 export default function AboutPage() {
@@ -63,11 +70,13 @@ export default function AboutPage() {
             builders who care deeply about every project we touch.
           </p>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 w-full max-w-md">
           <Image
-            src="/about/tribe-illustration.svg"
+            width={1200}
+            height={10000}
+            src={AboutUsImage}
             alt="About TribeTek"
-            className="w-full max-w-sm mx-auto"
+            className="object-cover rounded-3xl"
           />
         </div>
       </section>
@@ -78,16 +87,17 @@ export default function AboutPage() {
           Meet Our Core Team
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {team.map((member, index) => (
             <div
               key={index}
               className="bg-[#f9f9f9] rounded-3xl p-6 shadow text-center hover:shadow-lg transition-all duration-300">
               <Image
-                src="/path/to/image.jpg"
+                src={member.image}
                 alt="description"
-                width={500}
-                height={300}
+                // width={500}
+                // height={300}
+                className=" rounded-2xl  grayscale mb-4 object-cover"
               />
 
               <h3 className="text-lg font-semibold text-gray-800">

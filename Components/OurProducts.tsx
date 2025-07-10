@@ -54,7 +54,7 @@ export default function ProductsSection() {
               key={index}
               href={product.link}
               className="bg-[#f2f2f2] rounded-3xl shadow-md hover:shadow-xl overflow-hidden transition-all duration-300 flex flex-col">
-              <Image
+              <img
                 src={product.image}
                 alt={product.name}
                 className="h-40 w-full object-cover"

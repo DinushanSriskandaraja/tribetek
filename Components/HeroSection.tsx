@@ -3,7 +3,7 @@ export default function HeroSection() {
     <section className="container mx-auto  pt-10">
       <div className="bg-white rounded-4xl px-6 md:px-16 py-10 md:py-20 shadow-lg border border-gray-100 transition-all duration-300">
         <h1 className="text-3xl md:text-5xl font-extrabold mb-6 leading-tight text-gray-900 max-w-xl md:max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-          Let’s transform your business into a digital powerhouse.
+          Transform Your Business into a Smart, Scalable Digital Brand{" "}
         </h1>
 
         <p className="text-base md:text-xl text-gray-600 mb-8 max-w-md md:max-w-2xl mx-auto md:mx-0 text-center md:text-left">

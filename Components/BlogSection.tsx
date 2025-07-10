@@ -1,29 +1,33 @@
 import Image from "next/image";
+import BizAutomation from "../assets/BizAutomation.jpg";
+import Branding from "../assets/Brandings.jpg";
+import SocialMedia from "../assets/SocialMedia.jpg";
+import TechStack from "../assets/TechStack.jpg";
 
 export default function BlogSection() {
   const blogs = [
     {
       title: "5 Ways to Automate Your Business Workflow",
       tagline: "From spreadsheets to smart systems.",
-      image: "/blog1.jpg",
+      image: BizAutomation,
       href: "/blog/automate-business-workflow",
     },
     {
       title: "Why Branding Is More Than Just a Logo",
       tagline: "Build trust and stand out.",
-      image: "/blog2.jpg",
+      image: Branding,
       href: "/blog/branding-trust",
     },
     {
       title: "Top Tech Stacks for Scalable Applications",
       tagline: "Choose the right tools from day one.",
-      image: "/blog3.jpg",
+      image: TechStack,
       href: "/blog/top-tech-stacks",
     },
     {
       title: "Social Media Strategies for B2B",
       tagline: "Reach and convert the right audience.",
-      image: "/blog4.jpg",
+      image: SocialMedia,
       href: "/blog/social-media-strategies",
     },
   ];
@@ -36,56 +40,25 @@ export default function BlogSection() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {/* Row 1 Blog 1 (col-span-2) */}
-          <a
-            href={blogs[0].href}
-            className="md:col-span-2 bg-[#f2f2f2] rounded-3xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
-            <Image
-              src={blogs[0].image}
-              alt={blogs[0].title}
-              className="h-56 w-full object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                {blogs[0].title}
-              </h3>
-              <p className="text-gray-600 text-sm">{blogs[0].tagline}</p>
-            </div>
-          </a>
-
-          {/* Row 1 Blog 2 (right-side) */}
-          <a
-            href={blogs[1].href}
-            className="bg-[#f2f2f2] rounded-3xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
-            <Image
-              src={blogs[1].image}
-              alt={blogs[1].title}
-              className="h-56 w-full object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                {blogs[1].title}
-              </h3>
-              <p className="text-gray-600 text-sm">{blogs[1].tagline}</p>
-            </div>
-          </a>
-
-          {/* Row 2 Blog 3 and 4 */}
-          {blogs.slice(2).map((blog, index) => (
+          {blogs.map((blog, index) => (
             <a
               key={index}
               href={blog.href}
-              className="bg-[#f2f2f2] rounded-3xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
+              className={`relative rounded-3xl shadow-md hover:shadow-xl overflow-hidden transition-all duration-300 ${
+                index === 0 ? "md:col-span-2" : ""
+              }`}>
               <Image
                 src={blog.image}
                 alt={blog.title}
-                className="h-56 w-full object-cover"
+                className="w-full h-64 object-cover"
+                width={800}
+                height={256}
+                placeholder="blur"
               />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  {blog.title}
-                </h3>
-                <p className="text-gray-600 text-sm">{blog.tagline}</p>
+              {/* Gradient Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white p-6">
+                <h3 className="text-xl font-semibold mb-1">{blog.title}</h3>
+                <p className="text-sm">{blog.tagline}</p>
               </div>
             </a>
           ))}
@@ -94,11 +67,11 @@ export default function BlogSection() {
           <a
             href="/blogs"
             className="bg-[#f2f2f2] rounded-3xl shadow-md flex flex-col items-center justify-center text-center p-6 hover:shadow-xl transition-all duration-300">
-            <Image
-              src="/read-more.svg"
+            {/* <Image
+              src=
               alt="View more"
               className="w-16 h-16 mb-4"
-            />
+            /> */}
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
               Explore More Blogs
             </h3>

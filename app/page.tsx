@@ -12,11 +12,11 @@ export default function HomePage() {
       <HeroSection />
       <ServicesSection />
       <TestimonialSection />
-      <OurProducts />
+      {/* <OurProducts /> */}
 
       {/* Uncomment if you want to include the Brands section */}
       {/* <BrandsSection /> */}
-      <BrandsSection />
+      {/* <BrandsSection /> */}
 
       <BlogSection />
     </main>
