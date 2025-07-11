@@ -14,13 +14,13 @@ const NavBar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}>
-        <div className="flex items-center px-6 space-x-6">
+        <div className="flex items-center px-4 space-x-4">
           {/* Logo */}
           <MotionImage
             src={TribeTek}
             alt="TribeTek Logo"
             // width={40}
-            height={35}
+            height={16}
             className=""
             // whileHover={{ scale: 1.1 }}
             // whileTap={{ scale: 0.95 }}
@@ -30,7 +30,7 @@ const NavBar = () => {
           <div className="flex space-x-4">
             {[
               { name: "Home", path: "/" },
-              { name: "About us", path: "/about" },
+              { name: "About", path: "/about" },
               { name: "Blogs", path: "/blog" },
               { name: "Contact", path: "/contact" },
             ].map((item) => (
