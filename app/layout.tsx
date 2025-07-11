@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// import Icon from "@/assets/TribeTek-Icon.png"; //updated
 //updated
 import Navbar from "../Components/nav";
 //updated
@@ -16,8 +17,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TribeTek",
-  description: "Transform Thrive Trimp",
+  title: "TribeTek | Custom Software, AI & Digital Transformation Sri Lanka",
+  description:
+    "TribeTek delivers custom software development, AI solutions, digital marketing, and business automation to help Sri Lankan businesses grow and digitize efficiently.",
+  icons: {
+    icon: "/TribeTek-Icon.png",
+  },
 };
 
 export default function RootLayout({
