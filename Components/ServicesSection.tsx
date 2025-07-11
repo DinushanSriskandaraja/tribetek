@@ -9,44 +9,44 @@ import {
 
 const services = [
   {
-    title: "Custom Website Development",
+    title: "SEO-Friendly, Responsive Websites",
     description:
-      "Beautiful, fast, and responsive websites tailored for your brand.",
+      "We design and develop lightning-fast websites optimized for performance, user experience, and SEO, tailored to elevate your brand online.",
     href: "/services/website-development",
     icon: <FaCode className="text-[#ED4716] w-10 h-10 ml-auto" />,
   },
   {
-    title: "Custom Software Development",
+    title: "Scalable Business Software Solutions",
     description:
-      "We build scalable and secure software that powers businesses.",
+      "From internal tools to full-scale platforms, we build secure, custom software that simplifies workflows and fuels business growth.",
     href: "/services/software-development",
     icon: <FaCogs className="text-[#ED4716] w-10 h-10 ml-auto" />,
   },
   {
-    title: "Digital Marketing & Branding",
+    title: "Digital Growth Through Marketing & Brand Strategy",
     description:
-      "Grow your online presence with smart strategy and stunning design.",
+      "Boost your visibility with data-driven digital marketing and design. We help businesses craft a bold online identity and attract ideal customers.",
     href: "/services/digital-marketing",
     icon: <FaBullhorn className="text-[#ED4716] w-10 h-10 ml-auto" />,
   },
   {
-    title: "End-to-End Digital Transformation",
+    title: "Manual to Digital: Full Business Systemization",
     description:
-      "We systemize your manual operations and optimize performance.",
+      "We transform outdated processes into efficient digital systems, integrating custom solutions to improve performance and reduce effort.",
     href: "/services/digital-transformation",
     icon: <FaSyncAlt className="text-[#ED4716] w-10 h-10 ml-auto" />,
   },
   {
-    title: "Tech Consulting",
+    title: "Technology Strategy & Digital Advisory",
     description:
-      "Expert guidance to help you choose the right digital solutions.",
+      " Get expert advice on choosing, planning, and implementing the right tech stack for your business needs and growth goals.",
     href: "/services/consulting",
     icon: <FaLightbulb className="text-[#ED4716] w-10 h-10 ml-auto" />,
   },
   {
-    title: "UI/UX Design",
+    title: "AI-Powered Business Solutions",
     description:
-      "Modern interfaces that keep users engaged and experiences intuitive.",
+      "We build smart AI tools and automations that streamline your operations — from predictive systems to chatbots, and business intelligence dashboards.",
     href: "/services/ui-ux",
     icon: <FaPencilRuler className="text-[#ED4716] w-10 h-10 ml-auto" />,
   },
@@ -56,8 +56,8 @@ export default function ServicesSection() {
   return (
     <section className="container rounded-4xl mx-auto py-10 px-6 sm:p-16  bg-white shadow-lg border border-gray-100 transition-all duration-300">
       <div className="mx-auto">
-        <h2 className="text-5xl font-bold mb-12 text-left text-gray-900">
-          We are experts in
+        <h2 className="text-3xl md:text-5xl font-bold mb-12 text-left text-gray-900">
+          What TribeTek Can Do for Your Business
         </h2>
 
         <div className="grid gap-12 grid-flow-row md:grid-cols-2 lg:grid-cols-3">

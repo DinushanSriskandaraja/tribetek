@@ -7,8 +7,9 @@ import TechStack from "../assets/TechStack.jpg";
 export default function BlogSection() {
   const blogs = [
     {
-      title: "5 Ways to Automate Your Business Workflow",
-      tagline: "From spreadsheets to smart systems.",
+      title: "How Business Automation Can Save You Time and Boost Profits",
+      tagline:
+        "Discover how business automation saves time, cuts costs, and boosts profits by streamlining your workflows with smart technology.",
       image: BizAutomation,
       href: "/blog/automate-business-workflow",
     },

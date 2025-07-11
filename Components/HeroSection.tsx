@@ -2,14 +2,14 @@ export default function HeroSection() {
   return (
     <section className="container mx-auto  pt-10">
       <div className="bg-white rounded-4xl px-6 md:px-16 py-10 md:py-20 shadow-lg border border-gray-100 transition-all duration-300">
-        <h1 className="text-3xl md:text-5xl font-extrabold mb-6 leading-tight text-gray-900 max-w-xl md:max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-          Transform Your Business into a Smart, Scalable Digital Brand{" "}
+        <h1 className="text-3xl md:text-5xl font-extrabold mb-6 leading-tight text-gray-900 max-w-xl md:max-w-5xl mx-auto md:mx-0 text-center md:text-left">
+          Custom Software, Branding & Business Digitization Solutions for Modern
+          Teams
         </h1>
 
         <p className="text-base md:text-xl text-gray-600 mb-8 max-w-md md:max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-          We build software that grows with your business
-          <br className="hidden md:block" />
-          custom systems, brand impact, and real results.
+          Build faster, smarter, and stronger with software tailored to your
+          operations and brand.
         </p>
 
         <div className="flex flex-col sm:flex-row  gap-4 justify-center md:justify-start">

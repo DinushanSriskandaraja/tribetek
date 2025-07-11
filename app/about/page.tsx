@@ -55,19 +55,16 @@ export default function AboutPage() {
             About <span>TribeTek</span>
           </h1>
           <p className="text-lg text-gray-700 leading-relaxed">
-            TribeTek was founded to empower businesses through custom software,
-            branding, and smart automation. We believe digital transformation
-            should be simple, accessible, and designed for real-world growth.
-            Our tribe is made of curious builders who care deeply about every
-            project we touch.TribeTek was founded to empower businesses through
-            custom software, branding, and smart automation. We believe digital
-            transformation should be simple, accessible, and designed for
-            real-world growth. Our tribe is made of curious builders who care
-            deeply about every project we touch.TribeTek was founded to empower
-            businesses through custom software, branding, and smart automation.
-            We believe digital transformation should be simple, accessible, and
-            designed for real-world growth. Our tribe is made of curious
-            builders who care deeply about every project we touch.
+            TribeTek began as a bootstrap agency, building digital products for
+            clients while working hard to create our own innovations. As
+            engineers first, we’ve always focused on crafting clean, scalable
+            solutions that solve real problems. Without outside funding, we
+            relied on grit and passion, turning late nights and simple spaces
+            into powerful technology. Today, while continuing to serve as a
+            trusted digital agency, we’re also committed to building our own
+            products and partnering with innovators and entrepreneurs who share
+            our drive. If you have a bold idea and a real challenge to solve,
+            we’re ready to build it with you.
           </p>
         </div>
         <div className="flex-1 w-full max-w-md">
