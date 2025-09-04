@@ -1,55 +1,60 @@
 import {
   FaCode,
   FaCogs,
-  FaBullhorn,
+ 
   FaSyncAlt,
   FaLightbulb,
-  FaPencilRuler,
+  
+  FaMobileAlt ,
+  FaRobot,
 } from "react-icons/fa";
 
 const services = [
-  {
-    title: "SEO-Friendly, Responsive Websites",
-    description:
-      "We design and develop lightning-fast websites optimized for performance, user experience, and SEO, tailored to elevate your brand online.",
-    href: "/services/website-development",
-    icon: <FaCode className="text-[#ED4716] w-10 h-10 ml-auto" />,
-  },
-  {
-    title: "Scalable Business Software Solutions",
-    description:
-      "From internal tools to full-scale platforms, we build secure, custom software that simplifies workflows and fuels business growth.",
-    href: "/services/software-development",
-    icon: <FaCogs className="text-[#ED4716] w-10 h-10 ml-auto" />,
-  },
-  {
-    title: "Digital Growth Through Marketing & Brand Strategy",
-    description:
-      "Boost your visibility with data-driven digital marketing and design. We help businesses craft a bold online identity and attract ideal customers.",
-    href: "/services/digital-marketing",
-    icon: <FaBullhorn className="text-[#ED4716] w-10 h-10 ml-auto" />,
-  },
-  {
-    title: "Manual to Digital: Full Business Systemization",
-    description:
-      "We transform outdated processes into efficient digital systems, integrating custom solutions to improve performance and reduce effort.",
-    href: "/services/digital-transformation",
-    icon: <FaSyncAlt className="text-[#ED4716] w-10 h-10 ml-auto" />,
-  },
-  {
-    title: "Technology Strategy & Digital Advisory",
-    description:
-      " Get expert advice on choosing, planning, and implementing the right tech stack for your business needs and growth goals.",
-    href: "/services/consulting",
-    icon: <FaLightbulb className="text-[#ED4716] w-10 h-10 ml-auto" />,
-  },
-  {
-    title: "AI-Powered Business Solutions",
-    description:
-      "We build smart AI tools and automations that streamline your operations — from predictive systems to chatbots, and business intelligence dashboards.",
-    href: "/services/ui-ux",
-    icon: <FaPencilRuler className="text-[#ED4716] w-10 h-10 ml-auto" />,
-  },
+   {
+  title: "AI-Powered Business Solutions",
+  description:
+    "Leverage intelligent AI tools and automation to optimize operations, drive smarter decisions, and enhance customer engagement.",
+  href: "/services/ai-solutions",
+  icon: <FaRobot className="text-[#ED4716] w-10 h-10 ml-auto" />,
+},
+{
+  title: "Manual Business to AI Automation",
+  description:
+    "Transform your manual business processes into AI-driven automation, increasing efficiency, scalability, and operational performance.",
+  href: "/services/digital-transformation",
+  icon: <FaSyncAlt className="text-[#ED4716] w-10 h-10 ml-auto" />,
+},
+
+{
+  title: "Custom Software Development",
+  description:
+    "Build secure, scalable, and user friendly software solutions ranging from internal tools to enterprise-grade platforms that accelerate growth.",
+  href: "/services/software-development",
+  icon: <FaCogs className="text-[#ED4716] w-10 h-10 ml-auto" />,
+},
+{
+  title: "Mobile App Development",
+  description:
+    "Design and develop high-performance mobile apps that delight users, strengthen your brand, and boost business growth on iOS and Android.",
+  href: "/services/mobile-app-development",
+  icon: <FaMobileAlt className="text-[#ED4716] w-10 h-10 ml-auto" />,
+},
+{
+  title: "SEO-Optimized & Responsive Websites",
+  description:
+    "Create visually stunning, lightning-fast websites optimized for SEO, UX, and conversions—perfectly tailored to elevate your online presence.",
+  href: "/services/website-development",
+  icon: <FaCode className="text-[#ED4716] w-10 h-10 ml-auto" />,
+},
+{
+  title: "Tech Strategy & Digital Advisory",
+  description:
+    "Get expert guidance on technology planning, digital strategy, and innovative solutions to maximize ROI and future-proof your business.",
+  href: "/services/consulting",
+  icon: <FaLightbulb className="text-[#ED4716] w-10 h-10 ml-auto" />,
+},
+
+
 ];
 
 export default function ServicesSection() {
