@@ -16,11 +16,11 @@ export default function HeroSection() {
             className="px-6 py-3 bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] text-white font-bold rounded-full shadow-md hover:bg-orange-600 transition duration-200 text-center">
             Lets Talk
           </a>
-          <a
+          {/* <a
             href="/products"
             className="px-6 py-3 border border-gray-300 text-gray-800 font-medium rounded-full hover:bg-gray-100 transition duration-200 text-center">
             Explore Products
-          </a>
+          </a> */}
         </div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+"use client";
+
 import { notFound } from "next/navigation";
 import { JSX } from "react";
 import {
@@ -34,6 +36,9 @@ import {
   SiMysql,
 } from "react-icons/si";
 
+
+
+// Your `services`, `techIconMap`, and `iconMap` stay exactly the same as your original code.
 type ServiceData = {
   title: string;
   tagline: string;
@@ -304,6 +309,7 @@ const iconMap: Record<string, JSX.Element> = {
   "mobile-app-development": <FaMobileAlt size={64} className="text-[#ED4716]" />,
 };
 
+
 export default async function ServiceDetailPage({
   params,
 }: {
@@ -316,58 +322,72 @@ export default async function ServiceDetailPage({
   const icon = iconMap[resolvedParams.slug];
 
   return (
-    <section className="container mx-auto my-20 px-6 sm:px-16">
-      {/* Hero */}
-      <div className="h-80 bg-white rounded-4xl shadow-lg border border-gray-100 p-12 flex flex-col md:flex-row items-center gap-8 md:gap-16">
-        <div className="flex-shrink-0 flex justify-center items-center bg-white p-8 rounded-3xl shadow-lg">
+    <section className="container mx-auto my-10 sm:my-20 px-4 sm:px-6 md:px-16">
+      {/* Hero Section */}
+      <div className="bg-white rounded-4xl shadow-lg border border-gray-100 p-6 sm:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-12">
+        <div className="flex-shrink-0 flex justify-center items-center bg-white p-6 sm:p-8 rounded-3xl shadow-lg">
           {icon}
         </div>
-        <div>
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+        <div className="text-center md:text-left">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-4">
             {service.title}
           </h1>
-          <h2 className="text-2xl md:text-3xl text-[#ED4716] font-semibold mb-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl text-[#ED4716] font-semibold mb-4 sm:mb-6">
             {service.tagline}
           </h2>
-          <p className="text-gray-700 text-lg md:text-xl">{service.description}</p>
+          <p className="text-gray-700 text-base sm:text-lg md:text-xl">{service.description}</p>
         </div>
-        
       </div>
 
-      {/* Benefits */}
-      <div className="mt-20 bg-white  rounded-4xl p-10 shadow-lg border border-gray-100">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center ">Why Choose This Service?</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+      {/* Benefits Section */}
+      <div className="mt-10 sm:mt-16 bg-white rounded-4xl p-6 sm:p-10 shadow-lg border border-gray-100">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
+          Why Choose This Service?
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {service.benefits.map((benefit, idx) => (
-            <div key={idx} className="bg-[#f2f2f2]  p-6 rounded-3xl shadow hover:shadow-xl transition-all duration-300">
-              <h3 className="font-semibold text-gray-800">{benefit}</h3>
+            <div
+              key={idx}
+              className="bg-[#f2f2f2] p-4 sm:p-6 rounded-3xl shadow hover:shadow-xl transition-all duration-300"
+            >
+              <h3 className="font-semibold text-gray-800 text-base sm:text-lg">{benefit}</h3>
             </div>
           ))}
         </div>
       </div>
 
-
-
-      {/* Process */}
-      <div className="mt-20 bg-white rounded-4xl p-10 shadow-lg border border-gray-100">
-        <h2 className="text-3xl text-center font-bold text-gray-900 mb-8">Our Process</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+      {/* Process Section */}
+      <div className="mt-10 sm:mt-16 bg-white rounded-4xl p-6 sm:p-10 shadow-lg border border-gray-100">
+        <h2 className="text-2xl sm:text-3xl text-center font-bold text-gray-900 mb-6 sm:mb-8">
+          Our Process
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {service.process.map((step, idx) => (
-            <div key={idx} className="bg-[#f2f2f2] p-6 rounded-3xl shadow hover:shadow-xl transition-all duration-300">
-              <h3 className="font-semibold text-gray-800">{`Step ${idx + 1}: ${step}`}</h3>
+            <div
+              key={idx}
+              className="bg-[#f2f2f2] p-4 sm:p-6 rounded-3xl shadow hover:shadow-xl transition-all duration-300"
+            >
+              <h3 className="font-semibold text-gray-800 text-base sm:text-lg">
+                {`Step ${idx + 1}: ${step}`}
+              </h3>
             </div>
           ))}
         </div>
       </div>
 
-            {/* What We Do */}
-      <div className="mt-20 bg-white rounded-4xl p-10 shadow-lg border border-gray-100">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Solutions</h2>
-        <div className="grid md:grid-cols-2 gap-8">
+      {/* What We Do Section */}
+      <div className="mt-10 sm:mt-16 bg-white rounded-4xl p-6 sm:p-10 shadow-lg border border-gray-100">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
+          Our Solutions
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {service.whatWeDo.map((point, idx) => (
-            <div key={idx} className="bg-[#f2f2f2] p-8 rounded-3xl shadow hover:shadow-xl transition-all duration-300">
-              <h3 className="font-semibold text-gray-800 mb-3">{point}</h3>
-              <p className="text-gray-600 text-sm">
+            <div
+              key={idx}
+              className="bg-[#f2f2f2] p-6 sm:p-8 rounded-3xl shadow hover:shadow-xl transition-all duration-300"
+            >
+              <h3 className="font-semibold text-gray-800 mb-2 sm:mb-3 text-base sm:text-lg">{point}</h3>
+              <p className="text-gray-600 text-xs sm:text-sm">
                 Detailed explanation of how we implement this to deliver top results for your business.
               </p>
             </div>
@@ -375,14 +395,17 @@ export default async function ServiceDetailPage({
         </div>
       </div>
 
-      {/* Tech Stack */}
-      <div className="mt-20 bg-white rounded-4xl p-10 shadow-lg border border-gray-100">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Tech Stack We Use</h2>
-        <div className="flex flex-wrap gap-5">
+      {/* Tech Stack Section */}
+      <div className="mt-10 sm:mt-16 bg-white rounded-4xl p-6 sm:p-10 shadow-lg border border-gray-100">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
+          Tech Stack We Use
+        </h2>
+        <div className="flex flex-wrap gap-3 sm:gap-5 justify-center">
           {service.techStack.map((tech, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-3 px-5 py-3 bg-[#f2f2f2] border border-gray-200 rounded-xl shadow-sm text-gray-700 text-sm hover:bg-[#ED4716] hover:text-white transition-all duration-300">
+              className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-3 bg-[#f2f2f2] border border-gray-200 rounded-xl shadow-sm text-gray-700 text-xs sm:text-sm hover:bg-[#ED4716] hover:text-white transition-all duration-300"
+            >
               {techIconMap[tech] || <FaTools />}
               <span className="font-medium">{tech}</span>
             </div>
@@ -390,35 +413,16 @@ export default async function ServiceDetailPage({
         </div>
       </div>
 
-      {/* Results */}
-      {/* {service.results && service.results.length > 0 && (
-        <div className="mt-20 bg-white rounded-4xl p-10 shadow-lg border border-gray-100">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Impact</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {service.results.map((res, idx) => (
-              <div key={idx} className="bg-[#f2f2f2] p-6 rounded-3xl shadow hover:shadow-xl transition-all duration-300 text-center">
-                <h3 className="text-2xl font-bold text-[#ED4716]">{res.value}</h3>
-                <p className="text-gray-700 mt-2">{res.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )} */}
-
-      {/* CTA */}
-      <div className="mt-20 flex flex-col md:flex-row justify-between items-center gap-8 bg-white rounded-4xl p-10 shadow-lg border border-gray-200">
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">
+      {/* CTA Section */}
+      <div className="mt-10 sm:mt-16 flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4 sm:gap-6 bg-white rounded-4xl p-6 sm:p-10 shadow-lg border border-gray-200">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 text-center sm:text-left">
           Want to explore more about our services?
         </h2>
-        <div className="flex gap-6">
-          {/* <a
-            href="/blogs"
-            className="px-7 py-4 bg-[#ED4716] text-white font-medium rounded-xl hover:bg-[#d53f12] transition-all">
-            Read Related Blogs
-          </a> */}
+        <div className="flex gap-4 sm:gap-6 flex-wrap justify-center sm:justify-start">
           <a
             href="/contact"
-            className="px-7 py-4 border border-[#ED4716] text-[#ED4716] font-medium rounded-xl hover:bg-[#ED4716] hover:text-white transition-all">
+            className="px-6 sm:px-7 py-3 sm:py-4 border border-[#ED4716] text-[#ED4716] font-medium rounded-xl hover:bg-[#ED4716] hover:text-white transition-all"
+          >
             Book A Free Consultation
           </a>
         </div>
