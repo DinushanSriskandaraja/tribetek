@@ -18,7 +18,7 @@ import {
   FaMailBulk,
   FaCloud,
   FaTrello,
-} from "react-icons/fa";
+} from "react-icons/fa"; // Font Awesome Icons
 import {
   SiNextdotjs,
   SiTailwindcss,
