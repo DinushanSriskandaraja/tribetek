@@ -1,5 +1,8 @@
+"use client";
+
 import { notFound } from "next/navigation";
-import { JSX } from "react";
+import { motion } from "framer-motion";
+import React from "react";
 import {
   FaCode,
   FaCogs,
@@ -18,7 +21,7 @@ import {
   FaMailBulk,
   FaCloud,
   FaTrello,
-} from "react-icons/fa"; // Font Awesome Icons
+} from "react-icons/fa";
 import {
   SiNextdotjs,
   SiTailwindcss,
@@ -33,6 +36,7 @@ import {
   SiCanva,
   SiMysql,
 } from "react-icons/si";
+import { JSX } from "react";
 
 type ServiceData = {
   title: string;
@@ -52,6 +56,7 @@ const services: Record<
   | "digital-transformation"
   | "consulting"
   | "ai-solutions"
+
   | "mobile-app-development",
   ServiceData
 > = {
@@ -293,7 +298,6 @@ const techIconMap: Record<string, JSX.Element> = {
   "Python AI Libraries": <FaRobot />,
 };
 
-// Service Icons
 const iconMap: Record<string, JSX.Element> = {
   "website-development": <FaCode size={64} className="text-[#ED4716]" />,
   "software-development": <FaCogs size={64} className="text-[#ED4716]" />,
@@ -304,102 +308,132 @@ const iconMap: Record<string, JSX.Element> = {
   "mobile-app-development": <FaMobileAlt size={64} className="text-[#ED4716]" />,
 };
 
-export default async function ServiceDetailPage({
+export default function ServiceDetailPage({
   params,
 }: {
   params: Promise<{ slug: keyof typeof services }>;
 }) {
-  const resolvedParams = await params;
-  const service = services[resolvedParams.slug];
+  const { slug } = React.use(params);
+  const service = services[slug];
   if (!service) return notFound();
 
-  const icon = iconMap[resolvedParams.slug];
+  const icon = iconMap[slug];
 
-  return (
-    <section className="container mx-auto my-20 px-6 sm:px-16">
-      {/* Hero */}
-      <div className="bg-white mt-28 rounded-3xl shadow-lg border border-gray-100 p-6 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-12">
-        <div className="flex-shrink-0 flex justify-center items-center bg-white p-8 rounded-3xl shadow-lg">
-          {icon}
-        </div>
-        <div>
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-            {service.title}
-          </h1>
-          <h2 className="text-2xl md:text-3xl text-[#ED4716] font-semibold mb-6">
-            {service.tagline}
-          </h2>
-          <p className="text-gray-700 text-lg md:text-xl">{service.description}</p>
-        </div>
+ return (
+    <main className="relative min-h-screen  text-white overflow-hidden">
+  {/* Background Accent Circles */}
+  <div className="absolute -top-40 -left-32 w-[450px] h-[450px] bg-[#ED4716]/15 blur-[160px] rounded-full" />
+  <div className="absolute bottom-0 -right-40 w-[400px] h-[400px] bg-[#ED4716]/10 blur-[160px] rounded-full" />
+
+  {/* Parent container with equal spacing */}
+  <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 py-28 flex flex-col space-y-32">
+
+    {/* HERO SECTION */}
+    <motion.section
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="text-center md:text-left flex flex-col md:flex-row items-center gap-12 mt-16"
+    >
+      <div className="bg-gradient-to-br from-[#151515] to-[#1f1f1f] rounded-3xl p-10 shadow-lg shadow-black/30">
+        {icon}
       </div>
-
-      {/* Benefits */}
-      <div className="mt-20 bg-white  rounded-4xl p-10 shadow-lg border border-gray-100">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center ">Why Choose This Service?</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {service.benefits.map((benefit, idx) => (
-            <div key={idx} className="bg-[#f2f2f2]  p-6 rounded-3xl shadow hover:shadow-xl transition-all duration-300">
-              <h3 className="font-semibold text-gray-800">{benefit}</h3>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Process */}
-      <div className="mt-20 bg-white rounded-4xl p-10 shadow-lg border border-gray-100">
-        <h2 className="text-3xl text-center font-bold text-gray-900 mb-8">Our Process</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {service.process.map((step, idx) => (
-            <div key={idx} className="bg-[#f2f2f2] p-6 rounded-3xl shadow hover:shadow-xl transition-all duration-300">
-              <h3 className="font-semibold text-gray-800">{`Step ${idx + 1}: ${step}`}</h3>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* What We Do */}
-      <div className="mt-20 bg-white rounded-4xl p-10 shadow-lg border border-gray-100">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Our Solutions</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {service.whatWeDo.map((point, idx) => (
-            <div key={idx} className="bg-[#f2f2f2] p-8 rounded-3xl shadow hover:shadow-xl transition-all duration-300">
-              <h3 className="font-semibold text-gray-800 mb-3">{point}</h3>
-              <p className="text-gray-600 text-sm">
-                Detailed explanation of how we implement this to deliver top results for your business.
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Tech Stack */}
-      <div className="mt-20 bg-white rounded-4xl p-10 shadow-lg border border-gray-100">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Tech Stack We Use</h2>
-        <div className="flex flex-wrap gap-5">
-          {service.techStack.map((tech, idx) => (
-            <div
-              key={idx}
-              className="flex items-center gap-3 px-5 py-3 bg-[#f2f2f2] border border-gray-200 rounded-xl shadow-sm text-gray-700 text-sm hover:bg-[#ED4716] hover:text-white transition-all duration-300">
-              {techIconMap[tech] || <FaTools />}
-              <span className="font-medium">{tech}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* CTA */}
-      <div className="mt-20 flex flex-col md:flex-row justify-between items-center gap-8 bg-white rounded-4xl p-10 shadow-lg border border-gray-200">
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">
-          Want to explore more about our services?
+      <div>
+        <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-[#ED4716] to-orange-400 bg-clip-text text-transparent mb-4">
+          {service.title}
+        </h1>
+        <h2 className="text-xl md:text-2xl text-gray-300 italic mb-6">
+          {service.tagline}
         </h2>
-        <div className="flex gap-6">
-          <a
-            href="/contact"
-            className="px-7 py-4 border border-[#ED4716] text-[#ED4716] font-medium rounded-xl hover:bg-[#ED4716] hover:text-white transition-all">
-            Book A Free Consultation
-          </a>
-        </div>
+        <p className="text-gray-400 text-lg leading-relaxed max-w-2xl mb-12">
+          {service.description}
+        </p>
       </div>
-    </section>
+    </motion.section>
+
+    {/* BENEFITS */}
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="space-y-16"
+    >
+      <h2 className="text-4xl md:text-5xl font-bold text-center text-white">
+        Key Benefits
+      </h2>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        {service.benefits.map((b, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ y: -5, scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-start gap-4"
+          >
+            <div className="w-4 h-4 rounded-full bg-gradient-to-br from-[#ED4716] to-orange-500 mt-2" />
+            <p className="text-gray-300 text-lg font-medium leading-relaxed mb-12">{b}</p>
+          </motion.div>
+        ))}
+      </div>
+    </motion.section>
+
+    {/* SOLUTIONS */}
+    <motion.section
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="relative overflow-hidden"
+    >
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#ED4716]/20 blur-[120px] rounded-full animate-pulse-slow" />
+        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#FF6B2C]/15 blur-[100px] rounded-full animate-pulse-slow" />
+      </div>
+
+      <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+        Solutions We Offer
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-{{service.whatWeDo.length}} gap-8 mb-12">
+        {service.whatWeDo.map((solution, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: i * 0.15 }}
+            className="relative bg-gradient-to-br from-[#1a1a1a]/80 to-[#121212]/80 backdrop-blur-md border border-[#2a2a2a] rounded-3xl p-8 flex flex-col justify-between h-full hover:scale-105 transition-transform duration-300 shadow-lg shadow-[#ED4716]/20"
+          >
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-12 h-1 rounded-full bg-gradient-to-r from-[#ED4716] to-[#FF6B2C]" />
+            <h3 className="text-2xl md:text-3xl text-[#ED4716] font-bold mb-4">{solution}</h3>
+            <p className="text-gray-300 text-base leading-relaxed">
+              Our approach ensures performance, scalability, and elegant user experience. Each solution is carefully designed to deliver results.
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </motion.section>
+
+    {/* TECH STACK */}
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="text-center space-y-10 h-[50px]"
+    >
+      <h2 className="text-4xl font-bold">Tech Stack</h2>
+      <div className="flex flex-wrap justify-center gap-6">
+        {service.techStack.map((tech, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-3 px-6 py-3 bg-[#151515]/70 border border-[#2a2a2a] rounded-full hover:bg-[#ED4716]/10 hover:border-[#ED4716]/50 transition"
+          >
+            {techIconMap[tech] || <FaTools />}
+            <span className="text-sm font-medium">{tech}</span>
+          </div>
+        ))}
+      </div>
+    </motion.section>
+
+  </div>
+</main>
+
   );
 }

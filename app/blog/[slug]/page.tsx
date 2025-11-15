@@ -28,34 +28,31 @@ export default async function BlogPostPage({
       </Head>
 
       {/* Hero Section */}
-      <section
-        className="relative flex items-center justify-center text-left text-white bg-[#f2f2f2] rounded-4xl shadow-lg mt-20"
-        style={{
-          // backgroundImage: `url(${postData.coverImage || "/default-cover.jpg"})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-white rounded-4xl mt-20"></div>
-        <div className="relative z-10 max-w-3xl px-6 py-20">
-          <h1 className="text-4xl text-black mt-10 sm:text-5xl font-extrabold mb-6 drop-shadow-lg">
-            {postData.title}
-          </h1>
-          <p className="text-lg text-black mb-4">{postData.description}</p>
-          <div className="text-sm text-black">
-            {/* {postData.author && <span>By {postData.author} • </span>} */}
-            {/* <span>{postData.date}</span> • <span>{postData.readTime} min read</span> */}
-          </div>
-        </div>
-      </section>
+<section className="relative flex items-center justify-center text-center shadow-lg mt-20 overflow-hidden">
+  {/* Background Accent */}
+  <div className="absolute -top-40 -left-32 w-[400px] h-[400px] bg-[#ED4716]/20 blur-[140px] rounded-full animate-pulse-slow" />
+  <div className="absolute -bottom-32 -right-32 w-[350px] h-[350px] bg-[#FF6B2C]/15 blur-[120px] rounded-full animate-pulse-slow" />
+
+  {/* Hero Content */}
+  <div className="relative z-10 max-w-4xl px-6 sm:px-12 py-32 flex flex-col items-center justify-center gap-6">
+    <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg">
+      {postData.title}
+    </h1>
+    <p className="text-lg sm:text-xl md:text-2xl text-[#ED4716] font-medium max-w-3xl">
+      {postData.description}
+    </p>
+   
+  </div>
+</section>
+
 
       {/* Blog Content */}
-      <section className="container mt-5 mb-5 rounded-4xl mx-auto py-10 px-6 sm:p-16  bg-white shadow-lg border border-gray-100 transition-all duration-300">
+      <section className="container mt-5 mb-5 rounded-4xl mx-auto py-10 px-6 sm:p-16  bg-[#0a0a0a]  shadow-lg  transition-all duration-300">
         {/* Floating Social Bar */}
        
 
         {/* Markdown Article */}
-        <article className="flex-1  mx-auto max-w-3xl markdown-body">
+        <article className="flex-1  mx-auto  markdown-body">
           <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </article>
       </section>

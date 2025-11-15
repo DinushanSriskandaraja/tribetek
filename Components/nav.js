@@ -20,13 +20,13 @@ const NavBar = () => {
   return (
     <div className="relative flex z-20 justify-center">
       <motion.nav
-        className="fixed top-4 w-[90%] bg-white/30 backdrop-blur-md border border-white/50 shadow-lg rounded-tl-full rounded-br-full px-8 py-4 flex items-center justify-between"
+        className="fixed top-2 w-full bg-black/30 backdrop-blur-md border border-black/50 shadow-lg   px-8 py-4 flex items-center justify-between"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         {/* Logo */}
-        <MotionImage src={TribeTek} alt="TribeTek Logo" height={40} />
+        <MotionImage src={TribeTek} alt="TribeTek Logo" height={30} />
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-5">
@@ -34,7 +34,7 @@ const NavBar = () => {
             <motion.a
               key={item.name}
               href={item.path}
-              className="text-[#ED4716] hover:text-gray-900 font-medium text-2xl"
+              className="text-[#ED4716] hover:text-gray-900 font-medium text-xl"
               whileHover={{ scale: 1.05 }}
             >
               {item.name}
