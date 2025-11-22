@@ -19,8 +19,7 @@ export default function MilestonesSection() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden h-screen  flex items-center"
-    >
+      className="relative overflow-hidden my-16  flex items-center">
       <div className="relative z-10 container mx-auto px-6 md:px-16 text-center">
         {/* Heading */}
         <motion.h2
@@ -28,8 +27,7 @@ export default function MilestonesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-extrabold text-white mb-6"
-        >
+          className="text-4xl md:text-5xl font-extrabold text-white mb-6">
           Our <span className="text-[#ED4716]">Milestones</span>
         </motion.h2>
 
@@ -38,8 +36,7 @@ export default function MilestonesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-[#b3b3b3] max-w-2xl mx-auto text-lg leading-relaxed mb-16"
-        >
+          className="text-[#b3b3b3] max-w-2xl mx-auto text-lg leading-relaxed mb-16">
           Every achievement is a reflection of our passion, innovation, and
           commitment to building next-generation digital solutions.
         </motion.p>
@@ -53,8 +50,7 @@ export default function MilestonesSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="relative flex flex-col items-center justify-center"
-            >
+              className="relative flex flex-col items-center justify-center">
               {/* Count */}
               <h3 className="text-6xl md:text-7xl font-extrabold text-[#ED4716] mb-4">
                 {inView ? <CountUp end={item.number} duration={2} /> : 0}+

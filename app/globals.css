@@ -30,15 +30,14 @@
   } */
 
   /* Hide scrollbar but still allow scrolling */
-.scrollbar-none::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
+  .scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 
-.scrollbar-none {
-  -ms-overflow-style: none;  /* IE & Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
+  .scrollbar-none {
+    -ms-overflow-style: none; /* IE & Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 /* Font face for Astonpoliz */
@@ -60,12 +59,15 @@ h2 {
    📝 Markdown Styling (Dark Nightfall)
    -------------------------------------- */
 .markdown-body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.8;
   color: #e5e5e5; /* soft white text */
   background-color: #0a0a0a; /* main background */
 }
 
+/* .scroll-smooth {
+  scroll-behavior: smooth;
+} */
 /* Headings */
 .markdown-body h1,
 .markdown-body h2,
@@ -193,9 +195,8 @@ h2 {
   --_noise-size: 8.6%;
   --_gradient-blur: 110px;
   --_gradient-blend-mode: normal;
-  --_gradient: 
-    radial-gradient(at 99.1% 97.5%, #ED4716 0px, transparent 50%),
-    radial-gradient(at 14.3% 43.2%, #ED6C45 0px, transparent 50%);
+  --_gradient: radial-gradient(at 99.1% 97.5%, #ed4716 0px, transparent 50%),
+    radial-gradient(at 14.3% 43.2%, #ed6c45 0px, transparent 50%);
 }
 
 /* Fullscreen background wrapper */
@@ -225,5 +226,6 @@ h2 {
 /* Frosted backdrop effect for content containers */
 .frosted-backdrop {
   backdrop-filter: blur(var(--_gradient-blur)) contrast(100%) brightness(100%);
-  -webkit-backdrop-filter: blur(var(--_gradient-blur)) contrast(100%) brightness(100%);
+  -webkit-backdrop-filter: blur(var(--_gradient-blur)) contrast(100%)
+    brightness(100%);
 }

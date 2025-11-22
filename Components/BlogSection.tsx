@@ -39,8 +39,6 @@ export default function BlogSection() {
 
   return (
     <section className="relative overflow-hidden py-24 ">
-      
-
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16">
         {/* Heading */}
         <motion.div
@@ -48,13 +46,13 @@ export default function BlogSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+          className="text-center mb-16">
           <h2 className="text-5xl font-extrabold text-white mb-3">
             Latest <span className="text-[#ED4716]">Insights</span>
           </h2>
           <p className="text-[#b3b3b3] text-lg max-w-2xl mx-auto">
-            Explore our stories, ideas, and lessons that inspire digital transformation.
+            Explore our stories, ideas, and lessons that inspire digital
+            transformation.
           </p>
         </motion.div>
 
@@ -64,15 +62,13 @@ export default function BlogSection() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex overflow-x-auto gap-10 scrollbar-hide snap-x snap-mandatory pb-6 px-2"
-        >
+          className="flex overflow-x-auto gap-10 scrollbar-hide snap-x snap-mandatory pb-6 px-2">
           {blogs.map((blog, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="relative flex-shrink-0 snap-center w-[320px] sm:w-[400px] rounded-3xl overflow-hidden bg-[#141414]/80 border border-[#1f1f1f] hover:border-[#ED4716]/50 transition-all duration-500 backdrop-blur-lg shadow-[0_0_40px_rgba(0,0,0,0.3)] hover:shadow-[0_0_50px_rgba(237,71,22,0.2)]"
-            >
+              className="relative flex-shrink-0 snap-center w-[320px] sm:w-[400px] rounded-3xl overflow-hidden bg-[#141414]/80 border border-[#1f1f1f] hover:border-[#ED4716]/50 transition-all duration-500 backdrop-blur-lg shadow-[0_0_40px_rgba(0,0,0,0.3)] hover:shadow-[0_0_50px_rgba(237,71,22,0.2)]">
               <div className="relative h-[240px]">
                 <Image
                   src={blog.image}
@@ -89,8 +85,7 @@ export default function BlogSection() {
                 <p className="text-[#b3b3b3] text-sm mb-4">{blog.tagline}</p>
                 <Link
                   href={blog.href}
-                  className="text-[#ED4716] font-medium text-sm hover:underline mt-auto"
-                >
+                  className="text-[#ED4716] font-medium text-sm hover:underline mt-auto">
                   Read More →
                 </Link>
               </div>
@@ -104,12 +99,10 @@ export default function BlogSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
+          className="mt-16 text-center">
           <Link
             href="/blogs"
-            className="inline-block px-8 py-3 rounded-full border border-[#ED4716]/60 text-white hover:bg-[#ED4716] hover:shadow-[0_0_30px_rgba(237,71,22,0.4)] transition-all duration-300 font-semibold"
-          >
+            className="inline-block px-8 py-3 rounded-full border border-[#ED4716]/60 text-white hover:bg-[#ED4716] hover:shadow-[0_0_30px_rgba(237,71,22,0.4)] transition-all duration-300 font-semibold">
             View All Articles →
           </Link>
         </motion.div>

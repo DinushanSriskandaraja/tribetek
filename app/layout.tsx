@@ -5,6 +5,7 @@ import Navbar from "../Components/nav";
 import Footer from "../Components/footer";
 import CTASection from "@/Components/cta";
 import FloatingGradient from "@/Components/bgEffect";
+import SmoothScroll from "@/Components/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,33 +26,32 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="scroll-smooth bg-[#0B0B0B] text-[#e5e5e5]">
+    <html
+      lang="en"
+      className="scroll-smooth bg-gradient-to-tr from-[#161616] to-[#0f0f0f] text-[#e5e5e5]">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} relative  text-[#e5e5e5] antialiased min-h-screen flex flex-col overflow-x-hidden`}
-      >
-        <FloatingGradient />
-        
-        {/* Navbar */}
-        <div className="sticky top-0 z-50 bg-[#121212] border-b border-[#1f1f1f]">
+        className={`${geistSans.variable} ${geistMono.variable} relative text-[#e5e5e5] antialiased overflow-x-hidden`}>
+        {/* FIXED NAVBAR */}
+        <div className="fixed top-0 left-0 w-full z-50 bg-[#121212] border-b border-[#1f1f1f]">
           <Navbar />
         </div>
 
-        {/* Main content */}
-        <main className="flex-grow relative z-10">{children}</main>
-
-        {/* CTA */}
-        <CTASection />
-
-        {/* Footer */}
-        <Footer />
-
-        {/* Optional: Subtle glowing gradient background
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-[#FF6B2C]/20 blur-[180px] rounded-full animate-pulse-slow" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#ED4716]/15 blur-[150px] rounded-full animate-pulse-slow" />
-        </div> */}
+        {/* SMOOTH SCROLL CONTENT */}
+        <main className="relative z-10">
+          {/* <SmoothScroll> */}
+          <div className="pt-[80px]">
+            {children}
+            <CTASection />
+            <Footer />
+          </div>
+          {/* </SmoothScroll> */}
+        </main>
       </body>
     </html>
   );

@@ -25,7 +25,9 @@ export default function ContactNewsletter() {
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value, type } = e.target;
     if (type === "checkbox" && e.target instanceof HTMLInputElement) {
@@ -74,16 +76,15 @@ export default function ContactNewsletter() {
   return (
     <section className="relative py-24 overflow-hidden">
       {/* Glows */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#FF6B2C]/10 rounded-full blur-[180px]" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#ED4716]/10 rounded-full blur-[180px]" />
+      {/* <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#FF6B2C]/10 rounded-full blur-[180px]" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#ED4716]/10 rounded-full blur-[180px]" /> */}
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12">
         {submitted ? (
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-[#4ade80] font-medium text-center text-xl"
-          >
+            className="text-[#4ade80] font-medium text-center text-xl">
             ✅ Thank you for reaching out! We’ll get back to you soon.
           </motion.p>
         ) : (
@@ -93,14 +94,14 @@ export default function ContactNewsletter() {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="bg-[#121212]/70 border border-[#1f1f1f] backdrop-blur-2xl rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.3)] p-8 md:p-12 flex flex-col gap-6"
-          >
+            className="bg-[#121212]/30 border border-[#1f1f1f] backdrop-blur-2xl rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.3)] p-8 md:p-12 flex flex-col gap-6">
             <div className="text-center mb-6">
               <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-3">
                 Let’s <span className="text-[#ED4716]">Connect</span>
               </h2>
               <p className="text-[#b3b3b3] text-lg">
-                Fill out your details and let us know your purpose. We will respond promptly.
+                Fill out your details and let us know your purpose. We will
+                respond promptly.
               </p>
             </div>
 
@@ -139,8 +140,7 @@ export default function ContactNewsletter() {
               name="purpose"
               value={formData.purpose}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-[#2a2a2a] text-white focus:outline-none focus:ring-2 focus:ring-[#ED4716]"
-            >
+              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-[#2a2a2a] text-white focus:outline-none focus:ring-2 focus:ring-[#ED4716]">
               <option>General Inquiry</option>
               <option>Software Development</option>
               <option>AI Solutions</option>
@@ -166,7 +166,9 @@ export default function ContactNewsletter() {
                 className="mt-1 w-4 h-4 accent-[#ED4716]"
               />
               <span>
-                I agree to share my details with <span className="text-[#FF6B2C] font-medium">TribeTek</span> for communication and service purposes.
+                I agree to share my details with{" "}
+                <span className="text-[#FF6B2C] font-medium">TribeTek</span> for
+                communication and service purposes.
               </span>
             </label>
 
@@ -174,8 +176,7 @@ export default function ContactNewsletter() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               type="submit"
-              className="mt-4 w-full md:w-auto px-10 py-3 bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] rounded-xl text-white font-semibold text-lg shadow-[0_0_25px_rgba(237,71,22,0.4)] hover:shadow-[0_0_35px_rgba(237,71,22,0.6)] transition-all"
-            >
+              className="mt-4 w-full md:w-auto px-10 py-3 bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] rounded-xl text-white font-semibold text-lg shadow-[0_0_25px_rgba(237,71,22,0.4)] hover:shadow-[0_0_35px_rgba(237,71,22,0.6)] transition-all">
               Send Message →
             </motion.button>
           </motion.form>
