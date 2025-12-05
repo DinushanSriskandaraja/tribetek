@@ -73,10 +73,18 @@ export default function WhyChooseSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="p-8 rounded-2xl bg-[#0e0e0e]/60 border border-[#2b2b2b]
-                        backdrop-blur-xl 
-                        hover:bg-gradient-to-tl from-[#ED4716]/20 via-[#ED4716]/10 to-transparent
-                        hover:-translate-y-2 transition-all duration-300">
+              className="group relative p-8 rounded-2xl bg-[#161616]/60 border border-[#2b2b2b]
+    backdrop-blur-xl overflow-hidden
+    transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)]">
+              {/* Smooth Glow from Bottom Right */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 
+    transition-opacity duration-700 ease-[cubic-bezier(.4,0,.2,1)] pointer-events-none">
+                <div
+                  className="absolute -bottom-[60px] -right-[60px] w-[180px] h-[180px] 
+      bg-[#ED4716] blur-[90px] opacity-30"></div>
+              </div>
+
               <div className="mb-5">{feature.icon}</div>
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">

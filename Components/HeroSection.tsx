@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-[99vh] w-full flex items-center justify-center text-white overflow-hidden">
+    <section className="relative h-[90vh] w-full flex items-center justify-center text-white overflow-hidden">
       {/* --- Subtle Grid Texture --- */}
       <div
         className="absolute inset-0 opacity-[0.04] 
@@ -19,8 +19,12 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="uppercase tracking-[0.35em] text-[#ED4716] text-sm md:text-base mb-5">
-          Empowering Innovation
+          className=" text-[#ED4716] text-sm md:text-base mb-7">
+          <span
+            className="px-4 py-1 rounded-full text-[#ED4716] text-xs md:text-sm font-medium 
+               bg-[#ED4716]/30 border border-[#ED4716]/20 backdrop-blur-sm">
+            🚀 Limited Onboarding Slots Available
+          </span>{" "}
         </motion.span>
 
         <motion.h1
@@ -64,6 +68,30 @@ export default function HeroSection() {
                        hover:shadow-[0_0_30px_rgba(255,107,44,0.5)] text-lg">
             Learn More
           </a>
+        </motion.div>
+        {/* --- Stats Line --- */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="flex flex-wrap justify-center gap-8 mt-6 text-sm text-gray-300">
+          {/* Item 1 */}
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-[#ED4716] shadow-[0_0_10px_#ED4716]"></span>
+            <span>Used by 15+ Sri Lankan brands</span>
+          </div>
+
+          {/* Item 2 */}
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-[#ED4716] shadow-[0_0_10px_#ED4716]"></span>
+            <span>2,400+ hours saved</span>
+          </div>
+
+          {/* Item 3 */}
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-[#ED4716] shadow-[0_0_10px_#ED4716]"></span>
+            <span>45+ projects delivered</span>
+          </div>
         </motion.div>
       </div>
 
