@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import SecondaryHero from "@/Components/SecondaryHero";
 import OurStoryCard from "@/Components/OurStoryCard";
@@ -6,7 +6,33 @@ import GoalCard from "@/Components/GoalCard";
 import MilestonesPage from "@/Components/milestones";
 import ProcessStepsSection from "@/Components/ProcessStepSections";
 import ProblemsSection from "@/Components/ProblemSection";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "About TribeTek | Why We Build Automation-First Systems",
+  description:
+    "Learn why TribeTek exists and how we help businesses move from manual processes to structured, automation-driven web systems.",
+
+  openGraph: {
+    title: "Why TribeTek Exists | Automation-First Thinking",
+    description:
+      "TribeTek was created to eliminate operational friction by building automation-driven web systems, not just websites.",
+    url: "https://tribetek.info/about",
+    siteName: "TribeTek",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Why TribeTek Exists | Automation-First Thinking",
+    description:
+      "TribeTek was created to eliminate operational friction by building automation-driven web systems, not just websites.",
+  },
+
+  alternates: {
+    canonical: "https://tribetek.info/about",
+  },
+};
 export default function AboutPage() {
   return (
     <div className="relative min-h-screen w-full text-white overflow-hidden">

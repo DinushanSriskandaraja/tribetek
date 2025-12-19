@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import SecondaryHero from "@/Components/SecondaryHero";
 import ServicesSection from "@/Components/ServicesSection";
@@ -8,8 +8,33 @@ import WhyChooseSection from "@/Components/WhyChooseSection";
 import MilestonesPage from "@/Components/milestones";
 import CTASection from "@/Components/cta";
 import BlogSection from "@/Components/BlogSection";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Services | Automation-Driven Web Systems by TribeTek",
+  description:
+    "Explore TribeTek’s services — automation-driven web systems, workflow optimization, custom web applications, and integrations.",
 
-export default function HomePage() {
+  openGraph: {
+    title: "What We Do | Automation-Driven Web Systems",
+    description:
+      "We build structured web systems that automate workflows, reduce manual work, and support scalable business growth.",
+    url: "https://tribetek.info/services",
+    siteName: "TribeTek",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "What We Do | Automation-Driven Web Systems",
+    description:
+      "We build structured web systems that automate workflows, reduce manual work, and support scalable business growth.",
+  },
+
+  alternates: {
+    canonical: "https://tribetek.info/services",
+  },
+};
+export default function ServicePage() {
   return (
     <main className="flex flex-col w-full text-white overflow-x-hidden transition-all duration-500">
       {/* Services Hero */}

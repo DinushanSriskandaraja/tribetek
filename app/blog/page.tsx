@@ -2,6 +2,33 @@ import Link from "next/link";
 import { getAllPostSlugs, getPostData } from "../../lib/post";
 import SecondaryHero from "@/Components/SecondaryHero";
 import BlogCard from "@/Components/BlogCard";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Insights & Articles | Automation, Systems & Web | TribeTek",
+  description:
+    "Read insights from TribeTek on automation, workflow optimization, and building scalable web systems for modern businesses.",
+
+  openGraph: {
+    title: "Insights on Automation & Web Systems | TribeTek",
+    description:
+      "Practical thoughts and guides on automation, business systems, and smarter web solutions.",
+    url: "https://tribetek.info/blog",
+    siteName: "TribeTek",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Insights on Automation & Web Systems | TribeTek",
+    description:
+      "Practical thoughts and guides on automation, business systems, and smarter web solutions.",
+  },
+
+  alternates: {
+    canonical: "https://tribetek.info/blog",
+  },
+};
 
 export default async function BlogsListPage() {
   const slugs = getAllPostSlugs();

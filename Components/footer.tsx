@@ -25,8 +25,13 @@ export default function Footer() {
             className="drop-shadow-[0_0_15px_rgba(237,71,22,0.3)]"
           />
           <p className="text-sm text-gray-400 leading-relaxed">
-            Empowering digital transformation — from <span className="text-white font-medium">strategy</span> to
-            <span className="text-white font-medium"> scalable software</span> solutions that drive measurable impact.
+            Empowering digital transformation — from{" "}
+            <span className="text-white font-medium">strategy</span> to
+            <span className="text-white font-medium">
+              {" "}
+              scalable software
+            </span>{" "}
+            solutions that drive measurable impact.
           </p>
         </div>
 
@@ -39,15 +44,14 @@ export default function Footer() {
           <ul className="flex flex-col gap-3 text-gray-400 text-sm">
             {[
               { href: "/services", label: "Services" },
-              { href: "/products", label: "Products" },
-              { href: "/blogs", label: "Blog" },
+              // { href: "/products", label: "Products" },
+              { href: "/blog", label: "Blog" },
               { href: "/contact", label: "Contact Us" },
             ].map((link, i) => (
               <li key={i}>
                 <Link
                   href={link.href}
-                  className="hover:text-[#FF6B2C] transition-all duration-300 hover:pl-1"
-                >
+                  className="hover:text-[#FF6B2C] transition-all duration-300 hover:pl-1">
                   {link.label}
                 </Link>
               </li>
@@ -94,8 +98,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="p-2 rounded-full border border-gray-700 hover:border-[#ED4716] hover:bg-[#ED4716]/10 text-gray-400 hover:text-[#FF6B2C] transition-all duration-300"
-              >
+                className="p-2 rounded-full border border-gray-700 hover:border-[#ED4716] hover:bg-[#ED4716]/10 text-gray-400 hover:text-[#FF6B2C] transition-all duration-300">
                 <Icon className="w-5 h-5" />
               </a>
             ))}
@@ -119,8 +122,7 @@ export default function Footer() {
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] hover:shadow-[0_0_20px_rgba(237,71,22,0.5)] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300"
-            >
+              className="bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] hover:shadow-[0_0_20px_rgba(237,71,22,0.5)] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300">
               Subscribe
             </button>
           </form>
@@ -130,7 +132,7 @@ export default function Footer() {
       {/* Bottom Section */}
       <div className="border-t border-[#1f1f1f] mt-16 pt-6 text-sm text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-4 px-6 md:px-16">
         <span>© {new Date().getFullYear()} TribeTek. All rights reserved.</span>
-        <div className="flex gap-6">
+        {/* <div className="flex gap-6">
           <Link
             href="/privacy"
             className="hover:text-[#FF6B2C] transition duration-300"
@@ -143,7 +145,7 @@ export default function Footer() {
           >
             Terms & Conditions
           </Link>
-        </div>
+        </div> */}
       </div>
     </footer>
   );
