@@ -1,29 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Lightbulb, Rocket, Cpu, ShieldCheck } from "lucide-react";
+import { Zap, Layers, Server, Users, Lightbulb } from "lucide-react";
 
 export default function WhyChooseSection() {
   const features = [
     {
-      icon: <Rocket className="w-10 h-10 text-[#ED4716]" />,
-      title: "Fast Execution",
-      desc: "We turn ideas into working digital products with unmatched speed — without compromising quality.",
+      icon: <Zap className="w-10 h-10 text-[#ED4716]" />,
+      title: "Automation-First Thinking",
+      desc: "We start by understanding your workflows and identifying what should be automated before writing a single line of code.",
     },
     {
-      icon: <Cpu className="w-10 h-10 text-[#ED4716]" />,
-      title: "AI-Driven Engineering",
-      desc: "We integrate AI deeply into product workflows, ensuring smarter, scalable and future-focused systems.",
+      icon: <Layers className="w-10 h-10 text-[#ED4716]" />,
+      title: "Business Logic Before Technology",
+      desc: "Technology is a tool, not the solution. We focus on your process, goals, and outcomes — then build the right system.",
     },
     {
-      icon: <ShieldCheck className="w-10 h-10 text-[#ED4716]" />,
-      title: "Solid Reliability",
-      desc: "Every system is engineered with performance, security and long-term stability as core foundations.",
+      icon: <Server className="w-10 h-10 text-[#ED4716]" />,
+      title: "Scalable & Maintainable Systems",
+      desc: "Our solutions are designed to grow with your operations, not break when your business scales.",
     },
     {
-      icon: <Lightbulb className="w-10 h-10 text-[#ED4716]" />,
-      title: "Creative Innovation",
-      desc: "We design bold digital experiences that stand out — visually and technically.",
+      icon: <Users className="w-10 h-10 text-[#ED4716]" />,
+      title: "Long-Term Partnership Mindset",
+      desc: "We think beyond delivery, providing guidance, improvements, and support as your systems evolve.",
     },
   ];
 
@@ -51,7 +51,7 @@ export default function WhyChooseSection() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
           className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-[0_0_20px_rgba(255,107,44,0.4)]">
-          Why Choose <span className="text-[#ED4716]">TribeTek</span>
+          Why Businesses Choose <span className="text-[#ED4716]">TribeTek</span>
         </motion.h2>
 
         <motion.p
@@ -60,8 +60,8 @@ export default function WhyChooseSection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="text-gray-400 max-w-2xl mx-auto mb-14 text-lg md:text-xl leading-relaxed">
-          We combine engineering precision with modern AI-powered creativity to
-          build solutions that give your business a clear competitive edge.
+          We don’t just build software — we design automation systems that
+          reduce workload, improve efficiency, and scale with your business.
         </motion.p>
 
         {/* Features Grid */}

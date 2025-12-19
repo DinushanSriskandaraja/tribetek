@@ -32,10 +32,11 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 
-          max-w-5xl 
-                     drop-shadow-[0_0_25px_rgba(255,107,44,0.35)]">
-          Building <span className="text-[#ED4716]">AI Software</span> & Digital
-          Experiences
+          max-w-7xl 
+                     ">
+          Automation-Driven{" "}
+          <span className="text-[#ED4716]">Web Solutions </span> That Reduce
+          Manual Work
         </motion.h1>
 
         <motion.p
@@ -44,8 +45,9 @@ export default function HeroSection() {
           transition={{ duration: 0.9 }}
           className="text-gray-400 text-xl md:text-2xl max-w-2xl mb-10 leading-relaxed 
                      drop-shadow-[0_0_20px_rgba(255,107,44,0.25)]">
-          We craft scalable, data-driven, and design-focused digital solutions —
-          helping brands innovate faster, smarter, and stronger.
+          TribeTek designs and develops custom web-based automation solutions
+          that replace manual processes, reduce errors, and help businesses
+          operate efficiently.
         </motion.p>
 
         {/* --- CTA Buttons --- */}
@@ -57,7 +59,7 @@ export default function HeroSection() {
           <a
             href="/contact"
             className="px-10 py-4 bg-gradient-to-r from-[#ED4716] to-[#ED4716] rounded-full font-semibold 
-                       shadow-[0_0_30px_rgba(255,107,44,0.4)] hover:shadow-[0_0_60px_rgba(255,107,44,0.8)] 
+                       
                        hover:scale-105 transition-all duration-300 text-lg">
             Start a Project
           </a>

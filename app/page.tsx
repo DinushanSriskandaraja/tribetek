@@ -1,19 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import HeroSection from "../Components/HeroSection";
-import ServicesSection from "../Components/ServicesSection";
-import BlogSection from "../Components/BlogSection";
-// import TestimonialSection from "../Components/TestimonialSection";
-import MilestonesPage from "../Components/milestones";
-// import BrandsSection from "../Components/BrandSection";
-// import OurProducts from "../Components/OurProducts";
-// import CTASection from "../Components/cta";
+import HeroSection from "@/Components/HeroSection";
+import ServicesSection from "@/Components/ServicesSection";
+import BlogSection from "@/Components/BlogSection";
+// import TestimonialSection from "@/Components/TestimonialSection";
+import MilestonesPage from "@/Components/milestones";
+// import BrandsSection from "@/Components/BrandSection";
+// import OurProducts from "@/Components/OurProducts";
+// import CTASection from "@/Components/cta";
 import Image from "next/image";
-import WorldMap from "../assets/WorldMap.svg";
+import WorldMap from "@/assets/WorldMap.svg";
 import OurProducts from "@/Components/OurProducts";
 import WhyChooseSection from "@/Components/WhyChooseSection";
 import TaglineSection from "@/Components/TaglineSection";
+import CTASection from "@/Components/cta";
+import ProblemsSection from "@/Components/ProblemSection";
+import ProcessStepsSection from "@/Components/ProcessStepSections";
 export default function HomePage() {
   return (
     <main className="flex flex-col  w-full  text-white overflow-x-hidden transition-all duration-500">
@@ -21,21 +24,28 @@ export default function HomePage() {
       <section className="w-full">
         <HeroSection />
       </section>
-      <section className="w-full">
-        <WhyChooseSection />
-      </section>
       {/* Services Section */}
       <section className="w-full">
         <ServicesSection />
       </section>
+      <section className="w-full">
+        <WhyChooseSection />
+      </section>
+      <CTASection />
       {/* Milestones Section */}
+      <section className="w-full">
+        <ProblemsSection />
+      </section>
+      <section className="w-full">
+        <MilestonesPage />
+      </section>
+      <section className="w-full">
+        <ProcessStepsSection />
+      </section>{" "}
       <section className="w-full">
         <TaglineSection />
       </section>
       {/* Milestones Section */}
-      <section className="w-full">
-        <MilestonesPage />
-      </section>
       {/* <section className="w-full">
         <OurProducts />
       </section> */}
@@ -43,7 +53,7 @@ export default function HomePage() {
       <section className="w-full">
         <BlogSection />
       </section>
-      <section className="w-full">
+      {/* <section className="w-full">
         <Image
           src={WorldMap}
           alt="About TribeTek"
@@ -51,11 +61,9 @@ export default function HomePage() {
           height={800}
           className="object-cover mx-auto my-20"
         />{" "}
-      </section>
-
+      </section> */}
       {/* Divider for CTA (optional) */}
       {/* <div className="w-full border-t border-[#2a2a2a] opacity-70" /> */}
-      {/* <CTASection /> */}
     </main>
   );
 }

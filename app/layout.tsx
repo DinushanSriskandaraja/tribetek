@@ -24,6 +24,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/TribeTek-Icon.png",
   },
+  themeColor: "#ED4716",
 };
 
 export default function RootLayout({
@@ -35,6 +36,10 @@ export default function RootLayout({
     <html
       lang="en"
       className="scroll-smooth bg-gradient-to-tr from-[#161616] to-[#0f0f0f] text-[#e5e5e5]">
+      <head>
+        <meta name="theme-color" content="#ED4716" />
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} relative text-[#e5e5e5] antialiased overflow-x-hidden`}>
         {/* FIXED NAVBAR */}

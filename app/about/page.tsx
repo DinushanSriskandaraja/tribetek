@@ -2,37 +2,43 @@
 
 import SecondaryHero from "@/Components/SecondaryHero";
 import OurStoryCard from "@/Components/OurStoryCard";
-import CoreValues from "@/Components/CoreValues";
+import GoalCard from "@/Components/GoalCard";
+import MilestonesPage from "@/Components/milestones";
+import ProcessStepsSection from "@/Components/ProcessStepSections";
+import ProblemsSection from "@/Components/ProblemSection";
 
 export default function AboutPage() {
   return (
     <div className="relative min-h-screen w-full text-white overflow-hidden">
-      {/* 🔥 Background Glows */}
-      {/* <div className="absolute inset-0 -z-10">
-        <div className="absolute top-[-200px] left-[-200px] w-[600px] h-[600px] bg-gradient-to-br from-[#ED4716]/30 via-[#FF6B2C]/20 to-transparent blur-[240px] rounded-full" />
-        <div className="absolute bottom-[-200px] right-[-200px] w-[600px] h-[600px] bg-gradient-to-tr from-[#FF6B2C]/25 via-[#ED4716]/15 to-transparent blur-[200px] rounded-full" />
-      </div> */}
-
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 space-y-28">
-        {/* --- Secondary Hero Section --- */}
         <SecondaryHero
-          title="About Us"
-          // highlight="TribeTek"
-          subtitle="Bootstrap-born, innovation-powered, and driven by results — building intelligent digital products for modern businesses."
+          title="Building Automation-Driven Systems"
+          highlight="That Simplify Work"
+          subtitle="Automation, Web Development & Smart Systems for Modern Businesses"
         />
-
         {/* --- Our Story Section --- */}
         <OurStoryCard
-          title="Our Journey"
-          description={`TribeTek started as a bootstrap-powered vision — building reliable digital products while crafting homegrown innovations.  
+          title="Why TribeTek Exists"
+          description={`Most growing businesses don’t struggle because of a lack of effort — they struggle because their operations are held together by manual work, disconnected tools, and inefficient workflows.
 
-Without external funding, just pure passion, grit, and collaboration, we transformed our ideas into tangible solutions for businesses.  
+We saw teams spending hours on tasks that should take minutes. Data entered multiple times. Systems that don’t talk to each other. Websites that look good but don’t actually support daily operations.
 
-Today, TribeTek stands as a trusted partner and creator of tech solutions redefining possibilities for modern businesses.`}
+TribeTek was created to fix that gap.
+
+We exist to help businesses move from manual processes to structured, automation-driven web systems — systems that reduce workload, improve visibility, and scale with the business.
+
+Instead of building one-off websites or tools, we focus on how your business actually runs, then design and develop systems that support it.`}
         />
-
-        {/* --- Core Values Section --- */}
-        <CoreValues />
+        <GoalCard />
+        <section className="w-full">
+          <ProblemsSection />
+        </section>
+        <section className="w-full">
+          <ProcessStepsSection />
+        </section>{" "}
+        <section className="w-full">
+          <MilestonesPage />
+        </section>
       </div>
     </div>
   );

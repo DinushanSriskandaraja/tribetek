@@ -25,8 +25,8 @@ export default function OurStoryCard({
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
       className="flex flex-col md:flex-row items-center gap-16 
-        bg-[#121212]/30
-        rounded-3xl border border-[#2a2a2a] p-10 md:p-16 
+        bg-[#161616]/70 border-[#2b2b2b]
+        rounded-3xl border  p-10 md:p-16 
         backdrop-blur-md ">
       {/* Text */}
       <div className="flex-1">

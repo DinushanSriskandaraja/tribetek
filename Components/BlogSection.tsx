@@ -38,11 +38,11 @@ export default function BlogSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden py-24 ">
+    <section className="relative overflow-hidden py-28">
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16">
         {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
@@ -57,52 +57,64 @@ export default function BlogSection() {
         </motion.div>
 
         {/* Blog Carousel */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="flex overflow-x-auto gap-10 scrollbar-hide snap-x snap-mandatory pb-6 px-2">
+        <div className="flex overflow-x-auto gap-10 scrollbar-hide snap-x snap-mandatory pb-6 px-2">
           {blogs.map((blog, index) => (
             <motion.div
               key={index}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="relative flex-shrink-0 snap-center w-[320px] sm:w-[400px] rounded-3xl overflow-hidden bg-[#141414]/80 border border-[#1f1f1f] hover:border-[#ED4716]/50 transition-all duration-500 backdrop-blur-lg shadow-[0_0_40px_rgba(0,0,0,0.3)] hover:shadow-[0_0_50px_rgba(237,71,22,0.2)]">
-              <div className="relative h-[240px]">
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="group relative flex-shrink-0 snap-center w-[320px] sm:w-[400px] rounded-3xl bg-[#161616]/70 backdrop-blur-xl border border-[#2b2b2b] overflow-hidden transition-all duration-700">
+              {/* Glow background */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                <div className="absolute -bottom-[60px] -right-[60px] w-[220px] h-[220px] bg-[#ED4716] blur-[100px] opacity-30" />
+              </div>
+
+              {/* Image */}
+              <div className="relative h-[240px] overflow-hidden">
                 <Image
                   src={blog.image}
                   alt={blog.title}
                   fill
-                  className="object-cover transition-transform duration-700 hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
               </div>
-              <div className="p-6 flex flex-col justify-between h-[200px]">
-                <h3 className="text-xl font-bold text-white mb-3 hover:text-[#ED4716] transition">
+
+              {/* Content */}
+              <div className="relative z-10 p-6 flex flex-col h-[200px]">
+                <h3 className="text-xl font-bold text-white mb-3 transition group-hover:text-[#ED4716]">
                   {blog.title}
                 </h3>
-                <p className="text-[#b3b3b3] text-sm mb-4">{blog.tagline}</p>
+
+                <p className="text-[#b3b3b3] text-sm mb-4 flex-1">
+                  {blog.tagline}
+                </p>
+
                 <Link
                   href={blog.href}
-                  className="text-[#ED4716] font-medium text-sm hover:underline mt-auto">
+                  className="text-[#ED4716] font-medium text-sm hover:underline">
                   Read More →
                 </Link>
               </div>
+
+              {/* Border shimmer */}
+              <span className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 pointer-events-none" />
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* View All Section */}
+        {/* View All */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
           className="mt-16 text-center">
           <Link
-            href="/blogs"
-            className="inline-block px-8 py-3 rounded-full border border-[#ED4716]/60 text-white hover:bg-[#ED4716] hover:shadow-[0_0_30px_rgba(237,71,22,0.4)] transition-all duration-300 font-semibold">
+            href="/blog"
+            className="inline-block px-8 py-3 rounded-full border border-[#ED4716]/60 text-white  transition-all duration-300 font-semibold">
             View All Articles →
           </Link>
         </motion.div>
