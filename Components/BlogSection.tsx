@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 import BizAutomation from "../assets/BizAutomation.jpg";
 import Branding from "../assets/Brandings.jpg";
 import SocialMedia from "../assets/SocialMedia.jpg";
@@ -9,81 +13,111 @@ export default function BlogSection() {
     {
       title: "How Business Automation Can Save You Time and Boost Profits",
       tagline:
-        "Discover how business automation saves time, cuts costs, and boosts profits by streamlining your workflows with smart technology.",
+        "Streamline your workflows and scale effortlessly with the power of smart automation.",
       image: BizAutomation,
       href: "/blog/automate-business-workflow",
     },
     {
       title: "Why Branding Is More Than Just a Logo",
-      tagline: "Build trust and stand out.",
+      tagline: "A powerful brand tells your story even before you do.",
       image: Branding,
       href: "/blog/branding-trust",
     },
     {
       title: "Top Tech Stacks for Scalable Applications",
-      tagline: "Choose the right tools from day one.",
+      tagline: "Choosing the right stack determines your future velocity.",
       image: TechStack,
       href: "/blog/top-tech-stacks",
     },
     {
       title: "Social Media Strategies for B2B",
-      tagline: "Reach and convert the right audience.",
+      tagline: "Make your brand visible where your customers actually are.",
       image: SocialMedia,
       href: "/blog/social-media-strategies",
     },
   ];
 
   return (
-    <section className="container mx-auto py-16 px-4 sm:px-6 md:px-16 bg-white rounded-4xl shadow-lg border border-gray-100">
-      <div className="mx-auto">
-        <h2 className="text-3xl font-bold mb-12 text-left text-gray-900">
-          Insights & Blog
-        </h2>
+    <section className="relative overflow-hidden py-28">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="text-center mb-16">
+          <h2 className="text-5xl font-extrabold text-white mb-3">
+            Latest <span className="text-[#ED4716]">Insights</span>
+          </h2>
+          <p className="text-[#b3b3b3] text-lg max-w-2xl mx-auto">
+            Explore our stories, ideas, and lessons that inspire digital
+            transformation.
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {/* Blog Carousel */}
+        <div className="flex overflow-x-auto gap-10 scrollbar-hide snap-x snap-mandatory pb-6 px-2">
           {blogs.map((blog, index) => (
-            <a
+            <motion.div
               key={index}
-              href={blog.href}
-              className={`relative rounded-3xl shadow-md hover:shadow-xl overflow-hidden transition-all duration-300 ${
-                index === 0 ? "md:col-span-2" : ""
-              }`}>
-              <Image
-                src={blog.image}
-                alt={blog.title}
-                className="w-full h-64 object-cover"
-                width={800}
-                height={256}
-                placeholder="blur"
-              />
-              {/* Gradient Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent text-white p-6">
-                <h3 className="text-xl font-semibold mb-1">{blog.title}</h3>
-                <p className="text-sm">{blog.tagline}</p>
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="group relative flex-shrink-0 snap-center w-[320px] sm:w-[400px] rounded-3xl bg-[#161616]/70 backdrop-blur-xl border border-[#2b2b2b] overflow-hidden transition-all duration-700">
+              {/* Glow background */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+                <div className="absolute -bottom-[60px] -right-[60px] w-[220px] h-[220px] bg-[#ED4716] blur-[100px] opacity-30" />
               </div>
-            </a>
-          ))}
 
-          {/* Read All */}
-          <a
-            href="/blogs"
-            className="bg-[#f2f2f2] rounded-3xl shadow-md flex flex-col items-center justify-center text-center p-6 hover:shadow-xl transition-all duration-300">
-            {/* <Image
-              src=
-              alt="View more"
-              className="w-16 h-16 mb-4"
-            /> */}
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">
-              Explore More Blogs
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Stay ahead with fresh insights & tips.
-            </p>
-            <span className="px-4 py-2 bg-[#ED4716] text-white rounded-full font-medium text-sm hover:bg-orange-600 transition">
-              View All →
-            </span>
-          </a>
+              {/* Image */}
+              <div className="relative h-[240px] overflow-hidden">
+                <Image
+                  src={blog.image}
+                  alt={blog.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              </div>
+
+              {/* Content */}
+              <div className="relative z-10 p-6 flex flex-col h-[200px]">
+                <h3 className="text-xl font-bold text-white mb-3 transition group-hover:text-[#ED4716]">
+                  {blog.title}
+                </h3>
+
+                <p className="text-[#b3b3b3] text-sm mb-4 flex-1">
+                  {blog.tagline}
+                </p>
+
+                <Link
+                  href={blog.href}
+                  className="text-[#ED4716] font-medium text-sm hover:underline">
+                  Read More →
+                </Link>
+              </div>
+
+              {/* Border shimmer */}
+              <span className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 pointer-events-none" />
+            </motion.div>
+          ))}
         </div>
+
+        {/* View All */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center">
+          <Link
+            href="/blog"
+            className="inline-block px-8 py-3 rounded-full border border-[#ED4716]/60 text-white  transition-all duration-300 font-semibold">
+            View All Articles →
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

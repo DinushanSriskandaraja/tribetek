@@ -7,69 +7,120 @@ import Logo from "@/assets/TribeTek-Primary-Logo.png";
 
 export default function Footer() {
   return (
-    <footer className="container bg-white rounded-t-4xl mx-auto py-10 px-6 sm:p-16 text-gray-700 md:px-16 py-10 md:py-20  shadow-md">
-      <div className="container mx-auto  px-6 sm:px-16 grid grid-cols-1 md:grid-cols-4 gap-10">
-        {/* Branding */}
-        <div className="flex flex-col gap-3">
-          <Image src={Logo} alt="TribeTek Logo" width={150} height={50} />
-          <p className="text-sm">
-            We build modern digital experiences that drive results  from software systems to strategy.
+    <footer className="relative overflow-hidden bg-gradient-to-b from-[#0a0a0a] via-[#0f0f0f] to-[#151515] text-gray-300 pt-20 pb-10">
+      {/* Glow Effects */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#ED4716]/10 rounded-full blur-[220px]" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#FF6B2C]/10 rounded-full blur-[200px]" />
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-4 gap-14">
+        {/* Branding Section */}
+        <div className="flex flex-col gap-4">
+          <Image
+            src={Logo}
+            alt="TribeTek Logo"
+            width={160}
+            height={60}
+            className="drop-shadow-[0_0_15px_rgba(237,71,22,0.3)]"
+          />
+          <p className="text-sm text-gray-400 leading-relaxed">
+            Empowering digital transformation — from <span className="text-white font-medium">strategy</span> to
+            <span className="text-white font-medium"> scalable software</span> solutions that drive measurable impact.
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
-          <ul className="flex flex-col gap-2">
-            <li>
-              <Link href="/services" className="hover:text-[#ED4716] transition">Services</Link>
-            </li>
-            <li>
-              <Link href="/products" className="hover:text-[#ED4716] transition">Products</Link>
-            </li>
-            <li>
-              <Link href="/blogs" className="hover:text-[#ED4716] transition">Blog</Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-[#ED4716] transition">Contact Us</Link>
-            </li>
+          <h4 className="text-lg font-semibold text-white mb-5 relative">
+            Quick Links
+            <span className="absolute left-0 -bottom-2 w-10 h-[2px] bg-[#ED4716]" />
+          </h4>
+          <ul className="flex flex-col gap-3 text-gray-400 text-sm">
+            {[
+              { href: "/services", label: "Services" },
+              { href: "/products", label: "Products" },
+              { href: "/blogs", label: "Blog" },
+              { href: "/contact", label: "Contact Us" },
+            ].map((link, i) => (
+              <li key={i}>
+                <Link
+                  href={link.href}
+                  className="hover:text-[#FF6B2C] transition-all duration-300 hover:pl-1"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Contact */}
+        {/* Contact Section */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Contact</h4>
-          <p className="text-sm mb-1">Colombo, Sri Lanka</p>
-          <p className="text-sm mb-1">info.tribetek@gmail.com</p>
-          {/* <p className="text-sm mb-3">+94 77 123 4567</p> */}
+          <h4 className="text-lg font-semibold text-white mb-5 relative">
+            Contact
+            <span className="absolute left-0 -bottom-2 w-10 h-[2px] bg-[#ED4716]" />
+          </h4>
+          <p className="text-sm text-gray-400 mb-1">Colombo, Sri Lanka</p>
+          <p className="text-sm text-gray-400 mb-1">info.tribetek@gmail.com</p>
+          {/* <p className="text-sm text-gray-400 mb-3">+94 77 123 4567</p> */}
 
-          <div className="flex gap-4 mt-3">
-            <a href="https://instagram.com/tribetek" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Instagram className="w-5 h-5 hover:text-[#ED4716] transition" />
-            </a>
-            <a href="https://linkedin.com/company/tribetek" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin className="w-5 h-5 hover:text-[#ED4716] transition" />
-            </a>
-            <a href="https://twitter.com/tribetek" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <Twitter className="w-5 h-5 hover:text-[#ED4716] transition" />
-            </a>
-            <a href="https://facebook.com/tribetek" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <Facebook className="w-5 h-5 hover:text-[#ED4716] transition" />
-            </a>
+          <div className="flex gap-5 mt-4">
+            {[
+              {
+                href: "https://instagram.com/tribetek",
+                icon: Instagram,
+                label: "Instagram",
+              },
+              {
+                href: "https://linkedin.com/company/tribetek",
+                icon: Linkedin,
+                label: "LinkedIn",
+              },
+              {
+                href: "https://twitter.com/tribetek",
+                icon: Twitter,
+                label: "Twitter",
+              },
+              {
+                href: "https://facebook.com/tribetek",
+                icon: Facebook,
+                label: "Facebook",
+              },
+            ].map(({ href, icon: Icon, label }, i) => (
+              <a
+                key={i}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="p-2 rounded-full border border-gray-700 hover:border-[#ED4716] hover:bg-[#ED4716]/10 text-gray-400 hover:text-[#FF6B2C] transition-all duration-300"
+              >
+                <Icon className="w-5 h-5" />
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Newsletter */}
+        {/* Newsletter Section */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Newsletter</h4>
-          <p className="text-sm mb-3">Subscribe for the latest updates and insights.</p>
-          <form className="flex flex-col sm:flex-row gap-2">
+          <h4 className="text-lg font-semibold text-white mb-5 relative">
+            Newsletter
+            <span className="absolute left-0 -bottom-2 w-10 h-[2px] bg-[#ED4716]" />
+          </h4>
+          <p className="text-sm text-gray-400 mb-4">
+            Get the latest news and insights from our innovation desk.
+          </p>
+          <form className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"
               placeholder="Your email"
-              className="w-full px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#ED4716]"
+              className="w-full px-4 py-2.5 rounded-full bg-[#1a1a1a] border border-gray-700 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ED4716]/60"
             />
-            <button className="bg-[#ED4716] hover:bg-[#d63f0f] text-white px-4 py-2 rounded-full font-medium transition">
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] hover:shadow-[0_0_20px_rgba(237,71,22,0.5)] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300"
+            >
               Subscribe
             </button>
           </form>
@@ -77,11 +128,21 @@ export default function Footer() {
       </div>
 
       {/* Bottom Section */}
-      <div className="border-t border-gray-200 mt-10 pt-6 text-sm text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-2 px-6 sm:px-16">
+      <div className="border-t border-[#1f1f1f] mt-16 pt-6 text-sm text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-4 px-6 md:px-16">
         <span>© {new Date().getFullYear()} TribeTek. All rights reserved.</span>
-        <div className="flex gap-4">
-          <Link href="/privacy" className="hover:text-[#ED4716] transition">Privacy Policy</Link>
-          <Link href="/terms" className="hover:text-[#ED4716] transition">Terms & Conditions</Link>
+        <div className="flex gap-6">
+          <Link
+            href="/privacy"
+            className="hover:text-[#FF6B2C] transition duration-300"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            href="/terms"
+            className="hover:text-[#FF6B2C] transition duration-300"
+          >
+            Terms & Conditions
+          </Link>
         </div>
       </div>
     </footer>

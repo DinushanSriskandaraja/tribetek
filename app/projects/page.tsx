@@ -37,14 +37,14 @@ const ProductShowcase = () => {
       >
         <motion.div className="max-w-3xl px-6">
           <h1 className="text-5xl font-bold mb-6">
-            Empower Your Business with <span className="text-orange-500">Innovation</span>
+            Empower Your Business with <span className="text-[#ED4716]">Innovation</span>
           </h1>
           <p className="text-lg mb-8 text-gray-600">
             Discover our cutting-edge solutions designed to transform your workflows, optimize productivity, and scale your operations effortlessly.
           </p>
           <motion.a
             href="#products"
-            className="px-6 py-3 bg-orange-500 text-[#FFFFFF] rounded-full font-semibold shadow-lg hover:bg-orange-700 transition-colors duration-300"
+            className="px-6 py-3 bg-[#ED4716]/500 text-[#FFFFFF] rounded-full font-semibold shadow-lg hover:bg-[#ED4716]/700 transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
           >
             Explore Solutions
@@ -107,7 +107,7 @@ const ProductShowcase = () => {
                     {product.description}
                   </motion.p>
                   <motion.div
-                    className="flex items-center justify-center text-orange-500 font-semibold cursor-pointer"
+                    className="flex items-center justify-center text-[#ED4716]/50 font-semibold cursor-pointer"
                     whileHover={{ x: 5 }}
                   >
                     Learn More <FaArrowRight className="ml-2" />

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// import Icon from "@/assets/TribeTek-Icon.png"; //updated
-//updated
 import Navbar from "../Components/nav";
-//updated
 import Footer from "../Components/footer";
-import Script from "next/script";
+import CTASection from "@/Components/cta";
+import FloatingGradient from "@/Components/bgEffect";
+import SmoothScroll from "@/Components/SmoothScroll";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,33 +24,39 @@ export const metadata: Metadata = {
   icons: {
     icon: "/TribeTek-Icon.png",
   },
+  themeColor: "#ED4716",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-[#f2f2f2] antialiased`}>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-          `}
-        </Script>
-        <Navbar />
+    <html
+      lang="en"
+      className="scroll-smooth bg-gradient-to-tr from-[#161616] to-[#0f0f0f] text-[#e5e5e5]">
+      <head>
+        <meta name="theme-color" content="#ED4716" />
+      </head>
 
-        {children}
-        <Footer />
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} relative text-[#e5e5e5] antialiased overflow-x-hidden`}>
+        {/* FIXED NAVBAR */}
+        <div className="fixed top-0 left-0 w-full z-50 bg-[#121212] border-b border-[#1f1f1f]">
+          <Navbar />
+        </div>
+
+        {/* SMOOTH SCROLL CONTENT */}
+        <main className="relative z-10">
+          {/* <SmoothScroll> */}
+          <div className="pt-[80px]">
+            {children}
+            <CTASection />
+            <Footer />
+          </div>
+          {/* </SmoothScroll> */}
+        </main>
       </body>
     </html>
   );

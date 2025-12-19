@@ -1,25 +1,69 @@
 "use client";
-import HeroSection from "../Components/HeroSection";
-import ServicesSection from "../Components/ServicesSection";
-import BlogSection from "../Components/BlogSection";
-// import TestimonialSection from "../Components/TestimonialSection";
-import MilestonesPage from "../Components/milestones";
-// import BrandsSection from "../Components/BrandSection";
-// import OurProducts from "../Components/OurProducts";
 
+import { motion } from "framer-motion";
+import HeroSection from "@/Components/HeroSection";
+import ServicesSection from "@/Components/ServicesSection";
+import BlogSection from "@/Components/BlogSection";
+// import TestimonialSection from "@/Components/TestimonialSection";
+import MilestonesPage from "@/Components/milestones";
+// import BrandsSection from "@/Components/BrandSection";
+// import OurProducts from "@/Components/OurProducts";
+// import CTASection from "@/Components/cta";
+import Image from "next/image";
+import WorldMap from "@/assets/WorldMap.svg";
+import OurProducts from "@/Components/OurProducts";
+import WhyChooseSection from "@/Components/WhyChooseSection";
+import TaglineSection from "@/Components/TaglineSection";
+import CTASection from "@/Components/cta";
+import ProblemsSection from "@/Components/ProblemSection";
+import ProcessStepsSection from "@/Components/ProcessStepSections";
 export default function HomePage() {
   return (
-    <main className="flex flex-col bg-[#f2f2f2] gap-12 px-4 md:px-20 py-16">
-      <HeroSection />
-      <ServicesSection />
-      {/* <TestimonialSection /> */}
-      <MilestonesPage />
-
-      {/* Uncomment if you want to include the Brands section */}
-      {/* <BrandsSection /> */}
-      {/* <BrandsSection /> */}
-
-      <BlogSection />
+    <main className="flex flex-col  w-full  text-white overflow-x-hidden transition-all duration-500">
+      {/* Hero Section - Full width */}
+      <section className="w-full">
+        <HeroSection />
+      </section>
+      {/* Services Section */}
+      <section className="w-full">
+        <ServicesSection />
+      </section>
+      <section className="w-full">
+        <WhyChooseSection />
+      </section>
+      <CTASection />
+      {/* Milestones Section */}
+      <section className="w-full">
+        <ProblemsSection />
+      </section>
+      <section className="w-full">
+        <MilestonesPage />
+      </section>
+      <section className="w-full">
+        <ProcessStepsSection />
+      </section>{" "}
+      <section className="w-full">
+        <TaglineSection />
+      </section>
+      {/* Milestones Section */}
+      {/* <section className="w-full">
+        <OurProducts />
+      </section> */}
+      {/* Blog Section */}
+      <section className="w-full">
+        <BlogSection />
+      </section>
+      {/* <section className="w-full">
+        <Image
+          src={WorldMap}
+          alt="About TribeTek"
+          width={1200}
+          height={800}
+          className="object-cover mx-auto my-20"
+        />{" "}
+      </section> */}
+      {/* Divider for CTA (optional) */}
+      {/* <div className="w-full border-t border-[#2a2a2a] opacity-70" /> */}
     </main>
   );
 }
