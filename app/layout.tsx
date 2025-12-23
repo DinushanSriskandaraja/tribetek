@@ -6,6 +6,7 @@ import Footer from "../Components/footer";
 import CTASection from "@/Components/cta";
 import FloatingGradient from "@/Components/bgEffect";
 import SmoothScroll from "@/Components/SmoothScroll";
+import SnowEffect from "../Components/SnowEffect";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
 
       <body
         className={`${geistSans.variable} ${geistMono.variable} relative text-[#e5e5e5] antialiased overflow-x-hidden`}>
+        <SnowEffect />
         {/* FIXED NAVBAR */}
         <div className="fixed top-0 left-0 w-full z-50 bg-[#121212] border-b border-[#1f1f1f]">
           <Navbar />
