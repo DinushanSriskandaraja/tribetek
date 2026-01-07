@@ -80,7 +80,7 @@ export default function HeroSection() {
           {/* Item 1 */}
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-[#ED4716] shadow-[0_0_10px_#ED4716]"></span>
-            <span>Used by 15+ Sri Lankan brands</span>
+            <span>Served to 5+ business</span>
           </div>
 
           {/* Item 2 */}
@@ -92,7 +92,7 @@ export default function HeroSection() {
           {/* Item 3 */}
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-[#ED4716] shadow-[0_0_10px_#ED4716]"></span>
-            <span>45+ projects delivered</span>
+            <span>10+ projects delivered</span>
           </div>
         </motion.div>
       </div>
