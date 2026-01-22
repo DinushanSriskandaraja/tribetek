@@ -72,22 +72,22 @@ export default function Footer() {
           <div className="flex gap-5 mt-4">
             {[
               {
-                href: "https://instagram.com/tribetek",
+                href: "https://www.instagram.com/tribe.tek/",
                 icon: Instagram,
                 label: "Instagram",
               },
               {
-                href: "https://linkedin.com/company/tribetek",
+                href: "https://www.linkedin.com/company/tribetekinfo",
                 icon: Linkedin,
                 label: "LinkedIn",
               },
+              // {
+              //   href: "https://twitter.com/tribetek",
+              //   icon: Twitter,
+              //   label: "Twitter",
+              // },
               {
-                href: "https://twitter.com/tribetek",
-                icon: Twitter,
-                label: "Twitter",
-              },
-              {
-                href: "https://facebook.com/tribetek",
+                href: "https://web.facebook.com/TribeTekPvtLtd",
                 icon: Facebook,
                 label: "Facebook",
               },
