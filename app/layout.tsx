@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "../Components/nav";
 import Footer from "../Components/footer";
@@ -39,6 +40,20 @@ export default function RootLayout({
       className="scroll-smooth bg-gradient-to-tr from-[#161616] to-[#0f0f0f] text-[#e5e5e5]">
       <head>
         <meta name="theme-color" content="#ED4716" />
+        {/* Google tag (gtag.js) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-3Z09L07JZY"
+        />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-3Z09L07JZY');
+          `}
+        </Script>
       </head>
 
       <body
