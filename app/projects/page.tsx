@@ -86,5 +86,3 @@ export default function ProductShowcase() {
     </main>
   );
 }
-
-export default ProductShowcase;
