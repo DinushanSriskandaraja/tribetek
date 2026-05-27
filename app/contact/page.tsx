@@ -39,14 +39,16 @@ export const metadata: Metadata = {
 
 export default function ContactSection() {
   return (
-    <>
-      {/* Contact / Newsletter Section */}
-      <SecondaryHero
-        title="Let’s Understand "
-        highlight="Your Workflow"
-        subtitle="Share a few details about your current process, and we’ll help you identify where automation can reduce manual work and improve efficiency."
-      />
-      <Newsletter />
-    </>
+    <main className="bg-white min-h-screen w-full text-[var(--c-text)] overflow-hidden pt-20">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-24">
+        {/* Contact / Newsletter Section */}
+        <SecondaryHero
+          title="Let’s Understand "
+          highlight="Your Workflow."
+          subtitle="Share a few details about your current process, and we’ll help you identify where automation can reduce manual work and improve efficiency."
+        />
+        <Newsletter />
+      </div>
+    </main>
   );
 }

@@ -4,133 +4,59 @@ import { motion } from "framer-motion";
 import { ShieldCheck, Cpu, RotateCw, Database, Eye } from "lucide-react";
 
 const problems = [
-  {
-    icon: <Cpu className="w-10 h-10 text-[#ED4716]" />,
-    title: "Manual Data Entry",
-    description:
-      "Re-entering the same information across systems wastes time and increases errors. We help replace repetitive data entry with automated workflows that move data where it’s needed—accurately and instantly.",
-  },
-  {
-    icon: <RotateCw className="w-10 h-10 text-[#ED4716]" />,
-    title: "Disconnected Tools",
-    description:
-      "When tools don’t talk to each other, teams lose time switching systems and fixing mistakes. We integrate and connect your platforms into a single, streamlined workflow.",
-  },
-  {
-    icon: <ShieldCheck className="w-10 h-10 text-[#ED4716]" />,
-    title: "Operational Bottlenecks",
-    description:
-      "Approval delays, slow processes, and dependency on individuals can hold your business back. We design automation systems that keep operations moving without unnecessary friction.",
-  },
-  {
-    icon: <Database className="w-10 h-10 text-[#ED4716]" />,
-    title: "Repetitive Admin Work",
-    description:
-      "Routine tasks drain productivity and distract teams from meaningful work. We automate recurring administrative processes so your team can focus on higher-value activities.",
-  },
-  {
-    icon: <Eye className="w-10 h-10 text-[#ED4716]" />,
-    title: "Lack of Visibility & Control",
-    description:
-      "Without clear insights, it’s hard to track progress or make informed decisions. We build dashboards and systems that give you real-time visibility and operational control.",
-  },
+  { Icon: Cpu, title: "Manual Data Entry", description: "Re-entering the same information across systems wastes hours. We replace repetitive entry with seamless automated flows.", num: "01" },
+  { Icon: RotateCw, title: "Disconnected Tools", description: "When tools don't talk to each other, teams lose time switching systems. We integrate your stack into one unified workflow.", num: "02" },
+  { Icon: ShieldCheck, title: "Operational Bottlenecks", description: "Approval delays and individual dependencies stall growth. We design systems that keep operations moving 24/7.", num: "03" },
+  { Icon: Database, title: "Repetitive Admin Work", description: "Routine tasks drain core productivity. We automate recurring admin so your team can focus on high-leverage growth.", num: "04" },
+  { Icon: Eye, title: "Zero Operational Visibility", description: "Without data, decisions are guesses. We build dashboards that provide real-time control over your entire operation.", num: "05" },
 ];
 
 export default function ProblemsSection() {
   return (
-    <section className="relative container mx-auto px-14 py-28 overflow-hidden text-white">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="relative z-10  mx-auto">
-        {/* Section Title */}
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-14 text-center">
-          Problems We <span className="text-[#ED4716]">Help You Eliminate</span>
-        </h2>
+    <section className="bg-white py-32 relative overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        <div className="flex flex-col lg:flex-row gap-20">
+          
+          {/* Header */}
+          <div className="lg:w-1/3">
+            <div className="mb-6">
+              <span className="badge-elite">What We Solve</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-[var(--c-black)] leading-[1.1] tracking-tight mb-8">
+              Eliminate the Friction <br /> Scaling Your Business.
+            </h2>
+            <p className="text-[var(--c-muted)] text-lg font-medium leading-relaxed">
+              Every manual task is a hidden cost. We identify and eliminate operational friction systematically so you can scale without the linear headcount growth.
+            </p>
+          </div>
 
-        {/* First three problems */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
-          {problems.slice(0, 3).map((problem, index) => (
-            <motion.div
-              key={problem.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}>
-              <div className="group relative p-8 rounded-2xl bg-[#161616]/70 backdrop-blur-xl border border-[#2b2b2b] overflow-hidden transition-all duration-700 min-h-[320px] flex flex-col">
-                {/* Glow background */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                  <div className="absolute -bottom-[60px] -right-[60px] w-[220px] h-[220px] bg-[#ED4716] blur-[100px] opacity-30" />
+          {/* Problems List */}
+          <div className="lg:w-2/3 space-y-6">
+            {problems.map((p, i) => (
+              <motion.div
+                key={p.num}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="card-elite group flex flex-col md:flex-row items-start gap-8"
+              >
+                <div className="w-12 h-12 flex-shrink-0 bg-[var(--c-black)] text-white rounded-xl flex items-center justify-center group-hover:bg-[var(--c-accent)] transition-colors duration-300">
+                  <p.Icon size={24} />
                 </div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col flex-1 items-start">
-                  <div className="p-4 rounded-xl mb-4 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3">
-                    {problem.icon}
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-bold text-[var(--c-black)] tracking-tight">{p.title}</h3>
+                    <span className="text-[10px] font-black text-[var(--c-border)] group-hover:text-[var(--c-accent)] transition-colors duration-300">#{p.num}</span>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{problem.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed flex-1">
-                    {problem.description}
-                  </p>
+                  <p className="text-[var(--c-muted)] font-medium leading-relaxed">{p.description}</p>
                 </div>
+              </motion.div>
+            ))}
+          </div>
 
-                {/* Border shimmer */}
-                <span className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5 pointer-events-none" />
-              </div>
-            </motion.div>
-          ))}
         </div>
-
-        {/* Last two problems sharing equal width */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mb-14">
-          {problems.slice(3).map((problem, index) => (
-            <motion.div
-              key={problem.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}>
-              <div className="group relative p-8 rounded-2xl bg-[#161616]/70 backdrop-blur-xl border border-[#2b2b2b] overflow-hidden transition-all duration-700 flex flex-col">
-                {/* Glow background */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                  <div className="absolute -bottom-[60px] -right-[60px] w-[220px] h-[220px] bg-[#ED4716] blur-[100px] opacity-30" />
-                </div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col flex-1 items-start">
-                  <div className="p-4 rounded-xl mb-4 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3">
-                    {problem.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{problem.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed flex-1">
-                    {problem.description}
-                  </p>
-                </div>
-
-                {/* Border shimmer */}
-                <span className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5 pointer-events-none" />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Closing statement */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto text-center">
-          TribeTek replaces these challenges with{" "}
-          <span className="text-[#ED4716] font-semibold">
-            structured, automation-driven web systems designed to simplify
-            operations and support scalable growth
-          </span>
-          .
-        </motion.p>
-      </motion.div>
+      </div>
     </section>
   );
 }

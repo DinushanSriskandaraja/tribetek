@@ -36,40 +36,39 @@ export const metadata: Metadata = {
 };
 export default function ServicePage() {
   return (
-    <main className="flex flex-col w-full text-white overflow-x-hidden transition-all duration-500">
-      {/* Services Hero */}
-      <section className="w-full">
+    <main className="bg-white min-h-screen w-full text-[var(--c-text)] overflow-hidden pt-20">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-24 space-y-32">
         <SecondaryHero
-          title="Automation-Driven Web Systems That "
-          highlight="Reduce Manual Work"
+          title="Automation-Driven Web"
+          highlight="Systems That Scale."
           subtitle="We design and build structured web systems that automate workflows, connect tools, and give you better control over daily operations."
         />
-      </section>
 
-      {/* Core Services */}
-      <section className="w-full">
-        <ServicesSection />
-      </section>
+        {/* Core Services */}
+        <section className="w-full">
+          <ServicesSection />
+        </section>
 
-      {/* Problems We Solve */}
-      <section className="w-full">
-        <ProblemsSection />
-      </section>
+        {/* Problems We Solve */}
+        <section className="w-full border-t border-[var(--c-border)] pt-32">
+          <ProblemsSection />
+        </section>
 
-      {/* How We Deliver */}
-      <section className="w-full">
-        <ProcessStepsSection />
-      </section>
+        {/* How We Deliver */}
+        <section className="w-full border-t border-[var(--c-border)] pt-32">
+          <ProcessStepsSection />
+        </section>
 
-      {/* Why Choose TribeTek */}
-      <section className="w-full">
-        <WhyChooseSection />
-      </section>
+        {/* Why Choose TribeTek */}
+        <section className="w-full border-t border-[var(--c-border)] pt-32">
+          <WhyChooseSection />
+        </section>
 
-      {/* Proof */}
-      <section className="w-full">
-        <MilestonesPage />
-      </section>
+        {/* Proof */}
+        <section className="w-full border-t border-[var(--c-border)] pt-32">
+          <MilestonesPage />
+        </section>
+      </div>
     </main>
   );
 }

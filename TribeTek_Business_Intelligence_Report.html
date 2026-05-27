@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TribeTek — Business Intelligence Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #ED4716;
+    --brand-dark: #C03A11;
+    --brand-light: #FF6B3D;
+    --bg: #0A0A0A;
+    --surface: #111111;
+    --surface2: #1A1A1A;
+    --surface3: #222222;
+    --border: #2A2A2A;
+    --text: #F0EDE8;
+    --text-muted: #888;
+    --text-dim: #555;
+    --green: #22C55E;
+    --yellow: #EAB308;
+    --red: #EF4444;
+    --blue: #3B82F6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ---- HEADER ---- */
+  .hero {
+    background: linear-gradient(135deg, #0A0A0A 0%, #1A0D08 50%, #0A0A0A 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(237,71,22,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--brand); }
+  .hero-meta {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 16px;
+  }
+  .exec-summary {
+    margin-top: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--brand);
+    border-radius: 8px;
+    padding: 24px 28px;
+  }
+  .exec-summary h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 14px;
+  }
+  .exec-summary ul { list-style: none; }
+  .exec-summary ul li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .exec-summary ul li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--brand);
+  }
+
+  /* ---- LAYOUT ---- */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  /* ---- SCORECARD ---- */
+  .scorecard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .score-card:hover { border-color: var(--brand); }
+  .score-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .score-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .score-note { font-size: 12px; color: var(--text-muted); }
+  .score-green { color: var(--green); }
+  .score-yellow { color: var(--yellow); }
+  .score-red { color: var(--red); }
+
+  /* ---- RATINGS TABLE ---- */
+  .rating-table { width: 100%; border-collapse: collapse; }
+  .rating-table th {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .rating-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  .rating-table tr:last-child td { border-bottom: none; }
+  .rating-table tr:hover td { background: var(--surface2); }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+  .dot-green { background: var(--green); }
+  .dot-yellow { background: var(--yellow); }
+  .dot-red { background: var(--red); }
+
+  /* ---- GAP CARDS ---- */
+  .gap-section { margin-bottom: 28px; }
+  .gap-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding: 10px 16px;
+    border-radius: 6px;
+  }
+  .gap-header.critical { background: rgba(239,68,68,0.1); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+  .gap-header.moderate { background: rgba(234,179,8,0.1); color: var(--yellow); border: 1px solid rgba(234,179,8,0.2); }
+  .gap-header.opportunity { background: rgba(34,197,94,0.1); color: var(--green); border: 1px solid rgba(34,197,94,0.2); }
+
+  .gap-list { list-style: none; }
+  .gap-list li {
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    color: var(--text-muted);
+    padding-left: 32px;
+    position: relative;
+  }
+  .gap-list li strong { color: var(--text); display: block; margin-bottom: 2px; }
+  .gap-list.critical li::before { content: '🔴'; position: absolute; left: 10px; top: 10px; }
+  .gap-list.moderate li::before { content: '🟡'; position: absolute; left: 10px; top: 10px; }
+  .gap-list.opportunity li::before { content: '🟢'; position: absolute; left: 10px; top: 10px; }
+
+  /* ---- STRATEGY PHASES ---- */
+  .phase-grid { display: grid; gap: 20px; }
+  .phase-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .phase-card.p1::before { background: var(--red); }
+  .phase-card.p2::before { background: var(--yellow); }
+  .phase-card.p3::before { background: var(--green); }
+  .phase-card.p4::before { background: var(--blue); }
+
+  .phase-tag {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .p1 .phase-tag { color: var(--red); }
+  .p2 .phase-tag { color: var(--yellow); }
+  .p3 .phase-tag { color: var(--green); }
+  .p4 .phase-tag { color: var(--blue); }
+
+  .phase-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .phase-items { list-style: none; }
+  .phase-items li {
+    padding: 6px 0;
+    padding-left: 16px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .phase-items li::before { content: '•'; position: absolute; left: 0; color: var(--brand); }
+  .phase-items li strong { color: var(--text); }
+
+  .kpi-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .kpi-chip {
+    background: var(--surface3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ---- QUICK WINS ---- */
+  .quick-wins {
+    background: var(--surface);
+    border: 1px solid var(--brand);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 32px;
+  }
+  .quick-wins-header {
+    background: var(--brand);
+    padding: 16px 24px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .quick-wins-list { list-style: none; }
+  .quick-wins-list li {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .quick-wins-list li:last-child { border-bottom: none; }
+  .qw-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--brand);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 28px;
+  }
+  .qw-text strong { display: block; color: var(--text); margin-bottom: 2px; }
+  .qw-text span { color: var(--text-muted); }
+
+  /* ---- FUNNEL ---- */
+  .funnel { display: flex; gap: 0; margin: 24px 0; }
+  .funnel-stage {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-right: none;
+    padding: 16px 14px;
+    font-size: 12px;
+  }
+  .funnel-stage:last-child { border-right: 1px solid var(--border); border-radius: 0 6px 6px 0; }
+  .funnel-stage:first-child { border-radius: 6px 0 0 6px; }
+  .funnel-stage-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 8px;
+  }
+  .funnel-item { color: var(--text-muted); padding: 3px 0; }
+  .funnel-missing { color: var(--red); padding: 3px 0; font-style: italic; }
+
+  /* ---- COMPETITIVE MATRIX ---- */
+  .matrix { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+  .matrix th {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+  .matrix th.highlight { color: var(--brand); }
+  .matrix td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text-muted);
+  }
+  .matrix tr:last-child td { border-bottom: none; }
+  .matrix td.highlight { color: var(--text); font-weight: 500; }
+  .matrix tr:hover td { background: var(--surface2); }
+
+  /* ---- PROSE ---- */
+  p { margin-bottom: 14px; color: var(--text-muted); font-size: 14px; }
+  p strong { color: var(--text); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* ---- FOOTER ---- */
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px 32px; }
+    .container { padding: 0 16px; }
+    .section { padding: 36px 0; }
+    .funnel { flex-direction: column; }
+    .funnel-stage { border-right: 1px solid var(--border); border-bottom: none; border-radius: 0 !important; }
+    .funnel-stage:first-child { border-radius: 6px 6px 0 0 !important; }
+    .funnel-stage:last-child { border-bottom: 1px solid var(--border); border-radius: 0 0 6px 6px !important; }
+    .scorecard-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-tag">Business Intelligence Report · May 2026</div>
+    <h1>TribeTek — <span>Marketing & Visibility</span><br>Deep Audit</h1>
+    <div class="hero-meta">Analyzed by Claude · tribetek.info · Colombo, Sri Lanka</div>
+    <div class="exec-summary">
+      <h3>Executive Summary</h3>
+      <ul>
+        <li>TribeTek has a <strong>clear and well-differentiated positioning</strong> (automation-first systems for SMBs) but the website contains a critical trust-killer: all impact metrics display as "0+" due to a JavaScript rendering issue.</li>
+        <li>Social media presence is <strong>extremely thin</strong> — no follower counts are publicly surfacing from searches, and no evidence of regular content output. This is the #1 revenue-limiting marketing problem.</li>
+        <li>The blog exists with 8 articles but publishing stopped in <strong>September 2025</strong>. Content quality appears solid but consistency is broken, hurting SEO and authority.</li>
+        <li>The Sri Lanka IT services market is <strong>crowded and commoditised</strong>. TribeTek's "automation-first" angle is a genuine differentiator but it is not yet being leveraged through content, proof, or reach.</li>
+        <li>TribeTek is a <strong>6–12 months away from meaningful organic visibility</strong> if it executes the recommended strategy below, starting with quick wins this week.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: DIGITAL PRESENCE SCORECARD -->
+  <div class="section">
+    <div class="section-label">Phase 1</div>
+    <div class="section-title">Digital Presence Scorecard</div>
+
+    <div class="scorecard-grid">
+      <div class="score-card">
+        <div class="score-label">Website Quality</div>
+        <div class="score-value score-yellow">7 / 10</div>
+        <div class="score-note">Great design. Broken counter metrics.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">Instagram Presence</div>
+        <div class="score-value score-red">2 / 10</div>
+        <div class="score-note">No visible followers, no engagement signals found</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">Facebook Presence</div>
+        <div class="score-value score-red">2 / 10</div>
+        <div class="score-note">Minimal discoverable activity</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">LinkedIn Presence</div>
+        <div class="score-value score-yellow">4 / 10</div>
+        <div class="score-note">Page exists; activity unknown, likely low</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">Blog / SEO Content</div>
+        <div class="score-value score-yellow">5 / 10</div>
+        <div class="score-note">8 articles, last published Sept 2025</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">Lead Gen Funnel</div>
+        <div class="score-value score-red">3 / 10</div>
+        <div class="score-note">Only a contact form. No lead magnet.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">Trust Signals</div>
+        <div class="score-value score-red">2 / 10</div>
+        <div class="score-note">No testimonials, no case studies, 0+ counters</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">SEO Foundation</div>
+        <div class="score-value score-yellow">6 / 10</div>
+        <div class="score-note">Good meta, OG tags, title structure</div>
+      </div>
+    </div>
+
+    <p><strong>Key Finding:</strong> The website is visually professional and messaging is well-structured. The fatal issue is that the hero section displays <strong>"0+" for every impact metric</strong> (projects delivered, hours saved, years of experience). This is almost certainly a JS hydration bug — the counters animate from 0 but the real numbers are never populated. To any first-time visitor, TribeTek looks like it has zero experience. This is the single most damaging issue on the site right now.</p>
+    <p>The newsletter subscription box in the footer has no visible mechanism and no proof of audience — it needs to either be powered up with a real email tool (Mailchimp, ConvertKit) or removed.</p>
+  </div>
+
+  <!-- SECTION 2: BRAND & POSITIONING -->
+  <div class="section">
+    <div class="section-label">Phase 2</div>
+    <div class="section-title">Brand & Positioning Analysis</div>
+
+    <table class="rating-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Rating</th>
+          <th>Observations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Value Proposition Clarity</strong></td>
+          <td><span class="dot dot-green"></span>Strong</td>
+          <td>"Automation-Driven Web Systems That Reduce Manual Work" — clear, specific, outcome-focused. One of the best positioned tech company taglines in the LK space.</td>
+        </tr>
+        <tr>
+          <td><strong>Brand Voice Consistency</strong></td>
+          <td><span class="dot dot-yellow"></span>Moderate</td>
+          <td>Website tone is professional and outcome-focused. Social media tone is unknown (insufficient activity to evaluate). Risk of inconsistency as social grows.</td>
+        </tr>
+        <tr>
+          <td><strong>Visual Identity</strong></td>
+          <td><span class="dot dot-green"></span>Strong</td>
+          <td>Brand orange (#ED4716) is distinctive and consistently applied. Clean design. Logo is professional. Stands out against typical LK agency websites.</td>
+        </tr>
+        <tr>
+          <td><strong>Differentiation</strong></td>
+          <td><span class="dot dot-green"></span>Strong</td>
+          <td>"Automation-first thinking before code" is genuinely different from generic "we build websites" competitors. The problem framing (manual entry, disconnected tools, bottlenecks) is sharp and buyer-centric.</td>
+        </tr>
+        <tr>
+          <td><strong>Trust & Social Proof</strong></td>
+          <td><span class="dot dot-red"></span>Weak</td>
+          <td>Zero testimonials. Zero named clients. Zero case studies. The "5+ businesses served / 2,400+ hours saved" in the hero is good — but the animated counters show 0+ breaking the effect entirely.</td>
+        </tr>
+        <tr>
+          <td><strong>Target Audience (ICP) Fit</strong></td>
+          <td><span class="dot dot-yellow"></span>Moderate</td>
+          <td>ICP appears to be startups and growing SMBs in Sri Lanka. Language fits but channels (Instagram, Facebook) are misaligned with the B2B buyer — LinkedIn is where ICP actually lives.</td>
+        </tr>
+        <tr>
+          <td><strong>Messaging Hierarchy</strong></td>
+          <td><span class="dot dot-yellow"></span>Moderate</td>
+          <td>Good primary promise. But there are no named case studies or supporting proof points — the hierarchy has the foundation without the credibility layer.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 3: COMPETITOR ANALYSIS -->
+  <div class="section">
+    <div class="section-label">Phase 3</div>
+    <div class="section-title">Competitive Landscape</div>
+
+    <p>TribeTek operates in an extremely competitive Sri Lankan IT services market. Key competitors range from full-stack digital agencies to automation-focused software houses. Here's how they stack up:</p>
+
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th class="highlight">TribeTek</th>
+          <th>Digiratina</th>
+          <th>Trinexa Tech</th>
+          <th>DigiFox</th>
+          <th>NorthEncaps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Positioning Focus</td>
+          <td class="highlight">Automation-first systems</td>
+          <td>Custom software / MVP</td>
+          <td>AI-driven enterprise</td>
+          <td>Web & digital marketing</td>
+          <td>Software, IoT, AI</td>
+        </tr>
+        <tr>
+          <td>Target Market</td>
+          <td class="highlight">SMBs / startups (LK)</td>
+          <td>LK + Singapore</td>
+          <td>Global</td>
+          <td>Local LK</td>
+          <td>Global (LK base)</td>
+        </tr>
+        <tr>
+          <td>Website Trust Signals</td>
+          <td class="highlight">⚠️ Broken counters, no case studies</td>
+          <td>✅ Client logos, case studies</td>
+          <td>✅ Enterprise positioning</td>
+          <td>✅ Portfolio visible</td>
+          <td>✅ Project listing</td>
+        </tr>
+        <tr>
+          <td>LinkedIn Activity</td>
+          <td class="highlight">🔴 Unknown / Low</td>
+          <td>🟡 Moderate</td>
+          <td>🟡 Active</td>
+          <td>🔴 Low</td>
+          <td>🟡 Moderate</td>
+        </tr>
+        <tr>
+          <td>Content / Blog</td>
+          <td class="highlight">🟡 8 articles, stale</td>
+          <td>🔴 None visible</td>
+          <td>🟡 Some content</td>
+          <td>🔴 None visible</td>
+          <td>🔴 None visible</td>
+        </tr>
+        <tr>
+          <td>Differentiator Clarity</td>
+          <td class="highlight">✅ Strong ("automation-first")</td>
+          <td>🟡 "Quality MVP builds"</td>
+          <td>🟡 "AI enterprise"</td>
+          <td>🔴 Generic</td>
+          <td>🟡 "IoT + AI"</td>
+        </tr>
+        <tr>
+          <td>Pricing Transparency</td>
+          <td class="highlight">🔴 None</td>
+          <td>🔴 None</td>
+          <td>🔴 None</td>
+          <td>🔴 None</td>
+          <td>🔴 None</td>
+        </tr>
+        <tr>
+          <td>Lead Magnet / Free Offer</td>
+          <td class="highlight">🟡 Free consultation CTA</td>
+          <td>🔴 None</td>
+          <td>🔴 None</td>
+          <td>🔴 None</td>
+          <td>🔴 None</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 20px;"><strong>Insight:</strong> The blog is actually a <em>competitive advantage hiding in plain sight</em>. Most competitors have no content engine at all. If TribeTek revives consistent publishing, it can own SEO for automation + Sri Lanka queries within 6–9 months — with very little competition to fight.</p>
+  </div>
+
+  <!-- SECTION 4: MARKETING FLOW -->
+  <div class="section">
+    <div class="section-label">Phase 4</div>
+    <div class="section-title">Current Marketing Flow Map</div>
+
+    <div class="funnel">
+      <div class="funnel-stage">
+        <div class="funnel-stage-title">Awareness</div>
+        <div class="funnel-item">✅ Blog (stale)</div>
+        <div class="funnel-item">✅ Social (inactive)</div>
+        <div class="funnel-missing">❌ No paid ads</div>
+        <div class="funnel-missing">❌ No SEO targeting</div>
+        <div class="funnel-missing">❌ No PR / media</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="funnel-stage-title">Consideration</div>
+        <div class="funnel-item">✅ Services page</div>
+        <div class="funnel-item">✅ About page</div>
+        <div class="funnel-missing">❌ No testimonials</div>
+        <div class="funnel-missing">❌ No case studies</div>
+        <div class="funnel-missing">❌ No pricing signals</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="funnel-stage-title">Conversion</div>
+        <div class="funnel-item">✅ Contact form</div>
+        <div class="funnel-item">✅ Free consultation CTA</div>
+        <div class="funnel-missing">❌ No lead magnet</div>
+        <div class="funnel-missing">❌ No calendar booking</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="funnel-stage-title">Retention</div>
+        <div class="funnel-missing">❌ No email sequence</div>
+        <div class="funnel-missing">❌ Newsletter not functional</div>
+        <div class="funnel-missing">❌ No retargeting</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="funnel-stage-title">Advocacy</div>
+        <div class="funnel-missing">❌ No referral program</div>
+        <div class="funnel-missing">❌ No testimonial collection</div>
+        <div class="funnel-missing">❌ No review presence</div>
+      </div>
+    </div>
+
+    <p><strong>Summary:</strong> The funnel is essentially broken after the first click. Awareness channels are near-silent, consideration has no proof, conversion has no frictionless path, and retention/advocacy mechanisms don't exist yet. The good news: the website design and messaging foundation is solid — the funnel just needs to be built around it.</p>
+  </div>
+
+  <!-- SECTION 5: GAP ANALYSIS -->
+  <div class="section">
+    <div class="section-label">Phase 5</div>
+    <div class="section-title">Gap & Opportunity Analysis</div>
+
+    <div class="gap-section">
+      <div class="gap-header critical">🔴 Critical Gaps — Fix Immediately</div>
+      <ul class="gap-list critical">
+        <li><strong>Broken Impact Counters on Homepage</strong>The "0+" stats destroy trust before the user reads a single word. Fix the JavaScript counter animation or hardcode the numbers. This is a 1-hour fix with significant ROI.</li>
+        <li><strong>Zero Social Media Activity</strong>All three channels appear dormant based on zero discoverable engagement data. A service business with no social proof is invisible to modern buyers who research before contacting anyone.</li>
+        <li><strong>No Case Studies or Client Testimonials</strong>The entire website has no named clients, no quotes, no before/after stories. In a trust-driven B2B service sale, this is the single biggest conversion killer.</li>
+        <li><strong>Blog Publishing Has Stopped</strong>Last article was September 2025 — 8 months of silence. Google penalises stale sites. Competitors who publish consistently will overtake TribeTek's SEO position.</li>
+      </ul>
+    </div>
+
+    <div class="gap-section">
+      <div class="gap-header moderate">🟡 Moderate Gaps — Address in 1–3 Months</div>
+      <ul class="gap-list moderate">
+        <li><strong>LinkedIn is Underinvested</strong>TribeTek's ICP (business owners, ops managers) lives on LinkedIn, not Instagram. The current social strategy is targeting the wrong platform for B2B lead generation.</li>
+        <li><strong>No Lead Magnet or Email Capture</strong>The newsletter CTA collects emails but there's no visible confirmation it works, no incentive to subscribe, and no email sequence built. This is a dead end in the funnel.</li>
+        <li><strong>No Booking / Calendar Tool</strong>The "Request a Free Consultation" CTA goes to a contact form — a high-friction path. Adding a Calendly or Cal.com link would increase conversion rate significantly.</li>
+        <li><strong>No SEO Keyword Strategy Visible</strong>Blog titles like "Top Tech Stacks for Scalable Applications" have weak search intent alignment. No automation + Sri Lanka specific targeting is happening.</li>
+        <li><strong>No Review Platform Presence</strong>TribeTek is not listed on Clutch, GoodFirms, or TechBehemoths — the directories buyers use to discover and vet software agencies in Sri Lanka.</li>
+      </ul>
+    </div>
+
+    <div class="gap-section">
+      <div class="gap-header opportunity">🟢 Opportunities — Build Into Strategy</div>
+      <ul class="gap-list opportunity">
+        <li><strong>Own "Business Automation Sri Lanka" SEO</strong>No competitor is publishing consistent, high-quality content on automation for local Sri Lankan businesses. TribeTek could own this keyword cluster with 2–3 articles/month.</li>
+        <li><strong>LinkedIn Thought Leadership Angle</strong>The founder(s) sharing real automation case stories, "before/after workflows", or "how we automated X for a client" posts would generate massive B2B trust. No competitor in LK is doing this well.</li>
+        <li><strong>Free Automation Audit as Lead Magnet</strong>Instead of "Request a Consultation", position a "Free Automation Opportunity Audit" — a structured assessment of a prospect's workflow. This frames TribeTek as an expert, not just a vendor.</li>
+        <li><strong>YouTube / Video Content</strong>Short "we automated this business process in 3 steps" videos would dominate YouTube Sri Lanka for automation content — an uncontested space.</li>
+        <li><strong>Clutch / GoodFirms Profile</strong>Getting listed and collecting 3–5 verified reviews on these platforms directly improves inbound leads from buyers who are actively looking for a vendor.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 6: 12-24 MONTH STRATEGY -->
+  <div class="section">
+    <div class="section-label">Phase 6</div>
+    <div class="section-title">12–24 Month Marketing Roadmap</div>
+
+    <div class="phase-grid">
+
+      <div class="phase-card p1">
+        <div class="phase-tag">Months 1–3 · Foundation</div>
+        <div class="phase-title">Fix, Prove, and Get Discovered</div>
+        <ul class="phase-items">
+          <li><strong>Fix the broken counters</strong> — hardcode real numbers (5+ clients, 2,400+ hours saved, X years) immediately</li>
+          <li><strong>Collect 3–5 client testimonials</strong> — reach out to past clients this week, even a LinkedIn recommendation works</li>
+          <li><strong>Build one case study</strong> — pick best project, document the problem, approach, result. This becomes your most powerful sales asset</li>
+          <li><strong>Set up LinkedIn as primary social channel</strong> — post 3x/week: one insight, one story, one reshare</li>
+          <li><strong>Resume blog publishing</strong> — commit to 2 articles/month targeting "automation + Sri Lanka" keyword clusters</li>
+          <li><strong>Create Clutch and GoodFirms profiles</strong> and collect first 3 reviews</li>
+          <li><strong>Replace contact form with Calendly link</strong> on all CTAs</li>
+          <li><strong>Set up Mailchimp or ConvertKit</strong> with a real welcome email sequence (3 emails)</li>
+        </ul>
+        <div class="kpi-row">
+          <span class="kpi-chip">KPI: 3 testimonials live</span>
+          <span class="kpi-chip">KPI: 1 case study published</span>
+          <span class="kpi-chip">KPI: LinkedIn 100+ followers</span>
+          <span class="kpi-chip">KPI: 2 blogs/month rhythm</span>
+        </div>
+      </div>
+
+      <div class="phase-card p2">
+        <div class="phase-tag">Months 4–9 · Growth</div>
+        <div class="phase-title">Build the Engine & Generate Leads</div>
+        <ul class="phase-items">
+          <li><strong>LinkedIn founder-led content</strong> — personal account posts about automation lessons, client wins, industry observations (personal > company page for reach)</li>
+          <li><strong>Launch a lead magnet</strong> — "Free Automation Opportunity Audit" or a downloadable "10 Signs Your Business Needs Automation" guide</li>
+          <li><strong>SEO content push</strong> — target: "business automation Sri Lanka", "workflow automation Colombo", "custom software for SMBs Sri Lanka"</li>
+          <li><strong>Start a YouTube channel</strong> — 2 videos/month: process walkthroughs, automation tutorials, client case explainers</li>
+          <li><strong>Cold outreach to target ICP</strong> — identify 20 local SMBs/month on LinkedIn, connect + value-first message, not a pitch</li>
+          <li><strong>Partner with Sri Lankan business communities</strong> — Chamber of Commerce, SLASSCOM, startup incubators — guest speaking, workshops</li>
+        </ul>
+        <div class="kpi-row">
+          <span class="kpi-chip">KPI: 5 qualified leads/month</span>
+          <span class="kpi-chip">KPI: 500+ LinkedIn followers</span>
+          <span class="kpi-chip">KPI: 500+ monthly organic visitors</span>
+          <span class="kpi-chip">KPI: Email list 200+ subscribers</span>
+        </div>
+      </div>
+
+      <div class="phase-card p3">
+        <div class="phase-tag">Months 10–18 · Scale</div>
+        <div class="phase-title">Double Down on What's Working</div>
+        <ul class="phase-items">
+          <li><strong>Scale top-performing content types</strong> — if LinkedIn posts outperform, go daily; if YouTube grows, increase cadence</li>
+          <li><strong>Test LinkedIn Ads</strong> targeting operations managers, founders, and business owners in Sri Lanka (very low cost, high precision)</li>
+          <li><strong>Build a referral program</strong> — incentivise existing clients to refer (10% off next project, gift voucher, etc.)</li>
+          <li><strong>Publish detailed case studies monthly</strong> — quantified ROI, named clients (with permission), becomes an SEO and trust powerhouse</li>
+          <li><strong>Speak at local events</strong> — SLASSCOM, startup meetups, business associations — positions TribeTek leadership as the automation authority</li>
+          <li><strong>Consider a niche vertical</strong> — e.g., "automation for Sri Lankan logistics companies" or "automation for retail chains" — vertical focus dramatically improves close rates</li>
+        </ul>
+        <div class="kpi-row">
+          <span class="kpi-chip">KPI: 15+ leads/month</span>
+          <span class="kpi-chip">KPI: 2,000+ LinkedIn followers</span>
+          <span class="kpi-chip">KPI: 2,000+ organic visitors/month</span>
+          <span class="kpi-chip">KPI: 2+ referral clients</span>
+        </div>
+      </div>
+
+      <div class="phase-card p4">
+        <div class="phase-tag">Months 18–24 · Dominate</div>
+        <div class="phase-title">Own the Category</div>
+        <ul class="phase-items">
+          <li><strong>Launch an "Automation Index" report</strong> for Sri Lankan businesses — annual state of automation research. Generates PR, backlinks, and authority</li>
+          <li><strong>Build a community</strong> — WhatsApp or Slack group for Sri Lankan business owners interested in automation / digital transformation</li>
+          <li><strong>Productise one service</strong> — offer a fixed-scope "Automation Starter Package" at a published price (e.g., LKR 250,000 for a 30-day workflow audit + implementation). Reduces sales friction enormously.</li>
+          <li><strong>Explore regional expansion</strong> — target Maldives, Bangladesh, or Southeast Asian SMB markets using the same automation positioning</li>
+          <li><strong>Consider an international directory push</strong> — GoodFirms, Clutch top-ranking requires 10+ reviews. Target this milestone for international inbound.</li>
+        </ul>
+        <div class="kpi-row">
+          <span class="kpi-chip">KPI: #1 for "automation Sri Lanka"</span>
+          <span class="kpi-chip">KPI: 30+ leads/month</span>
+          <span class="kpi-chip">KPI: 5,000+ community members</span>
+          <span class="kpi-chip">KPI: First international client</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUICK WINS -->
+  <div class="section">
+    <div class="section-label">Action Plan</div>
+    <div class="section-title">Top 5 Quick Wins — Do This Week</div>
+
+    <div class="quick-wins">
+      <div class="quick-wins-header">⚡ 5 Things to Do in the Next 7 Days</div>
+      <ul class="quick-wins-list">
+        <li>
+          <div class="qw-num">1</div>
+          <div class="qw-text">
+            <strong>Fix the "0+" counter bug on your homepage</strong>
+            <span>Open the website code and either hardcode real numbers or debug the animation script. "0+ projects delivered" is actively costing you clients. This is a 1-hour fix with potentially thousands of dollars in recovered trust.</span>
+          </div>
+        </li>
+        <li>
+          <div class="qw-num">2</div>
+          <div class="qw-text">
+            <strong>Text or WhatsApp 3 past clients and ask for a testimonial</strong>
+            <span>You don't need a form. Just ask: "Would you be willing to write 2–3 sentences about working with us? I'd love to add it to our website." Even one real testimonial transforms how potential clients perceive you.</span>
+          </div>
+        </li>
+        <li>
+          <div class="qw-num">3</div>
+          <div class="qw-text">
+            <strong>Replace your contact form CTAs with a Calendly link</strong>
+            <span>Free to set up, takes 20 minutes. "Book a Free 30-Min Automation Call" converts far better than "fill out this form." Removes the biggest conversion friction point on the site.</span>
+          </div>
+        </li>
+        <li>
+          <div class="qw-num">4</div>
+          <div class="qw-text">
+            <strong>Post your first LinkedIn article as the founder</strong>
+            <span>Write about a real problem you solved for a client (anonymised if needed). "How we saved [local business] 20 hours/week by automating their order tracking" — this type of post travels fast in the Sri Lanka business community. Do NOT post as the company page. Post as yourself.</span>
+          </div>
+        </li>
+        <li>
+          <div class="qw-num">5</div>
+          <div class="qw-text">
+            <strong>Create a Clutch.co profile and request your first review</strong>
+            <span>Free to list. Clutch is the #1 directory buyers use to find and verify software agencies. Getting 3 reviews in the first month puts you on the map for international discovery. Go to clutch.co, claim your profile, and invite a past client to review.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Business Intelligence Report · TribeTek (tribetek.info) · Generated May 2026 by Claude<br>
+  All analysis based on publicly available data from the website, social media, and competitive research.
+</div>
+
+</body>
+</html>

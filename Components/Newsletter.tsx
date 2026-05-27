@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Send, CheckCircle2 } from "lucide-react";
 
 interface FormData {
   name: string;
@@ -74,113 +75,118 @@ export default function ContactNewsletter() {
   };
 
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Glows */}
-      {/* <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#FF6B2C]/10 rounded-full blur-[180px]" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#ED4716]/10 rounded-full blur-[180px]" /> */}
-
-      <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12">
-        {submitted ? (
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-[#4ade80] font-medium text-center text-xl">
-            ✅ Thank you for reaching out! We’ll get back to you soon.
-          </motion.p>
-        ) : (
-          <motion.form
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-            onSubmit={handleSubmit}
-            className="bg-[#121212]/30 border border-[#1f1f1f] backdrop-blur-2xl rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.3)] p-8 md:p-12 flex flex-col gap-6">
-            <div className="text-center mb-6">
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-3">
-                Let’s <span className="text-[#ED4716]">Connect</span>
-              </h2>
-              <p className="text-[#b3b3b3] text-lg">
-                Fill out your details and let us know your purpose. We will
-                respond promptly.
+    <section className="bg-white py-32 relative overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        
+        <div className="max-w-4xl mx-auto">
+          {submitted ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="card-elite text-center py-20"
+            >
+              <div className="w-20 h-20 bg-[var(--c-accent)]/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                <CheckCircle2 size={40} className="text-[var(--c-accent)]" />
+              </div>
+              <h2 className="text-3xl font-black text-[var(--c-black)] mb-4">Transmission Successful.</h2>
+              <p className="text-[var(--c-muted)] text-lg font-medium leading-relaxed">
+                We've received your brief. An automation strategist will reach out within 24 hours.
               </p>
-            </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              className="card-elite card-elite-lg"
+            >
+              <div className="mb-12">
+                <div className="mb-6">
+                  <span className="badge-elite">Direct Consultation</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black text-[var(--c-black)] leading-[1.1] tracking-tighter">
+                  Let’s Build Your <span className="text-[var(--c-accent)]">Elite System.</span>
+                </h2>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-[#2a2a2a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ED4716]"
-              />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-[#2a2a2a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ED4716]"
-              />
-            </div>
+              <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-[var(--c-black)] uppercase tracking-[0.2em] ml-2">Identify Name</label>
+                    <input
+                      type="text" name="name" placeholder="Full Name"
+                      value={formData.name} onChange={handleChange} required
+                      className="input-elite"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-[var(--c-black)] uppercase tracking-[0.2em] ml-2">Contact Link (Phone)</label>
+                    <input
+                      type="tel" name="phone" placeholder="+00 000 000 000"
+                      value={formData.phone} onChange={handleChange} required
+                      className="input-elite"
+                    />
+                  </div>
+                </div>
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-[#2a2a2a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ED4716]"
-            />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-[var(--c-black)] uppercase tracking-[0.2em] ml-2">Digital Address (Email)</label>
+                    <input
+                      type="email" name="email" placeholder="work@company.com"
+                      value={formData.email} onChange={handleChange} required
+                      className="input-elite"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black text-[var(--c-black)] uppercase tracking-[0.2em] ml-2">Project Classification</label>
+                    <select
+                      name="purpose" value={formData.purpose} onChange={handleChange}
+                      className="input-elite appearance-none cursor-pointer"
+                    >
+                      <option>General Inquiry</option>
+                      <option>Software Development</option>
+                      <option>AI Solutions</option>
+                      <option>Mobile App Development</option>
+                      <option>Digital Transformation</option>
+                    </select>
+                  </div>
+                </div>
 
-            <select
-              name="purpose"
-              value={formData.purpose}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-[#2a2a2a] text-white focus:outline-none focus:ring-2 focus:ring-[#ED4716]">
-              <option>General Inquiry</option>
-              <option>Software Development</option>
-              <option>AI Solutions</option>
-              <option>Mobile App Development</option>
-              <option>Digital Transformation</option>
-            </select>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-[var(--c-black)] uppercase tracking-[0.2em] ml-2">Operational Context (Message)</label>
+                  <textarea
+                    name="message" placeholder="Briefly describe your current friction points..."
+                    value={formData.message} onChange={handleChange} rows={5}
+                    className="input-elite"
+                  />
+                </div>
 
-            <textarea
-              name="message"
-              placeholder="Tell us about your project or requirements..."
-              value={formData.message}
-              onChange={handleChange}
-              rows={5}
-              className="w-full px-4 py-3 rounded-xl bg-[#0f0f0f] border border-[#2a2a2a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ED4716]"
-            />
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 pt-4">
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox" name="consent" checked={formData.consent}
+                      onChange={handleChange}
+                      className="w-5 h-5 rounded border-[var(--c-border)] accent-[var(--c-accent)] transition-all"
+                    />
+                    <span className="text-[11px] font-bold text-[var(--c-muted)] uppercase tracking-widest group-hover:text-[var(--c-black)] transition-colors">
+                      I agree to the processing of personal data.
+                    </span>
+                  </label>
 
-            <label className="flex items-start gap-3 text-[#b3b3b3] text-sm">
-              <input
-                type="checkbox"
-                name="consent"
-                checked={formData.consent}
-                onChange={handleChange}
-                className="mt-1 w-4 h-4 accent-[#ED4716]"
-              />
-              <span>
-                I agree to share my details with{" "}
-                <span className="text-[#FF6B2C] font-medium">TribeTek</span> for
-                communication and service purposes.
-              </span>
-            </label>
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg min-w-[240px]"
+                  >
+                    Deploy Inquiry <Send size={18} />
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          )}
+        </div>
 
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              type="submit"
-              className="mt-4 w-full md:w-auto px-10 py-3 bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] rounded-xl text-white font-semibold text-lg shadow-[0_0_25px_rgba(237,71,22,0.4)] hover:shadow-[0_0_35px_rgba(237,71,22,0.6)] transition-all">
-              Send Message →
-            </motion.button>
-          </motion.form>
-        )}
       </div>
     </section>
   );

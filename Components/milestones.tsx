@@ -1,82 +1,39 @@
 "use client";
 
-import CountUp from "react-countup";
-import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
+const milestones = [
+  { number: 10, suffix: "+", label: "Elite Systems Built", description: "Automation-first architecture" },
+  { number: 2400, suffix: "+", label: "Hours Recovered", description: "Manual work eliminated" },
+  { number: 50, suffix: "+", label: "Businesses Scaled", description: "Measurable operational ROI" },
+  { number: 100, suffix: "%", label: "Automation Focus", description: "Zero-friction operations" },
+];
+
 export default function MilestonesSection() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const milestones = [
-    {
-      number: 1,
-      label: "End-to-End Automation System Delivered",
-      description:
-        "Designed to replace manual workflows and improve operational efficiency",
-    },
-    {
-      number: 9,
-      label: "Web & System Projects Delivered",
-      description: "Web applications built with automation-ready architecture",
-    },
-    {
-      number: 3,
-      label: "Years Building Web & Automation Solutions",
-      description:
-        "Experience across web development, systems, and process automation",
-    },
-  ];
-
   return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden my-16 flex items-center">
-      <div className="relative z-10 container mx-auto px-6 md:px-16 text-center">
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-          Our <span className="text-[#ED4716]"> Impact </span>So Far
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-[#b3b3b3] max-w-2xl mx-auto text-lg leading-relaxed mb-16">
-          We focus on building systems that deliver real operational value — not
-          vanity metrics.
-        </motion.p>
-
-        {/* Stats Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
-          {milestones.map((item, index) => (
+    <section className="bg-white py-24 relative overflow-hidden border-b border-[var(--c-border)]">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          {milestones.map((item, i) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="relative flex flex-col items-center justify-center text-center">
-              {/* Count */}
-              <h3 className="text-6xl md:text-7xl font-extrabold text-[#ED4716] mb-4">
-                {inView ? <CountUp end={item.number} duration={2} /> : 0}+
-              </h3>
-
-              {/* Title */}
-              <p className="text-[#d1d1d1] text-lg font-semibold tracking-wide mb-2">
+              className="flex flex-col"
+            >
+              <div className="text-[10px] font-black text-[var(--c-accent)] uppercase tracking-[0.3em] mb-4">
+                Metric.0{i + 1}
+              </div>
+              <div className="text-4xl md:text-5xl font-black text-[var(--c-black)] tracking-tighter mb-4 flex items-baseline">
+                {item.number.toLocaleString()}
+                <span className="text-[var(--c-accent)] ml-1">{item.suffix}</span>
+              </div>
+              <h3 className="text-[var(--c-black)] font-extrabold text-sm uppercase tracking-wider mb-2">
                 {item.label}
-              </p>
-
-              {/* Description */}
-              <p className="text-[#9e9e9e] text-sm max-w-xs leading-relaxed">
+              </h3>
+              <p className="text-[var(--c-muted)] text-[11px] font-bold uppercase tracking-widest leading-relaxed">
                 {item.description}
               </p>
             </motion.div>

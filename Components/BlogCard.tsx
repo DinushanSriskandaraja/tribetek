@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 interface BlogCardProps {
   title: string;
   description?: string;
   slug: string;
   date?: string;
-  index?: number; // for animation delay
+  index?: number;
 }
 
 export default function BlogCard({
@@ -24,34 +25,25 @@ export default function BlogCard({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group relative rounded-3xl bg-[#161616]/60 border border-[#2b2b2b] backdrop-blur-xl overflow-hidden
-        transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)]
-        hover:-translate-y-2 ">
-      {/* Glow Effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-        <div className="absolute -bottom-[60px] -right-[60px] w-[200px] h-[200px] bg-[#ED4716] blur-[100px] opacity-30" />
-      </div>
-
-      {/* Card Content */}
-      <div className="relative z-10 p-8 flex flex-col justify-between">
+    >
+      <Link href={`/blog/${slug}`} className="card-elite group h-full flex flex-col justify-between">
         <div>
-          <h3 className="text-2xl font-semibold text-white group-hover:text-[#ED4716] transition">
+          <div className="flex items-center justify-between mb-6">
+            <span className="badge-elite">Perspective</span>
+            <span className="text-[10px] font-black text-[var(--c-muted)] uppercase tracking-widest">{date || "Coming soon"}</span>
+          </div>
+          <h3 className="text-2xl font-black text-[var(--c-black)] group-hover:text-[var(--c-accent)] transition-colors duration-300 tracking-tight leading-tight mb-4">
             {title}
           </h3>
-          <p className="text-gray-400 mt-3 line-clamp-3 leading-relaxed">
+          <p className="text-[var(--c-muted)] font-medium leading-relaxed line-clamp-3">
             {description}
           </p>
         </div>
 
-        <div className="mt-6 flex items-center justify-between text-sm text-gray-500">
-          <span className="text-gray-500">{date || "Coming soon"}</span>
-          <Link
-            href={`/blog/${slug}`}
-            className="font-semibold text-[#ED4716] group-hover:underline">
-            Read more →
-          </Link>
+        <div className="mt-10 flex items-center gap-2 text-[var(--c-black)] font-black text-[10px] uppercase tracking-[0.2em] group-hover:gap-4 transition-all duration-300">
+          Analyze Insight <ArrowRight size={14} className="text-[var(--c-accent)]" />
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 }

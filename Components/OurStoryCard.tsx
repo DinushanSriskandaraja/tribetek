@@ -11,42 +11,38 @@ type OurStoryCardProps = {
 
 export default function OurStoryCard({
   title = "Our Story",
-  description = `TribeTek started as a bootstrap-powered vision — building powerful
-  systems for businesses while crafting our own innovations. Without investors,
-  without shortcuts, just execution and obsession with quality.
-
-  Today, TribeTek builds automation-first products that transform how modern
-  businesses operate.`,
+  description,
 }: OurStoryCardProps) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="flex flex-col md:flex-row items-center gap-16 
-        bg-[#161616]/70 border-[#2b2b2b]
-        rounded-3xl border  p-10 md:p-16 
-        backdrop-blur-md ">
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="flex flex-col lg:flex-row items-center gap-16"
+    >
       {/* Text */}
       <div className="flex-1">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+        <div className="mb-6">
+          <span className="badge-elite">Foundations</span>
+        </div>
+        <h2 className="text-4xl md:text-5xl font-black text-[var(--c-black)] mb-8 tracking-tighter">
           {title}
         </h2>
-        <p className="text-gray-400 leading-relaxed text-lg whitespace-pre-line">
+        <p className="text-[var(--c-muted)] font-medium leading-relaxed text-xl whitespace-pre-line">
           {description}
         </p>
       </div>
 
       {/* Image */}
-      <div className="flex-1">
-        <div className="relative overflow-hidden rounded-3xl border border-[#2a2a2a] ">
+      <div className="flex-1 w-full">
+        <div className="card-elite p-0 overflow-hidden group">
           <Image
             src={AboutUsImage}
             alt="Our Story"
             width={1200}
             height={800}
-            className="object-cover rounded-3xl"
+            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
             priority
           />
         </div>

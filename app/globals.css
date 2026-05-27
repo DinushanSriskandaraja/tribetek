@@ -2,45 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --------------------------------------
-   🌑 TribeTek Nightfall Black Theme
-   -------------------------------------- */
+/* ============================================================
+   TRIBETEK 2025 — ELITE · MINIMAL · HIGH-CONVERSION
+   ============================================================ */
 
-@layer components {
-  .tribetek-shape {
-    border-radius: 0 100% 0 20%;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #0a0a0a;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #ed4716;
-    border-radius: 4px;
-  }
-
-  /* ::-webkit-scrollbar-thumb:hover {
-    background: #ff5c28;
-  } */
-
-  /* Hide scrollbar but still allow scrolling */
-  .scrollbar-none::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
-
-  .scrollbar-none {
-    -ms-overflow-style: none; /* IE & Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-}
-
-/* Font face for Astonpoliz */
 @font-face {
   font-family: "Astonpoliz";
   src: url("/fonts/Astonpoliz.woff2") format("woff2");
@@ -49,183 +14,203 @@
   font-display: swap;
 }
 
-/* Headings use Astonpoliz */
-h1,
-h2 {
-  font-family: "Astonpoliz", sans-serif;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* --------------------------------------
-   📝 Markdown Styling (Dark Nightfall)
-   -------------------------------------- */
-.markdown-body {
-  font-family: "Inter", sans-serif;
-  line-height: 1.8;
-  color: #e5e5e5; /* soft white text */
-  background-color: #0a0a0a; /* main background */
-}
-
-/* .scroll-smooth {
+html {
+  font-family: "Inter", system-ui, sans-serif;
+  background: #FFFFFF;
+  color: #0F172A;
   scroll-behavior: smooth;
-} */
-/* Headings */
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4 {
-  font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  line-height: 1.3;
-  color: #ffffff;
 }
 
-.markdown-body h1 {
-  font-size: 2.5rem;
-  border-bottom: 2px solid #1f1f1f;
-  padding-bottom: 0.3rem;
-}
-.markdown-body h2 {
-  font-size: 2rem;
-  border-left: 4px solid #ed4716;
-  padding-left: 0.5rem;
-}
-.markdown-body h3 {
-  font-size: 1.5rem;
-  color: #f0f0f0;
-}
-.markdown-body h4 {
-  font-size: 1.2rem;
-  color: #d9d9d9;
-}
+h1, h2, h3, h4 { font-family: "Astonpoliz", "Inter", sans-serif; letter-spacing: -0.02em; }
 
-/* Paragraphs */
-.markdown-body p {
-  margin: 1rem 0;
-  color: #bfbfbf;
-}
-
-/* Links */
-.markdown-body a {
-  color: #ed4716;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.markdown-body a:hover {
-  color: #ff5c28;
-  text-decoration: underline;
-}
-
-/* Lists */
-.markdown-body ul {
-  list-style: disc;
-  margin: 1rem 0 1rem 1.5rem;
-}
-.markdown-body ol {
-  list-style: decimal;
-  margin: 1rem 0 1rem 1.5rem;
-}
-.markdown-body li {
-  margin: 0.4rem 0;
-  color: #cccccc;
-}
-
-/* Blockquotes */
-.markdown-body blockquote {
-  border-left: 4px solid #ed4716;
-  padding-left: 1rem;
-  color: #a3a3a3;
-  font-style: italic;
-  background-color: #121212;
-  margin: 1.5rem 0;
-  border-radius: 0.25rem;
-}
-
-/* Code blocks */
-.markdown-body pre {
-  background: #111111;
-  color: #f5f5f5;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-  border: 1px solid #1f1f1f;
-}
-.markdown-body code {
-  background: #1a1a1a;
-  color: #fcd34d;
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.3rem;
-  font-size: 0.95rem;
-}
-
-/* Images */
-.markdown-body img {
-  margin: 1.5rem 0;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.08);
-}
-
-/* Tables */
-.markdown-body table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  background: #121212;
-  border-radius: 0.5rem;
-  overflow: hidden;
-}
-.markdown-body th,
-.markdown-body td {
-  border: 1px solid #1f1f1f;
-  padding: 0.75rem;
-  text-align: left;
-  color: #e5e5e5;
-}
-.markdown-body th {
-  background: #1a1a1a;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-/* globals.css or background.module.css */
-
+/* ============================================================
+   DESIGN TOKENS (The 3-Color Palette)
+   ============================================================ */
 :root {
-  --_noise-texture: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'><defs><filter id='n' x='0' y='0' width='100%' height='100%' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='0.3' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix type='saturate' values='0' in='t' result='g'/><feComponentTransfer in='g' result='a'><feFuncA type='linear' slope='0.5'/></feComponentTransfer></filter></defs><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  --_noise-size: 8.6%;
-  --_gradient-blur: 110px;
-  --_gradient-blend-mode: normal;
-  --_gradient: radial-gradient(at 99.1% 97.5%, #ed4716 0px, transparent 50%),
-    radial-gradient(at 14.3% 43.2%, #ed6c45 0px, transparent 50%);
+  --c-white:       #FFFFFF;
+  --c-black:       #0F172A;
+  --c-accent:      #ED4716;
+  
+  --c-bg:          var(--c-white);
+  --c-text:        var(--c-black);
+  --c-muted:       rgba(15, 23, 42, 0.6);
+  --c-border:      rgba(15, 23, 42, 0.06);
+  
+  --shadow-elite:  0 10px 40px -10px rgba(15, 23, 42, 0.08);
+  --radius-elite:  1rem;
 }
 
-/* Fullscreen background wrapper */
-.background-wrapper {
-  position: fixed;
-  inset: 0;
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--c-bg); }
+::-webkit-scrollbar-thumb { background: rgba(15, 23, 42, 0.1); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--c-accent); }
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+.text-gradient {
+  background: linear-gradient(135deg, var(--c-accent) 0%, #FF8C5A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   BUTTONS (Conversion Focused)
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 99px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-lg  { padding: 1.25rem 3rem; font-size: 1.1rem; }
+.btn-md  { padding: 0.85rem 2.2rem; }
+.btn-sm  { padding: 0.65rem 1.6rem; font-size: 0.85rem; }
+
+.btn-primary {
+  background: var(--c-accent);
+  color: var(--c-white);
+  box-shadow: 0 10px 25px -8px rgba(237, 71, 22, 0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -12px rgba(237, 71, 22, 0.6);
+  filter: brightness(1.1);
+}
+
+.btn-ghost {
+  border: 1.5px solid var(--c-border);
+  color: var(--c-text);
+  background: transparent;
+}
+.btn-ghost:hover {
+  background: rgba(15, 23, 42, 0.03);
+  border-color: var(--c-black);
+}
+
+/* ============================================================
+   CARDS & SECTIONS
+   ============================================================ */
+.section-void { background: var(--c-bg); }
+.section-raised { background: #FAFAFA; border-y: 1px solid var(--c-border); }
+
+.card-elite {
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-elite);
+  padding: 2rem;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-elite);
+}
+.card-elite-lg { padding: 3rem; }
+.card-elite:hover {
+  border-color: var(--c-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.12);
+}
+
+/* ============================================================
+   BADGES & CHIPS
+   ============================================================ */
+.badge-elite {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid var(--c-border);
+  color: var(--c-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%   { box-shadow: 0 0 0 0 rgba(237,71,22,0.4); opacity: 1; }
+  70%  { box-shadow: 0 0 0 8px rgba(237,71,22,0); opacity: 0.6; }
+  100% { box-shadow: 0 0 0 0 rgba(237,71,22,0); opacity: 1; }
+}
+
+/* ============================================================
+   MARQUEE & ANIMATION
+   ============================================================ */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 60s linear infinite;
+}
+.marquee-track-reverse {
+  display: flex;
+  width: max-content;
+  animation: marqueeScrollReverse 60s linear infinite;
+}
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marqueeScrollReverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* ============================================================
+   INPUTS (High Conversion)
+   ============================================================ */
+.input-elite {
   width: 100%;
-  height: 100%;
-  z-index: -10; /* behind all content */
-  background: var(--_gradient) #161616;
-  mix-blend-mode: var(--_gradient-blend-mode);
-  overflow: hidden;
+  padding: 1.1rem 1.5rem;
+  background: var(--c-white);
+  border: 1.5px solid var(--c-border);
+  border-radius: 1rem;
+  color: var(--c-text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.input-elite:focus {
+  outline: none;
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 4px rgba(237, 71, 22, 0.05);
 }
 
-/* Noise overlay */
-.background-wrapper::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--_noise-texture);
-  background-size: var(--_noise-size);
-  background-repeat: repeat;
-  background-position: center;
-  pointer-events: none; /* prevent blocking clicks */
+/* ============================================================
+   MISC
+   ============================================================ */
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--c-muted);
 }
 
-/* Frosted backdrop effect for content containers */
-.frosted-backdrop {
-  backdrop-filter: blur(var(--_gradient-blur)) contrast(100%) brightness(100%);
-  -webkit-backdrop-filter: blur(var(--_gradient-blur)) contrast(100%)
-    brightness(100%);
+.stat-num {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
+  color: var(--c-black);
+  letter-spacing: -0.04em;
 }

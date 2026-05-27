@@ -35,37 +35,42 @@ export const metadata: Metadata = {
 };
 export default function AboutPage() {
   return (
-    <div className="relative min-h-screen w-full text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-24 space-y-28">
+    <main className="bg-white min-h-screen w-full text-[var(--c-text)] overflow-hidden pt-20">
+      <div className="container mx-auto px-6 md:pxwhy-12 lg:px-20 py-24 space-y-32">
         <SecondaryHero
-          title="Building Automation-Driven Systems"
-          highlight="That Simplify Work"
-          subtitle="Automation, Web Development & Smart Systems for Modern Businesses"
+          title="Building Automation-Driven"
+          highlight="Systems That Scale."
+          subtitle="We eliminate operational friction by building smart, automation-first web systems for modern businesses."
         />
+
         {/* --- Our Story Section --- */}
-        <OurStoryCard
-          title="Why TribeTek Exists"
-          description={`Most growing businesses don’t struggle because of a lack of effort — they struggle because their operations are held together by manual work, disconnected tools, and inefficient workflows.
-
-We saw teams spending hours on tasks that should take minutes. Data entered multiple times. Systems that don’t talk to each other. Websites that look good but don’t actually support daily operations.
-
-TribeTek was created to fix that gap.
-
-We exist to help businesses move from manual processes to structured, automation-driven web systems — systems that reduce workload, improve visibility, and scale with the business.
-
-Instead of building one-off websites or tools, we focus on how your business actually runs, then design and develop systems that support it.`}
-        />
-        <GoalCard />
         <section className="w-full">
+          <OurStoryCard
+            title="Why TribeTek Exists"
+            description={`Most growing businesses don’t struggle because of a lack of effort — they struggle because their operations are held together by manual work, disconnected tools, and inefficient workflows.
+
+We saw teams spending hours on tasks that should take minutes. Data entered multiple times. Systems that don’t talk to each other.
+
+TribeTek was created to fix that gap. We exist to help businesses move from manual processes to structured, automation-driven web systems — systems that reduce workload, improve visibility, and scale with the business.`}
+          />
+        </section>
+
+        <section className="max-w-3xl">
+          <GoalCard />
+        </section>
+
+        <section className="w-full border-t border-[var(--c-border)] pt-32">
           <ProblemsSection />
         </section>
-        <section className="w-full">
+
+        <section className="w-full border-t border-[var(--c-border)] pt-32">
           <ProcessStepsSection />
-        </section>{" "}
-        <section className="w-full">
+        </section>
+
+        <section className="w-full border-t border-[var(--c-border)] pt-32">
           <MilestonesPage />
         </section>
       </div>
-    </div>
+    </main>
   );
 }

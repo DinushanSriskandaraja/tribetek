@@ -1,48 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export default function TaglineSection() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.3, 1, 0.3]);
+
   return (
-    <section className="relative w-full py-32 sm:py-56 text-white overflow-hidden">
-      {/* Background Grid */}
-      <div
-        className="absolute inset-0 opacity-[0.04] 
-        bg-[linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px),
-        linear-gradient(180deg,rgba(255,255,255,0.06)_1px,transparent_1px)]
-        bg-[size:70px_70px]"
-      />
+    <section ref={ref} className="bg-white py-40 overflow-hidden relative border-t border-[var(--c-border)]">
+      <motion.div
+        style={{ y, opacity }}
+        className="container mx-auto px-6 text-center"
+      >
+        <div className="mb-10">
+          <span className="badge-elite">Our Vision</span>
+        </div>
 
-      {/* Soft Glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 
-                      -translate-y-1/2 w-[700px] h-[200px]
-                      bg-[#ED4716]/25 blur-[140px] rounded-full"
-      />
+        <h2 className="text-5xl md:text-8xl font-black text-[var(--c-black)] leading-[1] tracking-tighter max-w-4xl mx-auto mb-10">
+          Turning Manual Work into <span className="text-[var(--c-accent)]">Autopilot Growth.</span>
+        </h2>
 
-      <div className="container relative z-10 mx-auto px-6 md:px-12 lg:px-20">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center text-4xl md:text-6xl font-extrabold leading-tight
-                     drop-shadow-[0_0_25px_rgba(255,107,44,0.35)]">
-          Turning Ideas Into
-          <span className="text-[#ED4716]"> Intelligent Products</span>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          viewport={{ once: true }}
-          className="text-center text-gray-400 mt-6 max-w-3xl mx-auto text-lg md:text-xl 
-                     leading-relaxed">
-          TribeTek blends design, engineering, and AI to build digital
-          experiences that perform, scale, and inspire.
-        </motion.p>
-      </div>
+        <p className="text-[var(--c-muted)] text-lg md:text-xl max-w-xl mx-auto font-medium leading-relaxed">
+          TribeTek blends elite engineering with automation to build web systems that perform, scale, and deliver measurable ROI.
+        </p>
+      </motion.div>
     </section>
   );
 }

@@ -1,113 +1,139 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, type Variants } from "framer-motion";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { useRef } from "react";
+import { useLeadGen } from "../hooks/useLeadGen";
+
+const marqueeItems = [
+  "Business Process Automation",
+  "Custom Web Systems",
+  "AI-Powered Workflows",
+  "API Integrations",
+  "Legacy Modernization",
+  "Growth-Ready Software",
+];
+
+const containerVariants: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1, y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+};
 
 export default function HeroSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { setShowPopup, draftEmail, setDraftEmail } = useLeadGen();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const springY = useSpring(y, { stiffness: 60, damping: 20 });
+
   return (
-    <section className="relative h-[90vh] w-full flex items-center justify-center text-white overflow-hidden">
-      {/* --- Subtle Grid Texture --- */}
-      <div
-        className="absolute inset-0 opacity-[0.04] 
-        bg-[linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px),
-        linear-gradient(180deg,rgba(255,255,255,0.06)_1px,transparent_1px)] 
-        bg-[size:70px_70px]"
+    <section ref={ref} className="relative min-h-screen w-full flex flex-col bg-[var(--c-white)] overflow-hidden">
+      {/* Background Decor — Extremely Subtle */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: "radial-gradient(var(--c-black) 1px, transparent 1px)",
+          backgroundSize: "40px 40px"
+        }}
       />
 
-      {/* --- Main Content Container --- */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 flex flex-col items-center text-center">
-        <motion.span
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className=" text-[#ED4716] text-sm md:text-base mb-7">
-          <span
-            className="px-4 py-1 rounded-full text-[#ED4716] text-xs md:text-sm font-medium 
-               bg-[#ED4716]/30 border border-[#ED4716]/20 backdrop-blur-sm">
-            🚀 Limited Onboarding Slots Available
-          </span>{" "}
-        </motion.span>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 
-          max-w-7xl 
-                     ">
-          Automation-Driven{" "}
-          <span className="text-[#ED4716]">Web Solutions </span> That Reduce
-          Manual Work
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          className="text-gray-400 text-xl md:text-2xl max-w-2xl mb-10 leading-relaxed 
-                     drop-shadow-[0_0_20px_rgba(255,107,44,0.25)]">
-          TribeTek designs and develops custom web-based automation solutions
-          that replace manual processes, reduce errors, and help businesses
-          operate efficiently.
-        </motion.p>
-
-        {/* --- CTA Buttons --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="flex flex-col sm:flex-row gap-5 justify-center">
-          <a
-            href="/contact"
-            className="px-10 py-4 bg-gradient-to-r from-[#ED4716] to-[#ED4716] rounded-full font-semibold 
-                       
-                       hover:scale-105 transition-all duration-300 text-lg">
-            Start a Project
-          </a>
-          <a
-            href="/about"
-            className="px-10 py-4 border border-[#2b2b2b] rounded-full text-gray-200 
-                       hover:text-[#ED4716] hover:border-[#ED4716] transition duration-300 
-                       hover:shadow-[0_0_30px_rgba(255,107,44,0.5)] text-lg">
-            Learn More
-          </a>
-        </motion.div>
-        {/* --- Stats Line --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="flex flex-wrap justify-center gap-8 mt-6 text-sm text-gray-300">
-          {/* Item 1 */}
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[#ED4716] shadow-[0_0_10px_#ED4716]"></span>
-            <span>Served to 5+ business</span>
-          </div>
-
-          {/* Item 2 */}
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[#ED4716] shadow-[0_0_10px_#ED4716]"></span>
-            <span>2,400+ hours saved</span>
-          </div>
-
-          {/* Item 3 */}
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[#ED4716] shadow-[0_0_10px_#ED4716]"></span>
-            <span>10+ projects delivered</span>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* --- Scroll Indicator --- */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-500 text-sm flex flex-col items-center">
-        <span>Scroll Down</span>
-        <div className="w-[1px] h-6 bg-[#ED4716] mt-2 rounded-full" />
+        style={{ y: springY, opacity }}
+        className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 md:px-12 pt-32 pb-20 text-center"
+      >
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="max-w-5xl"
+        >
+          {/* Badge */}
+          <motion.div variants={itemVariants} className="mb-8">
+            <span className="badge-elite">
+              <span className="badge-dot" />
+              Elite Automation for Growing Businesses
+            </span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.div variants={itemVariants} className="mb-8">
+            <h1 className="text-5xl sm:text-7xl lg:text-[6rem] font-black leading-[1] tracking-[-0.04em] text-[var(--c-black)]">
+              Recover <span className="text-[var(--c-accent)]">15+ Hours</span> <br className="hidden md:block" />
+              Every Single Week.
+            </h1>
+          </motion.div>
+
+          {/* Subtext */}
+          <motion.p variants={itemVariants} className="text-[var(--c-muted)] text-xl md:text-2xl max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+            Stop losing money to repetitive manual tasks. We build 
+            <span className="text-[var(--c-black)]"> elite web systems</span> that connect your tools and automate your growth on autopilot.
+          </motion.p>
+
+          {/* Lead Capture */}
+          <motion.div variants={itemVariants} className="w-full max-w-xl mx-auto mb-16">
+            <form 
+              onSubmit={(e) => { e.preventDefault(); setShowPopup(true); }}
+              className="flex flex-col sm:flex-row gap-3 p-2 bg-white border border-[var(--c-border)] rounded-2xl sm:rounded-full shadow-elite"
+            >
+              <input 
+                type="email" 
+                placeholder="Your work email..." 
+                required
+                value={draftEmail}
+                onChange={(e) => setDraftEmail(e.target.value)}
+                className="flex-1 px-6 py-4 bg-transparent text-[var(--c-black)] placeholder:text-[var(--c-muted)] focus:outline-none text-lg font-medium"
+              />
+              <button type="submit" className="btn btn-primary btn-lg rounded-xl sm:rounded-full px-10">
+                Get Free Audit
+                <ArrowRight size={20} />
+              </button>
+            </form>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-6">
+              <span className="flex items-center gap-2 text-[11px] font-bold text-[var(--c-muted)] uppercase tracking-widest">
+                <CheckCircle2 size={14} className="text-[var(--c-accent)]" />
+                100% Free Consultation
+              </span>
+              <span className="flex items-center gap-2 text-[11px] font-bold text-[var(--c-muted)] uppercase tracking-widest">
+                <CheckCircle2 size={14} className="text-[var(--c-accent)]" />
+                No Commitment Required
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Integration Bar */}
+          <motion.div variants={itemVariants} className="flex flex-col items-center gap-6">
+            <span className="text-[10px] font-bold text-[var(--c-muted)] uppercase tracking-[0.25em]">We automate your favorite tools</span>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14 opacity-20 grayscale">
+              {["Zapier", "Make", "Slack", "Stripe", "HubSpot", "OpenAI"].map((tool) => (
+                <span key={tool} className="text-lg font-black text-[var(--c-black)] tracking-tighter italic">
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
       </motion.div>
 
-      {/* Bottom Gradient Glow */}
+      {/* Marquee */}
+      <div className="w-full py-6 border-y border-[var(--c-border)] overflow-hidden">
+        <div className="marquee-track">
+          {[...marqueeItems, ...marqueeItems].map((item, i) => (
+            <span key={i} className="flex items-center gap-4 px-10 text-[11px] font-bold text-[var(--c-muted)] whitespace-nowrap uppercase tracking-[0.2em]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--c-accent)]" />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 type SecondaryHeroProps = {
   title: string;
-  highlight?: string; // brand-colored text
+  highlight?: string;
   subtitle: string;
   className?: string;
 };
@@ -12,26 +13,22 @@ export default function SecondaryHero({
   title,
   highlight,
   subtitle,
-  className = "h-[40vh]",
+  className = "py-24",
 }: SecondaryHeroProps) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 25 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7 }}
-      className={`relative max-w-5xl mx-auto flex flex-col justify-center items-center text-center ${className}`}>
-      {/* Grid background overlay */}
-      {/* <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:80px_80px]" /> */}
-
-      <div
-        className="relative z-10 px-6
-      ">
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight text-white">
-          {title}{" "}
-          {highlight && <span className="text-[#ED4716]  ">{highlight}</span>}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`relative flex flex-col justify-center items-center text-center ${className}`}
+    >
+      <div className="relative z-10 px-6">
+        <h1 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter text-[var(--c-black)] leading-[1.05]">
+          {title}<br />
+          {highlight && <span className="text-[var(--c-accent)]">{highlight}</span>}
         </h1>
 
-        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+        <p className="text-[var(--c-muted)] text-xl md:text-2xl max-w-3xl mx-auto font-medium leading-relaxed">
           {subtitle}
         </p>
       </div>

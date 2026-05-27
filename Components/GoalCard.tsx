@@ -2,18 +2,21 @@ import { Target } from "lucide-react";
 
 export default function GoalCard() {
   return (
-    <div className="flex items-center gap-5 rounded-2xl border bg-[#161616]/70 border-[#2b2b2b] px-6 py-5 backdrop-blur-md">
+    <div className="card-elite flex items-center gap-8 group">
       {/* Icon */}
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl  text-[#ED4716]">
-        <Target size={52} />
+      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--c-black)] text-white group-hover:bg-[var(--c-accent)] transition-colors duration-300">
+        <Target size={32} />
       </div>
 
       {/* Content */}
       <div>
-        <h3 className="text-lg font-semibold text-white">
+        <div className="text-[10px] font-black text-[var(--c-accent)] uppercase tracking-[0.3em] mb-2">
+          Mission.01
+        </div>
+        <h3 className="text-xl font-black text-[var(--c-black)] tracking-tight mb-1">
           Our goal is simple:
         </h3>
-        <p className="text-gray-400 leading-relaxed">
+        <p className="text-[var(--c-muted)] font-medium leading-relaxed">
           Replace operational friction with clarity, automation, and control.
         </p>
       </div>

@@ -2,150 +2,105 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Instagram, Linkedin, Twitter, Facebook } from "lucide-react";
+import { Instagram, Linkedin, Facebook, ArrowUpRight } from "lucide-react";
 import Logo from "@/assets/TribeTek-Primary-Logo.png";
+
+const socials = [
+  { href: "https://www.instagram.com/tribe.tek/", icon: Instagram, label: "Instagram" },
+  { href: "https://www.linkedin.com/company/tribetekinfo", icon: Linkedin, label: "LinkedIn" },
+  { href: "https://web.facebook.com/TribeTekPvtLtd", icon: Facebook, label: "Facebook" },
+];
+
+const companyLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/blog", label: "Blog" },
+  { href: "https://calendly.com/tribetek", label: "Contact" },
+];
+
+const serviceLinks = [
+  { label: "Automation", href: "/services/digital-transformation" },
+  { label: "Web Systems", href: "/services/website-development" },
+  { label: "AI Solutions", href: "/services/ai-solutions" },
+  { label: "Consulting", href: "/services/consulting" },
+];
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-[#0a0a0a] via-[#0f0f0f] to-[#151515] text-gray-300 pt-20 pb-10">
-      {/* Glow Effects */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#ED4716]/10 rounded-full blur-[220px]" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#FF6B2C]/10 rounded-full blur-[200px]" />
-      </div>
+    <footer className="bg-[var(--c-black)] text-white py-24 relative overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-4 gap-14">
-        {/* Branding Section */}
-        <div className="flex flex-col gap-4">
-          <Image
-            src={Logo}
-            alt="TribeTek Logo"
-            width={160}
-            height={60}
-            className="drop-shadow-[0_0_15px_rgba(237,71,22,0.3)]"
-          />
-          <p className="text-sm text-gray-400 leading-relaxed">
-            Empowering digital transformation — from{" "}
-            <span className="text-white font-medium">strategy</span> to
-            <span className="text-white font-medium">
-              {" "}
-              scalable software
-            </span>{" "}
-            solutions that drive measurable impact.
-          </p>
+        {/* Top Strip */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12 pb-16 border-b border-white/10 mb-16">
+          <div className="max-w-xl">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-tight mb-4">
+              Scale without <br /> <span className="text-[var(--c-accent)]">the head count.</span>
+            </h2>
+            <p className="text-white/60 text-lg font-medium">Ready to build the elite systems your business deserves?</p>
+          </div>
+          <a href="https://calendly.com/tribetek" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+            Start Your Audit <ArrowUpRight size={20} />
+          </a>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h4 className="text-lg font-semibold text-white mb-5 relative">
-            Quick Links
-            <span className="absolute left-0 -bottom-2 w-10 h-[2px] bg-[#ED4716]" />
-          </h4>
-          <ul className="flex flex-col gap-3 text-gray-400 text-sm">
-            {[
-              { href: "/services", label: "Services" },
-              // { href: "/products", label: "Products" },
-              { href: "/blog", label: "Blog" },
-              { href: "/contact", label: "Contact Us" },
-            ].map((link, i) => (
-              <li key={i}>
-                <Link
-                  href={link.href}
-                  className="hover:text-[#FF6B2C] transition-all duration-300 hover:pl-1">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* Links Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div>
+            <Image src={Logo} alt="TribeTek" width={140} height={40} className="mb-8 " />
+            <p className="text-white/50 text-sm font-medium leading-relaxed mb-8 max-w-xs">
+              We design and build elite automation-driven web systems that eliminate manual work and scale operations.
+            </p>
+            <div className="flex gap-4">
+              {socials.map(({ href, icon: Icon, label }) => (
+                <a key={label} href={href} className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center hover:bg-[var(--c-accent)] hover:border-[var(--c-accent)] transition-all duration-300">
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+          </div>
 
-        {/* Contact Section */}
-        <div>
-          <h4 className="text-lg font-semibold text-white mb-5 relative">
-            Contact
-            <span className="absolute left-0 -bottom-2 w-10 h-[2px] bg-[#ED4716]" />
-          </h4>
-          <p className="text-sm text-gray-400 mb-1">Colombo, Sri Lanka</p>
-          <p className="text-sm text-gray-400 mb-1">info.tribetek@gmail.com</p>
-          {/* <p className="text-sm text-gray-400 mb-3">+94 77 123 4567</p> */}
+          <div>
+            <h4 className="text-[10px] font-black text-[var(--c-accent)] uppercase tracking-[0.2em] mb-8">Platform</h4>
+            <ul className="space-y-4">
+              {companyLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-white/60 hover:text-white font-bold text-sm transition-colors">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <div className="flex gap-5 mt-4">
-            {[
-              {
-                href: "https://www.instagram.com/tribe.tek/",
-                icon: Instagram,
-                label: "Instagram",
-              },
-              {
-                href: "https://www.linkedin.com/company/tribetekinfo",
-                icon: Linkedin,
-                label: "LinkedIn",
-              },
-              // {
-              //   href: "https://twitter.com/tribetek",
-              //   icon: Twitter,
-              //   label: "Twitter",
-              // },
-              {
-                href: "https://web.facebook.com/TribeTekPvtLtd",
-                icon: Facebook,
-                label: "Facebook",
-              },
-            ].map(({ href, icon: Icon, label }, i) => (
-              <a
-                key={i}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="p-2 rounded-full border border-gray-700 hover:border-[#ED4716] hover:bg-[#ED4716]/10 text-gray-400 hover:text-[#FF6B2C] transition-all duration-300">
-                <Icon className="w-5 h-5" />
-              </a>
-            ))}
+          <div>
+            <h4 className="text-[10px] font-black text-[var(--c-accent)] uppercase tracking-[0.2em] mb-8">Capabilities</h4>
+            <ul className="space-y-4">
+              {serviceLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-white/60 hover:text-white font-bold text-sm transition-colors">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-[10px] font-black text-[var(--c-accent)] uppercase tracking-[0.2em] mb-8">Connect</h4>
+            <p className="text-white/60 text-sm font-bold mb-4">Colombo, Sri Lanka</p>
+            <a href="mailto:info.info@tribetek.info" className="text-lg font-black hover:text-[var(--c-accent)] transition-colors">
+              info@tribetek.info
+            </a>
           </div>
         </div>
 
-        {/* Newsletter Section */}
-        <div>
-          <h4 className="text-lg font-semibold text-white mb-5 relative">
-            Newsletter
-            <span className="absolute left-0 -bottom-2 w-10 h-[2px] bg-[#ED4716]" />
-          </h4>
-          <p className="text-sm text-gray-400 mb-4">
-            Get the latest news and insights from our innovation desk.
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em]">
+            © {new Date().getFullYear()} TribeTek Pvt Ltd.
           </p>
-          <form className="flex flex-col sm:flex-row gap-3">
-            <input
-              type="email"
-              placeholder="Your email"
-              className="w-full px-4 py-2.5 rounded-full bg-[#1a1a1a] border border-gray-700 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ED4716]/60"
-            />
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] hover:shadow-[0_0_20px_rgba(237,71,22,0.5)] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300">
-              Subscribe
-            </button>
-          </form>
+          <p className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em]">
+            Built for Elite Performance.
+          </p>
         </div>
-      </div>
 
-      {/* Bottom Section */}
-      <div className="border-t border-[#1f1f1f] mt-16 pt-6 text-sm text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-4 px-6 md:px-16">
-        <span>© {new Date().getFullYear()} TribeTek. All rights reserved.</span>
-        {/* <div className="flex gap-6">
-          <Link
-            href="/privacy"
-            className="hover:text-[#FF6B2C] transition duration-300"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            href="/terms"
-            className="hover:text-[#FF6B2C] transition duration-300"
-          >
-            Terms & Conditions
-          </Link>
-        </div> */}
       </div>
     </footer>
   );

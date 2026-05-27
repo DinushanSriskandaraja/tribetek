@@ -3,121 +3,78 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import BizAutomation from "../assets/BizAutomation.jpg";
 import Branding from "../assets/Brandings.jpg";
 import SocialMedia from "../assets/SocialMedia.jpg";
 import TechStack from "../assets/TechStack.jpg";
 
+const blogs = [
+  { title: "Business Automation ROI", tagline: "How smart workflows directly impact your bottom line.", image: BizAutomation, href: "/blog/automate-business-workflow", tag: "Strategy" },
+  { title: "The Branding Myth", tagline: "Why authority is built on systems, not just visual aesthetics.", image: Branding, href: "/blog/branding-trust", tag: "Authority" },
+  { title: "Scalable Tech Stacks", tagline: "Choosing the right architecture for exponential growth.", image: TechStack, href: "/blog/top-tech-stacks", tag: "Engineering" },
+];
+
 export default function BlogSection() {
-  const blogs = [
-    {
-      title: "How Business Automation Can Save You Time and Boost Profits",
-      tagline:
-        "Streamline your workflows and scale effortlessly with the power of smart automation.",
-      image: BizAutomation,
-      href: "/blog/automate-business-workflow",
-    },
-    {
-      title: "Why Branding Is More Than Just a Logo",
-      tagline: "A powerful brand tells your story even before you do.",
-      image: Branding,
-      href: "/blog/branding-trust",
-    },
-    {
-      title: "Top Tech Stacks for Scalable Applications",
-      tagline: "Choosing the right stack determines your future velocity.",
-      image: TechStack,
-      href: "/blog/top-tech-stacks",
-    },
-    {
-      title: "Social Media Strategies for B2B",
-      tagline: "Make your brand visible where your customers actually are.",
-      image: SocialMedia,
-      href: "/blog/social-media-strategies",
-    },
-  ];
-
   return (
-    <section className="relative overflow-hidden py-28">
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16">
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-16">
-          <h2 className="text-5xl font-extrabold text-white mb-3">
-            Latest <span className="text-[#ED4716]">Insights</span>
-          </h2>
-          <p className="text-[#b3b3b3] text-lg max-w-2xl mx-auto">
-            Explore our stories, ideas, and lessons that inspire digital
-            transformation.
-          </p>
-        </motion.div>
+    <section className="bg-white py-32 relative overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+          <div className="max-w-2xl">
+            <div className="mb-6">
+              <span className="badge-elite">Insights</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black text-[var(--c-black)] leading-tight tracking-tighter">
+              Latest <span className="text-[var(--c-accent)]">Thinking.</span>
+            </h2>
+          </div>
+          <Link href="/blog" className="btn btn-primary">
+            View All Articles <ArrowUpRight size={20} />
+          </Link>
+        </div>
 
-        {/* Blog Carousel */}
-        <div className="flex overflow-x-auto gap-10 scrollbar-hide snap-x snap-mandatory pb-6 px-2">
-          {blogs.map((blog, index) => (
+        {/* Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {blogs.map((blog, i) => (
             <motion.div
-              key={index}
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="group relative flex-shrink-0 snap-center w-[320px] sm:w-[400px] rounded-3xl bg-[#161616]/70 backdrop-blur-xl border border-[#2b2b2b] overflow-hidden transition-all duration-700">
-              {/* Glow background */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                <div className="absolute -bottom-[60px] -right-[60px] w-[220px] h-[220px] bg-[#ED4716] blur-[100px] opacity-30" />
-              </div>
-
-              {/* Image */}
-              <div className="relative h-[240px] overflow-hidden">
-                <Image
-                  src={blog.image}
-                  alt={blog.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 p-6 flex flex-col h-[200px]">
-                <h3 className="text-xl font-bold text-white mb-3 transition group-hover:text-[#ED4716]">
-                  {blog.title}
-                </h3>
-
-                <p className="text-[#b3b3b3] text-sm mb-4 flex-1">
-                  {blog.tagline}
-                </p>
-
-                <Link
-                  href={blog.href}
-                  className="text-[#ED4716] font-medium text-sm hover:underline">
-                  Read More →
-                </Link>
-              </div>
-
-              {/* Border shimmer */}
-              <span className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 pointer-events-none" />
+            >
+              <Link href={blog.href} className="card-elite group block h-full overflow-hidden p-0">
+                <div className="relative h-64 w-full overflow-hidden">
+                  <Image
+                    src={blog.image}
+                    alt={blog.title}
+                    fill
+                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="badge-elite !bg-[var(--c-black)] !text-white !border-transparent">
+                      {blog.tag}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-[var(--c-black)] mb-3 tracking-tight group-hover:text-[var(--c-accent)] transition-colors duration-300">
+                    {blog.title}
+                  </h3>
+                  <p className="text-[var(--c-muted)] font-medium leading-relaxed mb-6">
+                    {blog.tagline}
+                  </p>
+                  <div className="flex items-center gap-2 text-[var(--c-black)] font-bold text-sm uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
+                    Read Article <ArrowUpRight size={18} />
+                  </div>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
 
-        {/* View All */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center">
-          <Link
-            href="/blog"
-            className="inline-block px-8 py-3 rounded-full border border-[#ED4716]/60 text-white  transition-all duration-300 font-semibold">
-            View All Articles →
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

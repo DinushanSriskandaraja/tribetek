@@ -1,64 +1,138 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { useLeadGen } from "../hooks/useLeadGen";
+import { usePathname } from "next/navigation";
 
-export default function CTASection() {
+interface CTASectionProps {
+  title?: string;
+  subtitle?: string;
+  bulletPoints?: string[];
+  isGlobal?: boolean;
+}
+
+export default function CTASection({ title, subtitle, bulletPoints, isGlobal }: CTASectionProps) {
+  const pathname = usePathname();
+  const { draftEmail, setDraftEmail, submitLead } = useLeadGen();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  // Hide the global CTA on promotional landing pages to avoid duplication
+  if (isGlobal && pathname?.startsWith("/promo/")) {
+    return null;
+  }
+
+  const defaultBulletPoints = [
+    "30-Minute Expert Automation Audit",
+    "Custom ROI & Savings Roadmap",
+    "Zero Commitment Consultation",
+    "24-Hour Response Guarantee"
+  ];
+
+  const displayBulletPoints = bulletPoints || defaultBulletPoints;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!draftEmail) return;
+    setIsSubmitting(true);
+    setTimeout(() => {
+      submitLead(draftEmail);
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }, 1200);
+  };
+
   return (
-    <section className="relative py-24 px-6 overflow-hidden text-white">
-      {/* Background glow accents */}
-      {/* <div className="absolute inset-0 -z-10">
-        <div className="absolute top-[-120px] left-[-80px] w-[400px] h-[400px] bg-[#ED4716]/20 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[-120px] right-[-80px] w-[400px] h-[400px] bg-[#FF6B2C]/20 blur-[120px] rounded-full animate-pulse" />
-      </div> */}
+    <section className="py-32 px-6 bg-[var(--c-black)] overflow-hidden relative">
+      {/* Background Decor */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--c-accent)] blur-[150px] rounded-full" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[var(--c-accent)] blur-[150px] rounded-full" />
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Card-like container */}
-        <div className="group relative p-12 rounded-3xl bg-[#161616]/60 backdrop-blur-xl border border-[#2b2b2b] overflow-hidden">
-          {/* Glow effect */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-            <div className="absolute -bottom-[60px] -right-[60px] w-[220px] h-[220px] bg-[#ED4716] blur-[100px] opacity-30" />
-          </div>
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* Text content */}
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 drop-shadow-[0_0_20px_rgba(255,107,44,0.4)]">
-            Let’s design an
-            {/* <br className="sm:hidden" /> */}
-            <span className="text-[#ED4716]"> automation system </span> that
-            actually works for your business.{" "}
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="mb-6">
+              <span className="badge-elite !bg-white/10 !border-white/10 !text-white">
+                <span className="badge-dot !bg-[var(--c-accent)]" />
+                Next Steps — Ready to Scale?
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black text-white leading-[1.05] tracking-tight mb-8">
+              {title || "Stop losing hours to manual work."}
+            </h2>
+            <div className="space-y-4">
+              {displayBulletPoints.map((item) => (
+                <div key={item} className="flex items-center gap-3 text-white/80 font-medium">
+                  <CheckCircle2 size={18} className="text-[var(--c-accent)]" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
-          {/* <p className="text-gray-400 text-lg md:text-xl mb-10 leading-relaxed">
-            Whether you’re launching a startup or scaling your business, our
-            expert team transforms ideas into cutting-edge software, mobile
-            apps, and digital solutions.z
-          </p> */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-white p-8 md:p-12 rounded-[2rem] shadow-2xl"
+          >
+            {submitted ? (
+              <div className="text-center py-12">
+                <div className="w-20 h-20 bg-[var(--c-accent)]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 size={40} className="text-[var(--c-accent)]" />
+                </div>
+                <h3 className="text-2xl font-black text-[var(--c-black)] mb-3">Audit Requested!</h3>
+                <p className="text-[var(--c-muted)] font-medium">
+                  We've received your request. Check your inbox shortly for your custom automation strategy.
+                </p>
+              </div>
+            ) : (
+              <>
+                <h3 className="text-2xl md:text-3xl font-black text-[var(--c-black)] mb-6 leading-tight">
+                  {subtitle || "Get your free automation roadmap."}
+                </h3>
+                <p className="text-[var(--c-muted)] font-medium mb-8">
+                  Enter your email and we'll send you a detailed audit of where you can save the most time.
+                </p>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Your work email..."
+                    value={draftEmail}
+                    onChange={(e) => setDraftEmail(e.target.value)}
+                    className="input-elite"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !draftEmail}
+                    className="btn btn-primary btn-lg w-full"
+                  >
+                    {isSubmitting ? "Processing..." : "Claim My Free Audit"}
+                    <ArrowRight size={20} />
+                  </button>
+                </form>
+                <p className="mt-6 text-center text-[10px] font-bold text-[var(--c-muted)] uppercase tracking-widest">
+                  No credit card required · Trusted by 50+ businesses
+                </p>
+              </>
+            )}
+          </motion.div>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/contact"
-              className="px-10 py-4 bg-gradient-to-r from-[#ED4716] to-[#FF6B2C] text-white font-semibold rounded-full 
-                         ] 
-                         transition duration-300">
-              Request a Free Automation Consultation{" "}
-            </a>
-            {/* <a
-              href="/portfolio"
-              className="px-10 py-4 border border-[#2b2b2b] text-gray-200 font-medium rounded-full 
-                         hover:border-[#ED4716] hover:text-[#ED4716] transition duration-300">
-              View Our Work
-            </a> */}
-          </div>
-
-          {/* Subtle border shimmer */}
-          <span className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 pointer-events-none" />
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
+

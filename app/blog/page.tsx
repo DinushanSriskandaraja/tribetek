@@ -35,41 +35,30 @@ export default async function BlogsListPage() {
   const posts = await Promise.all(slugs.map(({ slug }) => getPostData(slug)));
 
   return (
-    <main className="relative min-h-screen  text-white overflow-hidden">
-      {/* --- Gradient Glows in Corners --- */}
-      {/* <div className="absolute top-[-200px] left-[-200px] w-[500px] h-[500px] bg-gradient-to-br from-[#ED4716]/40 via-[#FF6B2C]/20 to-transparent blur-[220px] rounded-full -z-10" />
-      <div className="absolute bottom-[-200px] right-[-200px] w-[500px] h-[500px] bg-gradient-to-tr from-[#FF6B2C]/30 via-[#ED4716]/15 to-transparent blur-[220px] rounded-full -z-10" /> */}
-      <SecondaryHero
-        title="Insights & Innovation"
-        subtitle="Explore our thoughts, strategies, and stories shaping the future of digital innovation."
-      />
+    <main className="bg-white min-h-screen w-full text-[var(--c-text)] overflow-hidden pt-20">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-24">
+        <SecondaryHero
+          title="Insights &"
+          highlight="Operational Innovation."
+          subtitle="Practical thoughts and strategies on building automation-driven systems for modern businesses."
+        />
 
-      {/* <div className="relative z-10 px-6">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight bg-gradient-to-r from-[#ED4716] via-[#FF6B2C] to-[#ED4716] bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(255,107,44,0.4)]">
-            Insights & Innovation
-          </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Explore our thoughts, strategies, and stories shaping the future of
-            digital innovation.
-          </p>
-        </div> */}
-      {/* </section> */}
-
-      {/* --- Blog List --- */}
-      <section className="relative container mx-auto px-6 sm:px-12 lg:px-20 pb-24">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post, index) => (
-            <BlogCard
-              key={post.slug}
-              title={post.title}
-              description={post.description}
-              slug={post.slug}
-              date={post.date}
-              index={index}
-            />
-          ))}
-        </div>
-      </section>
+        {/* --- Blog List --- */}
+        <section className="mt-20">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post, index) => (
+              <BlogCard
+                key={post.slug}
+                title={post.title}
+                description={post.description}
+                slug={post.slug}
+                date={post.date}
+                index={index}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

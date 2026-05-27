@@ -2,24 +2,10 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { JSX } from "react";
-import {
-  services,
-  ServiceSlug,
-  ServiceData,
-  iconMap,
-} from "@/data/servicesData";
+import { services, ServiceSlug, ServiceData, iconMap } from "@/data/servicesData";
+import { ArrowRight } from "lucide-react";
 
-import { Icon, LucideIcon } from "lucide-react";
-
-type ServiceCard = {
-  title: string;
-  description: string;
-  href: string;
-  icon: LucideIcon;
-};
-
-const serviceCards: ServiceCard[] = (
+const serviceCards = (
   Object.entries(services) as [ServiceSlug, ServiceData][]
 )
   .filter(([slug]) => slug !== "digital-marketing")
@@ -32,79 +18,59 @@ const serviceCards: ServiceCard[] = (
 
 export default function ServicesSection() {
   return (
-    <section className="relative py-28 overflow-hidden text-white">
-      <div className="container relative z-10 mx-auto px-6 md:px-12 lg:px-20 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-4xl md:text-6xl font-extrabold mb-6">
-          What We <span className="text-[#ED4716]">Automate</span> for Your
-          Business
-        </motion.h2>
+    <section className="bg-white py-32 relative overflow-hidden">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20">
+        
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+          <div className="max-w-2xl">
+            <div className="mb-6">
+              <span className="badge-elite">Our Expertise</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-[var(--c-black)] leading-[1.1] tracking-tight">
+              Systems Built for <br /> <span className="text-[var(--c-accent)]">Unstoppable Scale.</span>
+            </h2>
+          </div>
+          <p className="text-[var(--c-muted)] text-lg font-medium leading-relaxed max-w-sm">
+            We don't just build apps. We build automation-driven engines that run your business on autopilot.
+          </p>
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-gray-400 max-w-2xl mx-auto mb-14 text-lg">
-          We design automation-focused systems that eliminate manual work and
-          scale your operations.
-        </motion.p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {serviceCards.map((service, index) => (
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {serviceCards.map((s, i) => (
             <motion.div
-              key={service.href}
+              key={s.href}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}>
-              <Link
-                href={service.href}
-                className="group relative block p-8 rounded-2xl 
-  bg-[#161616]/70  
-  backdrop-blur-xl overflow-hidden min-h-80
-  transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)]
-  ">
-                {/* Glow background */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                  <div className="absolute -bottom-[70px] -right-[70px] w-[220px] h-[220px] bg-[#ED4716] blur-[110px] opacity-30" />
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Link href={s.href} className="card-elite group h-full flex flex-col">
+                <div className="w-12 h-12 bg-[var(--c-black)] text-white rounded-xl flex items-center justify-center group-hover:bg-[var(--c-accent)] transition-colors duration-300 mb-6">
+                  {s.icon && <s.icon size={24} />}
                 </div>
-
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="mb-6 flex items-center justify-start">
-                    <div
-                      className="p-4 rounded-xl text-[#ED4716]
-    transition-all duration-700
-    ">
-                      {service.icon && (
-                        <service.icon size={64} strokeWidth={1.8} />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-bold mb-3 tracking-wide transition-colors duration-500 ">
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-400 text-sm leading-relaxed transition-colors duration-500 group-hover:text-gray-300">
-                    {service.description}
-                  </p>
+                <h3 className="text-xl font-bold text-[var(--c-black)] tracking-tight mb-3 group-hover:text-[var(--c-accent)] transition-colors duration-300">
+                  {s.title}
+                </h3>
+                <p className="text-[var(--c-muted)] font-medium leading-relaxed mb-8 flex-1">
+                  {s.description}
+                </p>
+                <div className="flex items-center gap-2 text-[var(--c-black)] font-bold text-sm uppercase tracking-widest group-hover:gap-4 transition-all duration-300">
+                  Explore Service <ArrowRight size={16} />
                 </div>
-
-                {/* Border shimmer */}
-                <span className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5 pointer-events-none" />
               </Link>
             </motion.div>
           ))}
         </div>
+
+        {/* Footer Link */}
+        <div className="mt-16 text-center">
+          <Link href="/services" className="btn btn-primary btn-lg">
+            View All Specialized Services
+          </Link>
+        </div>
+
       </div>
     </section>
   );
